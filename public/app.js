@@ -492,7 +492,9 @@
   function bind() {
     $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
     $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
-      activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all'; $('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
+      activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all';
+      $('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
       $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
       $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
       fetchNews(activeTopic);
