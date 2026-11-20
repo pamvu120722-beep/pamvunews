@@ -4,7 +4,8 @@ import { XMLParser } from 'fast-xml-parser';
 const FEEDS = {
   'vn-home': { url: 'https://e.vnexpress.net/rss/home.rss', source: 'VnExpress International', topic: 'vietnam' },
   'vn-business': { url: 'https://e.vnexpress.net/rss/business.rss', source: 'VnExpress International', topic: 'economy' },
-  'vn-sports': { url: 'https://e.vnexpress.net/rss/sports.rss', source: 'VnExpress International', topic: 'football' },
+  // Sports RSS is a MIXED feed. We only keep actual association-football items below.
+  'vn-sports': { url: 'https://e.vnexpress.net/rss/sports.rss', source: 'VnExpress International', topic: 'football', mixedSports: true },
   'vn-tech': { url: 'https://e.vnexpress.net/rss/tech.rss', source: 'VnExpress International', topic: 'technology' },
   'vn-travel': { url: 'https://e.vnexpress.net/rss/travel.rss', source: 'VnExpress International', topic: 'culture' },
   'guardian-football': { url: 'https://www.theguardian.com/football/rss', source: 'The Guardian', topic: 'football' },
@@ -13,7 +14,7 @@ const FEEDS = {
   'guardian-tech': { url: 'https://www.theguardian.com/technology/rss', source: 'The Guardian', topic: 'technology' },
   'cna-asia': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6511', source: 'CNA', topic: 'world' },
   'cna-business': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6936', source: 'CNA', topic: 'economy' },
-  'cna-sport': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=10296', source: 'CNA', topic: 'football' },
+  'cna-sport': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=10296', source: 'CNA', topic: 'football', mixedSports: true },
   'cna-world': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6311', source: 'CNA', topic: 'world' },
   'dw-world': { url: 'https://rss.dw.com/rdf/rss-en-all', source: 'DW', topic: 'world' }
 };
@@ -53,16 +54,44 @@ const cleanLink = (value) => {
   const candidate = typeof value === 'object' ? value?.['@_href'] ?? value?.['#text'] : value;
   try { const u = new URL(plain(candidate)); return ['https:', 'http:'].includes(u.protocol) ? u.href : ''; } catch { return ''; }
 };
+// Images are used ONLY if they appear in the RSS item (never scraped from an article).
 const imageFrom = (item) => {
-  const media = item['media:content'] ?? item['media:thumbnail'] ?? item.enclosure ?? item['image'];
-  for (const i of asArray(media)) {
-    const url = cleanLink(i?.['@_url'] ?? i?.['@_href'] ?? i);
-    if (url && (!i?.['@_type'] || String(i['@_type']).startsWith('image/'))) return url;
+  const candidates = [
+    ...asArray(item['media:content']), ...asArray(item['media:thumbnail']),
+    ...asArray(item['media:group']).flatMap(g => [...asArray(g?.['media:content']), ...asArray(g?.['media:thumbnail'])]),
+    ...asArray(item.enclosure), ...asArray(item.image?.url), ...asArray(item.image)
+  ];
+  for (const entry of candidates) {
+    const kind = String(entry?.['@_type'] ?? '').toLowerCase();
+    const medium = String(entry?.['@_medium'] ?? '').toLowerCase();
+    if ((kind && !kind.startsWith('image/')) || (medium && medium !== 'image')) continue;
+    const url = cleanLink(entry?.['@_url'] ?? entry?.['@_href'] ?? entry);
+    if (url) return url;
   }
-  // Images in publisher-provided RSS descriptions only (not article scraping).
-  const match = plain(item.description).match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? cleanLink(htmlEntities(match[1])) : '';
+  for (const description of [item.description, item['content:encoded'], item.summary]) {
+    const match = plain(description).match(/<img\b[^>]+src=["']([^"']+)["']/i);
+    if (match) { const url = cleanLink(htmlEntities(match[1])); if (url) return url; }
+  }
+  return '';
 };
+// RSS descriptions are often absent. Respect that: never manufacture an article body.
+const excerptFrom = (item, title) => {
+  const choices = [item.description, item.summary, item['dc:description'], item['media:description'], item['content:encoded']];
+  for (const c of choices) {
+    const excerpt = strip(c).slice(0, 450).trim();
+    if (excerpt && excerpt.toLowerCase() !== title.toLowerCase() && excerpt.length >= 20) return excerpt;
+  }
+  return '';
+};
+// Football ≠ every sport. Mixed sports feeds frequently carry F1, cricket, rugby, etc.
+const OTHER_SPORTS = /\b(?:f\s?1|formula\s?(?:1|one)|formula e|grand prix|motor racing|nascar|motogp|cricket|rugby|six nations|nfl|nba|basketball|baseball|tennis|golf|badminton|volleyball|swimming|marathon|cycling|doping|athletics|world series|wimbledon|fiji rugby|ufc|mma|esports|e-sports|pickleball|snooker|hockey)\b/i;
+const SOCCER_TERMS = /\b(?:football|soccer|fifa|uefa|afc|premier league|champions league|europa league|conference league|v-?league|la liga|bundesliga|serie a|ligue 1|world cup|asian cup|afc cup|aff cup|asean cup|national football team|goalkeeper|striker|midfielder|penalty shootout|penalty kick|free kick|offside|transfer window|football club|manchester (?:united|city)|man united|arsenal|liverpool|chelsea|tottenham|real madrid|barcelona|bayern munich|psg|inter milan|ac milan|juventus|newcastle united|everton|brighton|aston villa|nottingham forest|west ham|wolves|leicester|napoli|atletico madrid|vietnamese football|vietnam football|vietnam women's team|hanoi fc|ho chi minh city fc)\b/i;
+export function isFootballStory(title, description = '', mixedSports = false) {
+  const text = `${title} ${description}`;
+  if (OTHER_SPORTS.test(text)) return false;
+  // The Guardian's football-specific RSS is already categorized by the publisher.
+  return !mixedSports || SOCCER_TERMS.test(text);
+}
 const calcLevel = (s) => {
   const w = s.toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g) ?? [];
   if (w.length < 13) return 'B1';
@@ -92,14 +121,16 @@ async function loadFeed(id) {
     const entries = asArray(root.item ?? root.entry);
     return entries.slice(0, 13).map((entry) => {
       const title = strip(entry.title).slice(0, 280);
-      const description = strip(entry.description ?? entry.summary).slice(0, 740);
+      const description = excerptFrom(entry, title);
       const url = cleanLink(entry.link ?? entry.guid);
       if (!url || !title) return null;
+      if (feed.topic === 'football' && !isFootballStory(title, description, Boolean(feed.mixedSports))) return null;
       const pub = plain(entry.pubDate ?? entry.published ?? entry.updated ?? entry['dc:date']);
       const t = Date.parse(pub);
       return {
         id: digest(url), title, summary: description, url,
         image: imageFrom(entry), source: feed.source, topic: feed.topic,
+        hasExcerpt: Boolean(description),
         publishedAt: Number.isFinite(t) ? new Date(t).toISOString() : null,
         level: calcLevel(`${title} ${description}`), contentType: 'rss',
         readMinutes: Math.max(2, Math.ceil((`${title} ${description}`.split(/\s+/).length) / 150))

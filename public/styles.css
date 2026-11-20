@@ -9,3 +9,22 @@
 
 .image-badge{z-index:2}.image-veil{z-index:1}.unstyled{border:0;padding:0;background:transparent}
 .saved-panel{margin-top:22px;background:#fff;padding:26px}.saved-panel h2{font:700 21px var(--serif);margin:0 0 13px}.saved-article-btn{display:flex;align-items:center;justify-content:space-between;gap:13px;border:0;border-bottom:1px solid #e8ece7;width:100%;padding:12px 0;background:transparent;text-align:left;color:var(--ink);font-weight:700;font-size:12px}.saved-article-btn svg{width:15px;height:15px;color:var(--green)}
+
+
+/* v2 improvements: transparent headline-only readings and daily flashcard review. */
+.excerpt-missing{color:#77867d!important;font-style:italic}
+.reading-guide{background:#f3f5ee;border:1px solid #d7e1d5;padding:22px 25px;margin:4px 0 21px;color:#294138}
+.reading-guide-label{font:800 10px var(--sans);color:#407761;letter-spacing:.12em}
+.reading-guide h3{font:700 20px/1.35 var(--serif);margin:10px 0}
+.reading-guide p,.reading-guide li{font-size:12px;line-height:1.8;color:#455c50}
+.reading-guide ol{margin:12px 0;padding-left:23px}
+.reading-guide li{padding-left:5px;margin-bottom:5px}
+.reading-guide-note{font-size:10px;color:#6b7e6e;border-top:1px solid #dce6d9;padding-top:12px;margin-top:15px}
+.review-status{text-align:center;font-size:12px;color:#53675c;background:#edf2eb;padding:12px 15px;margin:10px auto 16px;max-width:390px}
+.review-status strong{color:#285b45;font-size:16px}
+.review-buttons{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:18px auto 10px}
+.review-buttons button{border:1px solid #d8dfd7;background:white;color:#334e3f;padding:12px 16px;font:800 12px var(--sans);cursor:pointer;min-height:44px}
+.review-buttons button:last-child{background:#224c3d;color:white;border-color:#224c3d}
+.review-buttons button:hover{filter:brightness(.94)}
+.review-hint{text-align:center;font-size:11px;line-height:1.5;color:#78887e;max-width:420px;margin:10px auto 16px}
+@media(max-width:600px){.reading-guide{padding:17px}.review-buttons{grid-template-columns:1fr 1fr;gap:8px}.review-buttons button{padding:11px 6px;font-size:11px}}

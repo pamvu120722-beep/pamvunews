@@ -122,7 +122,8 @@
   }
   async function fetchNews(topic = activeTopic, force = false) {
     const ticket = ++requestSeq;
-    if (!force && liveByTopic.has(topic)) { if (topic === activeTopic) applyStories(liveByTopic.get(topic), false); return; }
+    const cached = liveByTopic.get(topic);
+    if (!force && cached && Date.now() - Date.parse(cached.fetchedAt) < 5 * 60 * 1000) { if (topic === activeTopic) applyStories(cached, false); return; }
     isLoading = true; $('#refreshNews').classList.add('loading');
     try {
       const url = '/api/news?topic=' + encodeURIComponent(topic) + (force ? '&fresh=' + Date.now() : '');
@@ -164,6 +165,9 @@
     if (query.trim()) { const q = query.toLowerCase().trim(); s = s.filter(a => `${a.title} ${a.summary} ${a.source}`.toLowerCase().includes(q)); }
     return s;
   }
+  // Publisher feeds can contain headlines without excerpts: label them clearly.
+  const previewText = a => isPractice(a) ? (a.summary || '') : (a.summary || 'Headline only in RSS. Open the publisher for the full story, then practise your English here.');
+  const isHeadlineOnly = a => !isPractice(a) && !String(a.summary || '').trim();
   function makeCover(article, hero = false) {
     const url = safeUrl(article.image);
     const className = hero ? 'hero-cover' : 'card-cover';
@@ -174,12 +178,12 @@
     return `<span class="source">${esc(a.source)}</span><span class="dot-separator"></span><span>${esc(relativeDate(a.publishedAt))}</span><span class="dot-separator"></span><span>${a.readMinutes} MIN READ</span>`;
   }
   function storyCard(a) {
-    return `<article class="story-card" data-article-id="${esc(a.id)}">${makeCover(a)}<div class="card-body"><div class="story-topline">${metadata(a)}</div><h3 class="article-title" role="button" tabindex="0" data-open="${esc(a.id)}">${esc(a.title)}</h3><p>${esc(a.summary)}</p><div class="story-footer"><button class="card-read unstyled" data-open="${esc(a.id)}">Practice reading ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(a.level)}</span><button class="save-small ${bookmarked(a.id) ? 'saved' : ''}" data-bookmark="${esc(a.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div></article>`;
+    return `<article class="story-card" data-article-id="${esc(a.id)}">${makeCover(a)}<div class="card-body"><div class="story-topline">${metadata(a)}</div><h3 class="article-title" role="button" tabindex="0" data-open="${esc(a.id)}">${esc(a.title)}</h3><p class="${isHeadlineOnly(a) ? 'excerpt-missing' : ''}">${esc(previewText(a))}</p><div class="story-footer"><button class="card-read unstyled" data-open="${esc(a.id)}">Practice reading ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(a.level)}</span><button class="save-small ${bookmarked(a.id) ? 'saved' : ''}" data-bookmark="${esc(a.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div></article>`;
   }
   function renderHome() {
     const filtered = filteredStories(), featured = filtered[0];
     if (featured) {
-      $('#heroStory').innerHTML = `${makeCover(featured,true)}<div class="hero-text"><div class="story-topline">${metadata(featured)}</div><h2 role="button" tabindex="0" data-open="${esc(featured.id)}">${esc(featured.title)}</h2><p>${esc(featured.summary)}</p><div class="story-footer"><button class="read-link unstyled" data-open="${esc(featured.id)}">Read & learn ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(featured.level)} READING</span><button class="save-small ${bookmarked(featured.id) ? 'saved' : ''}" data-bookmark="${esc(featured.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div>`;
+      $('#heroStory').innerHTML = `${makeCover(featured,true)}<div class="hero-text"><div class="story-topline">${metadata(featured)}</div><h2 role="button" tabindex="0" data-open="${esc(featured.id)}">${esc(featured.title)}</h2><p class="${isHeadlineOnly(featured) ? 'excerpt-missing' : ''}">${esc(previewText(featured))}</p><div class="story-footer"><button class="read-link unstyled" data-open="${esc(featured.id)}">Read & learn ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(featured.level)} READING</span><button class="save-small ${bookmarked(featured.id) ? 'saved' : ''}" data-bookmark="${esc(featured.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div>`;
     } else {
       $('#heroStory').innerHTML = '<div class="empty-state"><h3>No matching stories</h3><p>Try a different topic, keyword or level.</p></div>';
     }
@@ -212,18 +216,40 @@
     $('#readerBookmark').classList.toggle('active',bookmarked(article.id));
     $('#readerBookmark span').textContent = bookmarked(article.id) ? 'Saved' : 'Bookmark';
     $('#readerListen span').textContent = 'Listen';
-    const copy = isPractice(article) ? article.body : `${article.summary || 'Publisher did not provide a text summary for this article.'}`;
+    const headlineOnly = isHeadlineOnly(article);
+    // With no excerpt, practise using the real headline; do not invent reporting.
+    const copy = isPractice(article) ? article.body : (article.summary || article.title);
     renderClickableText(copy);
-    $('#readerCopyright').textContent = isPractice(article) ? (article.contentType === 'custom' ? 'Your text is stored locally in this browser and is not uploaded.' : 'Original practice text created for PamVu English Ledger. This is not a news report.') : 'Publisher RSS excerpt only. The full article belongs to the original publisher. Use the source link to continue reading.';
+    renderReadingGuide(article, headlineOnly);
+    $('#readerCopyright').textContent = isPractice(article) ? (article.contentType === 'custom' ? 'Your text is stored locally in this browser and is not uploaded.' : 'Original practice text created for PamVu English Ledger. This is not a news report.') : (headlineOnly ? 'Headline supplied by the publisher via RSS. No article summary was available. Read the original for facts before writing your reflection.' : 'Short publisher-provided RSS excerpt only. Full reporting belongs to the original publisher.');
     $('#readOriginal').hidden = !safeUrl(article.url) || isPractice(article);
     if (!$('#readOriginal').hidden) $('#readOriginal').href = safeUrl(article.url);
     $('#completeReader').textContent = startedToday(article) ? '✓ Completed today' : '✓ Mark as completed';
-    $('#reflectionPrompt').textContent = isPractice(article) ? 'Write 2–3 English sentences: What was the main idea, and what would you like to discuss?' : 'Summarise the headline and RSS excerpt. After reading the full story at the publisher, note an important insight.';
+    $('#reflectionPrompt').textContent = isPractice(article) ? 'Write 2–3 English sentences: What was the main idea, and what would you like to discuss?' : (headlineOnly ? 'After opening the original report, write 2–3 English sentences describing confirmed facts. Avoid guessing from the headline.' : 'Summarise the RSS excerpt. After reading the original report, note one verified fact and one new expression.');
     $('#reflectionText').value = data.reflections[article.id]?.text || '';
     $('#reflectionStatus').textContent = '';
     renderArticleWords(); renderQuiz(article);
     $('#readerDialog').showModal(); document.body.classList.add('modal-open');
     $('#readerDialog').scrollTop = 0;
+  }
+  function renderReadingGuide(article, headlineOnly) {
+    let section = $('#readingGuide');
+    if (!section) {
+      section = document.createElement('section'); section.id = 'readingGuide';
+      section.className = 'reading-guide';
+      $('#readerBody').insertAdjacentElement('afterend', section);
+    }
+    if (isPractice(article)) { section.hidden = true; return; }
+    section.hidden = false;
+    section.innerHTML = `<div class="reading-guide-label">${headlineOnly ? 'HEADLINE LAB · NO RSS EXCERPT' : 'NEWS READING LAB · VERIFIED SOURCE'}</div>
+      <h3>${headlineOnly ? 'Start with the headline. Then verify the story.' : 'Make this news story part of your English practice.'}</h3>
+      <p>${headlineOnly ? 'This publisher provides a headline but no text preview in RSS. The text above is the actual headline, not the full article.' : 'The paragraph above is a short publisher-provided excerpt, not the whole report.'}</p>
+      <ol>
+        <li>Before opening the link, predict the subject in one English sentence.</li>
+        <li>Read the full story on the publisher's website. Identify <b>one confirmed fact</b>.</li>
+        <li>Return here: save three expressions and write a 2–3 sentence reflection.</li>
+      </ol>
+      <div class="reading-guide-note">No invented articles or auto-generated facts · Original journalism stays with its publisher</div>`;
   }
   function renderClickableText(text) {
     const root = $('#readerBody'); root.replaceChildren();
@@ -306,7 +332,11 @@
     $('#dictExample').textContent=currentDict.example.length>100 ? '“'+currentDict.example.slice(0,160)+'…”' : '“'+currentDict.example+'”';
     $('#dictVietnamese').value=currentDict.vietnamese;
     $('#dictSave').textContent=existing?'Update flashcard':'+ Save to flashcards';
-    const pop=$('#dictionaryPopover'); pop.hidden=false;
+    const pop=$('#dictionaryPopover');
+    // A native <dialog> is in the browser top layer. A popover outside it can appear
+    // visible yet be impossible to click. Keep the dictionary INSIDE the dialog.
+    if (!$('#readerDialog').contains(pop)) $('#readerDialog').appendChild(pop);
+    pop.hidden=false;
     let rect=element.getBoundingClientRect();
     let left=Math.max(12,Math.min(window.innerWidth-355,rect.left));
     let top=rect.bottom+9;
@@ -356,16 +386,51 @@
     if(wordsMode==='cards'){renderFlashcards();return;}
     $('#wordsContent').innerHTML=`<div class="word-table">${data.words.map(w=>`<div class="word-item" data-word-row="${esc(w.word)}"><div><h3>${esc(w.word)} ${w.mastered?'<span class="sublevel">MASTERED</span>':''}</h3><p>${esc(w.english||'Add a definition or translation')}</p><small>From: ${esc(w.sourceTitle||'Your reading')} ${w.phonetic?' · '+esc(w.phonetic):''}</small></div><div class="word-item-actions"><input type="text" data-meaning="${esc(w.word)}" aria-label="Nghĩa tiếng Việt cho ${esc(w.word)}" value="${esc(w.vietnamese||'')}" placeholder="Ghi nghĩa tiếng Việt"><button data-speak="${esc(w.word)}" aria-label="Nghe từ">${icon('volume')}</button><button data-delete="${esc(w.word)}" aria-label="Xóa từ">${icon('trash')}</button></div></div>`).join('')}</div>`;
   }
+  function reviewDue(w) { return !w.nextReview || w.nextReview <= todayLocal(); }
+  function scheduledDate(days) {
+    const d = new Date(todayLocal() + 'T12:00:00+07:00');
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toLocaleDateString('sv-SE', { timeZone:'Asia/Ho_Chi_Minh' });
+  }
+  function reviewCard(word, remembered) {
+    if (remembered) {
+      const nextStep = Math.min(5, Number(word.reviewStep || 0) + 1);
+      const intervals = [0, 1, 3, 7, 14, 30];
+      word.reviewStep = nextStep;
+      word.nextReview = scheduledDate(intervals[nextStep]);
+      if (nextStep >= 4) word.mastered = true;
+      showToast(`Tốt lắm! Từ “${word.word}” sẽ được ôn lại sau ${intervals[nextStep]} ngày.`);
+    } else {
+      word.reviewStep = 0;
+      word.mastered = false;
+      word.nextReview = todayLocal();
+      showToast(`Đã đưa “${word.word}” về danh sách cần ôn hôm nay.`);
+    }
+    word.lastReviewed = new Date().toISOString();
+    store();
+    const candidate = data.words.findIndex((w, i) => i !== flashIndex && reviewDue(w));
+    flashIndex = candidate >= 0 ? candidate : (flashIndex + 1) % data.words.length;
+    flipped = false;
+    renderFlashcards();
+  }
   function renderFlashcards() {
     flashIndex = Math.max(0, Math.min(data.words.length-1,flashIndex));
     const word=data.words[flashIndex];
-    $('#wordsContent').innerHTML=`<div class="flashcard-wrapper"><p class="eyebrow" style="justify-content:center">SPACED REPETITION · TAP TO FLIP</p><div class="flashcard-outer" id="flashFlip" role="button" tabindex="0" aria-label="Lật flashcard"><div class="flashcard ${flipped?'flipped':''}" id="flashcard"><div class="flashcard-face"><span>FRONT · THE WORD</span><h2>${esc(word.word)}</h2><p>${esc(word.phonetic||'Tap to reveal meaning')}</p></div><div class="flashcard-face back"><span>BACK · THE MEANING</span><h2>${esc(word.vietnamese||word.english||'Your own meaning')}</h2><p>${esc(word.english||'')}<br>${esc(word.example?.slice(0,180)||'')}</p></div></div></div><div class="flashcard-controls"><button id="flashPrev">← Previous</button><span class="flashcard-counter">${flashIndex+1} / ${data.words.length}</span><button id="flashNext">Next →</button></div><div class="flashcard-controls"><button id="flashShuffle">↝ Shuffle</button><button id="flashMaster">${word.mastered?'✓ Mastered':'Mark as mastered ✓'}</button></div></div>`;
+    const dueCount=data.words.filter(reviewDue).length;
+    $('#wordsContent').innerHTML=`<div class="flashcard-wrapper"><p class="eyebrow" style="justify-content:center">SPACED REVIEW · TAP TO FLIP</p>
+      <div class="review-status"><strong>${dueCount}</strong> words due today · ${data.words.length} saved total</div>
+      <div class="flashcard-outer" id="flashFlip" role="button" tabindex="0" aria-label="Lật flashcard"><div class="flashcard ${flipped?'flipped':''}" id="flashcard"><div class="flashcard-face"><span>FRONT · THE WORD</span><h2>${esc(word.word)}</h2><p>${esc(word.phonetic||'Tap to reveal meaning')}</p></div><div class="flashcard-face back"><span>BACK · THE MEANING</span><h2>${esc(word.vietnamese||word.english||'Your own meaning')}</h2><p>${esc(word.english||'')}<br>${esc(word.example?.slice(0,180)||'')}</p></div></div></div>
+      <div class="flashcard-controls"><button id="flashPrev">← Previous</button><span class="flashcard-counter">${flashIndex+1} / ${data.words.length}</span><button id="flashNext">Next →</button></div>
+      <div class="review-buttons"><button id="flashAgain">↻ Still learning</button><button id="flashGood">✓ I remember</button></div>
+      <p class="review-hint">${reviewDue(word) ? 'Due now' : 'Next review: '+esc(word.nextReview)} · Remembered words are scheduled after 1, 3, 7, 14 then 30 days.</p>
+      <div class="flashcard-controls"><button id="flashShuffle">↝ Shuffle cards</button></div></div>`;
     $('#flashFlip').addEventListener('click',flipCard);
     $('#flashFlip').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flipCard();}});
     $('#flashPrev').onclick=()=>{flashIndex=(flashIndex-1+data.words.length)%data.words.length;flipped=false;renderFlashcards();};
     $('#flashNext').onclick=()=>{flashIndex=(flashIndex+1)%data.words.length;flipped=false;renderFlashcards();};
     $('#flashShuffle').onclick=()=>{flashIndex=Math.floor(Math.random()*data.words.length);flipped=false;renderFlashcards();};
-    $('#flashMaster').onclick=()=>{word.mastered=!word.mastered;store();renderFlashcards();};
+    $('#flashAgain').onclick=()=>reviewCard(word,false);
+    $('#flashGood').onclick=()=>reviewCard(word,true);
   }
   function flipCard() {flipped=!flipped;$('#flashcard').classList.toggle('flipped',flipped);}
   function renderProgress() {
@@ -432,7 +497,7 @@
     $('#readerBookmark').onclick=()=>currentArticle&&doBookmark(currentArticle.id);
     $('#completeReader').onclick=finishArticle;
     $('#saveReflection').onclick=saveReflection;
-    $('#readerListen').onclick=()=>{if(!currentArticle)return;if('speechSynthesis'in window&&window.speechSynthesis.speaking){window.speechSynthesis.cancel();$('#readerListen span').textContent='Listen';}else{speakText(isPractice(currentArticle)?currentArticle.body:currentArticle.summary);$('#readerListen span').textContent='Stop / Listen';}};
+    $('#readerListen').onclick=()=>{if(!currentArticle)return;if('speechSynthesis'in window&&window.speechSynthesis.speaking){window.speechSynthesis.cancel();$('#readerListen span').textContent='Listen';}else{speakText(isPractice(currentArticle) ? currentArticle.body : (currentArticle.summary || currentArticle.title));$('#readerListen span').textContent='Stop / Listen';}};
     $('#dictClose').onclick=closeDict;
     $('#dictSpeak').onclick=()=>currentDict&&speakText(currentDict.word);
     $('#dictSave').onclick=saveCurrentWord;
