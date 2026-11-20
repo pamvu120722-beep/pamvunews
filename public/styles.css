@@ -28,3 +28,41 @@
 .review-buttons button:hover{filter:brightness(.94)}
 .review-hint{text-align:center;font-size:11px;line-height:1.5;color:#78887e;max-width:420px;margin:10px auto 16px}
 @media(max-width:600px){.reading-guide{padding:17px}.review-buttons{grid-template-columns:1fr 1fr;gap:8px}.review-buttons button{padding:11px 6px;font-size:11px}}
+
+/* Economy Desk and accessible RSS pagination · 2026-11 */
+.economy-desk{background:#eef3ed;border:1px solid #dbe5dc;padding:23px 26px;margin:22px 0 5px}
+.economy-desk[hidden]{display:none!important}
+.economy-desk-heading{display:flex;justify-content:space-between;gap:25px;align-items:center}
+.economy-kicker{font-size:10px;letter-spacing:.14em;font-weight:800;color:#27745e}
+.economy-desk-heading h3{font:700 24px/1.35 'Libre Baskerville',Georgia,serif;letter-spacing:-.045em;margin:6px 0}
+.economy-desk-heading p{font-size:12px;color:#526a5b;margin:0}
+.economy-source-label{font-size:10px;letter-spacing:.08em;color:#7b9083;font-weight:800;max-width:210px;text-align:right}
+.economy-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}
+.economy-pill{background:white;border:1px solid #cadcd0;border-radius:25px;color:#335848;padding:9px 14px;font-weight:800;font-size:11px;line-height:1.2}
+.economy-pill.active,.economy-pill[aria-pressed="true"]{background:#102b49;color:white;border-color:#102b49}
+.economy-pill:hover:not(.active){background:#e2ede4}
+.story-count{padding:17px 0 0;font-size:11px;color:#657571;font-weight:700}
+.loadmore-status{color:#667875;font-size:11px;margin:13px 0 0}
+.loadmore-row{min-height:85px}
+.loadmore-row .outline-button:not([hidden]){min-width:230px;transition:background .2s,border-color .2s}
+.loadmore-row .outline-button:hover{background:#e7efea;border-color:#739d8c}
+@media(max-width:600px){.economy-desk{padding:18px;margin-top:17px}.economy-desk-heading{display:block}.economy-desk-heading h3{font-size:21px}.economy-source-label{display:block;text-align:left;margin-top:9px}.economy-pill{padding:9px 11px}}
+
+/* Respect native hidden states even when buttons and notices have display styles. */
+#loadMoreBtn[hidden],#newsNotice[hidden],#economyDesk[hidden]{display:none!important}
+
+/* League of Legends esports desk: LCK and LPL, not general gaming */
+.esports-desk{background:#eef0f7;border:1px solid #dce0ee;padding:23px 26px;margin:22px 0 5px}
+.esports-desk[hidden]{display:none!important}
+.esports-title-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.esports-kicker{font-size:10px;letter-spacing:.14em;color:#52629b;font-weight:800}
+.esports-title-row h3{font:700 24px/1.35 'Libre Baskerville',Georgia,serif;margin:6px 0;letter-spacing:-.045em}
+.esports-title-row p{color:#60697c;font-size:12px;margin:0}
+.esports-source{font-size:10px;letter-spacing:.07em;font-weight:800;color:#707c9c;text-align:right}
+.esports-filters{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.esports-pill{border:1px solid #c9d0e3;background:white;color:#2e4068;padding:9px 15px;border-radius:20px;font-size:11px;font-weight:800}
+.esports-pill.active,.esports-pill[aria-pressed=true]{background:#102b49;color:white;border-color:#102b49}
+.esports-pill:hover:not(.active){background:#e0e6f2}
+.esports-note{font-size:10px;color:#64728a;margin:14px 0 0;line-height:1.6}
+.cover-art[data-topic=esports]{background-image:radial-gradient(circle at 78% 21%,#c0baf2aa 0 13%,transparent 14%),linear-gradient(135deg,#152d52,#535c9b 62%,#9289bd)}
+@media(max-width:600px){.esports-desk{padding:18px}.esports-title-row{display:block}.esports-title-row h3{font-size:21px}.esports-source{display:block;text-align:left;margin-top:10px}.esports-pill{padding:9px 13px}}

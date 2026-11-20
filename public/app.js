@@ -4,8 +4,8 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const KEY = 'pamvu-english-ledger-v1';
   const GOAL_DEFAULT = 15;
-  const TOPIC_LABEL = { all:'All stories',vietnam:'Vietnam',football:'Football',economy:'Economy',world:'World',technology:'Technology',culture:'Lifestyle' };
-  const TOPIC_COLOR = { vietnam:'#bf855f',football:'#5e8c76',economy:'#586d8e',world:'#71949c',technology:'#4e8b9c',culture:'#b28d83' };
+  const TOPIC_LABEL = { all:'All stories',vietnam:'Vietnam',football:'Football',economy:'Economy',esports:'Esports',world:'World',technology:'Technology',culture:'Lifestyle' };
+  const TOPIC_COLOR = { vietnam:'#bf855f',football:'#5e8c76',economy:'#586d8e',esports:'#626ca5',world:'#71949c',technology:'#4e8b9c',culture:'#b28d83' };
   const GLOSSARY = {
     economy:['nền kinh tế','the system of producing, buying, and selling goods and services'],
     economic:['thuộc kinh tế','relating to an economy'],inflation:['lạm phát','a general increase in prices'],
@@ -78,6 +78,7 @@
   let data = readStore();
   let activeView = 'home', activeTopic = 'all', activeLevel = 'all', query = '';
   let displayed = [], articlesById = new Map(), liveByTopic = new Map();
+  let economyFocus = 'all', leagueFocus = 'all';
   let currentArticle = null, currentDict = null, wordsMode = 'list', flashIndex = 0, flipped = false, itemsShown = 9;
   let fetchedAt = null, cacheStatus = 'connecting', isLoading = false, requestSeq = 0, toastTimer = null;
 
@@ -146,7 +147,7 @@
     fetchedAt = result.fetchedAt;
     indexArticles(displayed);
     setLiveState(practiceMode ? 'practice' : 'live');
-    itemsShown = 9;
+    // Keep the expanded list when RSS automatically refreshes.
     const notice = $('#newsNotice');
     if (practiceMode) {
       notice.hidden = false;
@@ -159,8 +160,21 @@
     }
     renderHome();
   }
+  const ECONOMY_MARKETS = /\b(?:stock|shares?|equities|invest(?:ment|ing|ors?)?|markets?|vn-?index|index|bonds?|interest rates?|central banks?|exchange rates?|currenc(?:y|ies)|gold prices?|bitcoin|crypto|securities|wall street|inflation|fed|trading|asset|commodit(?:y|ies))\b/i;
+  const ECONOMY_COMPANIES = /\b(?:compan(?:y|ies)|businesses|firms?|corporat(?:e|ion|ions)|startup|start-up|enterprise|manufacturer|brand|retailer|factory|factories|ceo|merger|acquisition|earnings|revenue|profit|exports?|imports?|supply chain|sales|jobs|workforce)\b/i;
+  function matchesEconomyFocus(article) {
+    if (activeTopic !== 'economy' || economyFocus === 'all') return true;
+    const text = String(article.title || '') + ' ' + String(article.summary || '');
+    if (economyFocus === 'vietnam') return article.source === 'VnExpress International' || /\b(vietnam|vietnamese|hanoi|ho chi minh|saigon)\b/i.test(text);
+    if (economyFocus === 'global') return article.source !== 'VnExpress International' && !/\b(vietnam|vietnamese)\b/i.test(text);
+    if (economyFocus === 'markets') return ECONOMY_MARKETS.test(text);
+    if (economyFocus === 'companies') return ECONOMY_COMPANIES.test(text);
+    return true;
+  }
   function filteredStories() {
     let s = displayed;
+    if (activeTopic === 'economy') s = s.filter(matchesEconomyFocus);
+    if (activeTopic === 'esports' && leagueFocus !== 'all') s = s.filter(a => a.league === leagueFocus);
     if (activeLevel !== 'all') s = s.filter(a => a.level === activeLevel);
     if (query.trim()) { const q = query.toLowerCase().trim(); s = s.filter(a => `${a.title} ${a.summary} ${a.source}`.toLowerCase().includes(q)); }
     return s;
@@ -172,7 +186,7 @@
     const url = safeUrl(article.image);
     const className = hero ? 'hero-cover' : 'card-cover';
     const badge = hero ? 'image-badge' : 'card-tag';
-    return `<div class="${className} cover-art" data-topic="${esc(article.topic)}">${url ? `<img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}<span class="${badge}">${esc(categoryName(article.topic).toUpperCase())}${isPractice(article) ? ' · PRACTICE' : ''}</span>${hero ? '<span class="image-veil"></span>' : ''}</div>`;
+    return `<div class="${className} cover-art" data-topic="${esc(article.topic)}">${url ? `<img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}<span class="${badge}">${esc(article.topic === 'esports' && article.league ? 'LOL · '+article.league.toUpperCase() : categoryName(article.topic).toUpperCase())}${isPractice(article) ? ' · PRACTICE' : ''}</span>${hero ? '<span class="image-veil"></span>' : ''}</div>`;
   }
   function metadata(a) {
     return `<span class="source">${esc(a.source)}</span><span class="dot-separator"></span><span>${esc(relativeDate(a.publishedAt))}</span><span class="dot-separator"></span><span>${a.readMinutes} MIN READ</span>`;
@@ -189,7 +203,16 @@
     }
     const rest = filtered.slice(1,itemsShown);
     $('#storyGrid').innerHTML = rest.length ? rest.map(storyCard).join('') : (filtered.length ? '<div class="empty-state"><h3>That’s the latest in this section.</h3><p>Explore another topic or try the Reading Studio.</p></div>' : '');
-    $('#loadMoreBtn').hidden = filtered.length <= itemsShown;
+    const more = Math.max(0, filtered.length - itemsShown);
+    const shown = Math.min(itemsShown, filtered.length);
+    const loadBtn = $('#loadMoreBtn');
+    loadBtn.hidden = more === 0;
+    loadBtn.disabled = more === 0;
+    loadBtn.innerHTML = more ? `Load ${Math.min(9,more)} more stories (${more} left) ${icon('chevron')}` : '';
+    $('#storyCount').textContent = filtered.length ? `Showing ${shown} of ${filtered.length} stories · ${categoryName(activeTopic)}` : 'No matching stories · try another filter';
+    $('#loadMoreStatus').textContent = more ? `${more} stories remaining` : (filtered.length ? `You're all caught up · ${filtered.length} stories shown` : '');
+    $('#economyDesk').hidden = activeTopic !== 'economy';
+    $('#esportsDesk').hidden = activeTopic !== 'esports';
     updateStats();
   }
   function setView(name) {
@@ -471,14 +494,35 @@
   function bind() {
     $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
     $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
-      activeTopic=button.dataset.topic; $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
+      activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all'; leagueFocus='all';
+      $$('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $$('[data-league]').forEach(el=>{const selected=el.dataset.league==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
       $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
       $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
       fetchNews(activeTopic);
     }));
-    $('#articleSearch').addEventListener('input',e=>{query=e.target.value;renderHome();});
-    $('#levelFilter').addEventListener('change',e=>{activeLevel=e.target.value;renderHome();});
-    $('#loadMoreBtn').addEventListener('click',()=>{itemsShown+=9;renderHome();});
+    $('#articleSearch').addEventListener('input',e=>{query=e.target.value;itemsShown=9;renderHome();});
+    $('#levelFilter').addEventListener('change',e=>{activeLevel=e.target.value;itemsShown=9;renderHome();});
+    $('#economyDesk').addEventListener('click',e=>{
+      const pill=e.target.closest('[data-economy-focus]'); if(!pill)return;
+      economyFocus=pill.dataset.economyFocus;itemsShown=9;
+      $$$('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
+      renderHome();
+    });
+    $('#esportsDesk').addEventListener('click',e=>{
+      const pill=e.target.closest('[data-league]'); if(!pill) return;
+      leagueFocus=pill.dataset.league; itemsShown=9;
+      $$('[data-league]').forEach(el=>{const chosen=el===pill;el.classList.toggle('active',chosen);el.setAttribute('aria-pressed',String(chosen));});
+      renderHome();
+    });
+    $('#loadMoreBtn').addEventListener('click',()=>{
+      const list=filteredStories();if(itemsShown>=list.length){renderHome();return;}
+      const old=itemsShown;itemsShown=Math.min(itemsShown+9,list.length);renderHome();
+      const cards=$$('.story-card', $('#storyGrid'));
+      const firstNew=cards[Math.max(0,old-1)];
+      if(firstNew){firstNew.setAttribute('tabindex','-1');firstNew.scrollIntoView({behavior:'smooth',block:'nearest'});}
+    });
     $('#refreshNews').addEventListener('click',()=>{liveByTopic.delete(activeTopic);fetchNews(activeTopic,true);});
     $('#storyGrid').addEventListener('click',handleOpenClicks);
     $('#heroStory').addEventListener('click',handleOpenClicks);
