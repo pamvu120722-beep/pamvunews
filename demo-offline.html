@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b49">
+  <meta name="description" content="PamVu English Ledger — đọc tin tức thật bằng tiếng Anh, học từ vựng qua ngữ cảnh và xây dựng thói quen đọc mỗi ngày.">
+  <title>PamVu English Ledger — Read the world, grow your English</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+:root{--ink:#102b49;--ink2:#1a354d;--paper:#fffefb;--shell:#f7f7f2;--light:#f0f0e9;--line:#d9ddd9;--muted:#67717b;--gold:#e8ae46;--orange:#e67b4f;--green:#27745e;--serif:'Libre Baskerville',Georgia,serif;--sans:'DM Sans',system-ui,-apple-system,sans-serif;--radius:12px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--shell);color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}body.modal-open{overflow:hidden}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}a:hover{color:var(--green)}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #e8ae46;outline-offset:2px}svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.7;flex-shrink:0}.icons{width:0;height:0;position:absolute;overflow:hidden}.container{width:min(1240px,calc(100% - 72px));margin:auto}.view{display:none}.view.active{display:block}.announcement{background:#edba5a;color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.14em}.announcement-inner{min-height:31px;display:flex;justify-content:space-between;align-items:center;gap:12px}.mini-sun{font-size:16px;margin-right:6px}.announcement-right{letter-spacing:.025em;font-weight:700;font-size:11px}.masthead{background:var(--ink);color:#fff}.masthead-grid{min-height:164px;display:grid;grid-template-columns:1fr 1.2fr 1fr;align-items:center;gap:15px}.masthead-side{align-self:end;padding-bottom:27px;color:#ccd5da}.date-small{font-size:11px;font-weight:800;color:white;letter-spacing:.12em;text-transform:uppercase}.edition-small{font-size:11px;opacity:.75;margin-top:5px}.masthead-side-right{text-align:right}.brand{color:white!important;display:flex;flex-direction:column;align-items:center;padding:18px 0;white-space:nowrap}.brand-overline{font-size:9px;font-weight:800;letter-spacing:.26em;color:#e4c783}.brand-title{font-family:var(--serif);font-size:72px;letter-spacing:-.08em;line-height:1.1;font-weight:700;margin-left:-10px}.brand-dot,.footer-logo span,.reader-brand span{color:var(--gold)}.brand-subtitle{font-size:11px;font-weight:800;letter-spacing:.38em;border-top:1px solid #577086;padding-top:8px;padding-left:10px}.live-indicator{display:inline-flex;align-items:center;gap:8px;color:#dce8e4;font-size:11px;font-weight:800}.live-dot{width:7px;height:7px;background:#f0b451;border-radius:50%;box-shadow:0 0 0 4px #ffffff12}.live-indicator.connected .live-dot{background:#65dbaf}.live-indicator.offline .live-dot{background:#e89970}.topnav{background:#fff;position:sticky;top:0;z-index:35;box-shadow:0 1px 0 #d6ddd9}.topnav-inner{display:flex;justify-content:space-between;min-height:64px;align-items:center;gap:12px}.navlinks{display:flex;align-items:stretch;height:64px;gap:28px}.nav-link{border:0;background:transparent;padding:0 2px;color:#51616d;font-weight:800;position:relative;font-size:12px;white-space:nowrap}.nav-link:hover,.nav-link.active{color:var(--ink)}.nav-link.active:after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold)}.nav-count{background:#e9efec;color:var(--green);padding:1px 5px;border-radius:5px;font-size:10px;margin-left:3px}.nav-actions{display:flex;align-items:center;gap:12px}.icon-button,.refresh-button{height:36px;width:36px;border:1px solid var(--line);border-radius:50%;display:grid;place-items:center;color:var(--ink);background:white}.icon-button svg,.refresh-button svg{width:17px;height:17px}.pill-button{display:flex;align-items:center;gap:9px;border:0;border-radius:22px;background:var(--ink);color:white;font-size:11px;padding:11px 15px;font-weight:800;white-space:nowrap}.pill-button svg{width:15px;height:15px}.pill-button:hover{background:#264d6f;color:#fff}.main-intro{padding:49px 0 43px}.eyebrow{display:flex;align-items:center;gap:10px;color:var(--green);font-size:10px;letter-spacing:.14em;font-weight:800}.eyebrow-line{width:20px;height:2px;background:var(--orange)}.intro-flex{display:flex;justify-content:space-between;align-items:end;gap:40px}.intro-flex h1{margin:13px 0 0;font:700 clamp(34px,4vw,54px)/1.25 var(--serif);letter-spacing:-.053em}.intro-flex h1 em,.workspace-head h1 em{font-style:italic;color:var(--green)}.intro-copy{max-width:380px;color:#606e74;margin:0 0 3px;font-size:13px;line-height:1.85}.home-top-grid{display:grid;grid-template-columns:minmax(0,1.95fr) minmax(285px,.96fr);gap:27px}.section-caption{border-bottom:1px solid #b7c0bd;padding-bottom:9px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;color:#58696e;letter-spacing:.13em;font-weight:800;font-size:10px}.section-caption span:first-child{color:var(--ink)}.section-caption svg{height:14px;width:14px;color:var(--orange)}.hero-story{background:white;overflow:hidden;min-height:485px;box-shadow:0 1px 5px #102b490a}.hero-cover{height:274px;position:relative;overflow:hidden;background:#547287}.hero-cover img{width:100%;height:100%;object-fit:cover;display:block}.hero-cover .image-veil{position:absolute;inset:0;background:linear-gradient(0deg,#102b49a8,transparent 68%)}.image-badge{position:absolute;left:25px;bottom:22px;background:var(--gold);color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.09em;padding:7px 12px}.hero-text{padding:23px 26px 26px}.story-topline{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:#647179}.story-topline .source{color:var(--green)}.story-topline .dot-separator{width:3px;height:3px;background:#a0aaa8;border-radius:50%}.hero-text h2{font-family:var(--serif);font-size:clamp(23px,2.55vw,34px);letter-spacing:-.044em;line-height:1.42;margin:13px 0 12px;cursor:pointer}.hero-text h2:hover{color:var(--green)}.hero-text p{font-size:13px;color:#657078;margin:0;line-height:1.8;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.story-footer{border-top:1px solid #e7e9e4;margin-top:21px;padding-top:15px;display:flex;justify-content:space-between;align-items:center;gap:12px}.read-link,.card-read{color:var(--ink);font-size:12px;display:inline-flex;align-items:center;gap:7px;font-weight:800}.read-link svg,.card-read svg{height:15px;width:15px}.read-link:hover,.card-read:hover{color:var(--green)}.story-footer-right{display:flex;gap:10px;align-items:center}.sublevel{background:#eaf1ec;border-radius:5px;padding:4px 7px;font-weight:800;font-size:10px;color:#35715d}.save-small{border:0;background:transparent;display:grid;place-items:center;color:#597181;padding:5px}.save-small svg{width:18px;height:18px}.save-small.saved{color:#d98b2e}.ritual-card{background:#f5dfb0;padding:26px 26px 24px;position:relative;overflow:hidden;min-height:443px}.ritual-card:before{content:'';position:absolute;right:-70px;top:-45px;width:200px;height:200px;border:1px solid #d6b574;border-radius:50%;box-shadow:0 0 0 36px #efcf9236,0 0 0 72px #efcf9230;pointer-events:none}.ritual-kicker{font-size:9px;letter-spacing:.14em;font-weight:800;position:relative}.ritual-card h2{font:700 32px/1.35 var(--serif);letter-spacing:-.055em;margin:19px 0 12px;position:relative}.ritual-card h2 i{color:#815519}.ritual-card p{font-size:12px;color:#6d644e;margin-bottom:24px;position:relative}.meter-head{display:flex;justify-content:space-between;font-size:11px;color:#5b5b4a}.meter-head strong{color:var(--ink)}.meter-track{height:7px;background:#d7ba81;border-radius:15px;overflow:hidden;margin:11px 0 21px}.meter-track span{display:block;background:var(--ink);height:100%;border-radius:15px;transition:width .4s}.ritual-steps{display:grid;gap:12px}.ritual-steps div{display:flex;align-items:center;gap:12px;font-weight:700;font-size:12px;color:#4c5550}.ritual-steps div span{display:grid;place-items:center;width:25px;height:25px;border:1px solid #a78d55;border-radius:50%;color:#6a602e;font-size:10px}.ritual-cta{width:100%;border:0;background:var(--ink);color:white;display:flex;align-items:center;justify-content:space-between;margin-top:26px;padding:14px 17px;font-size:12px;font-weight:800}.ritual-cta:hover{background:#2d526e}.ritual-cta svg{width:17px}.aside-note{display:flex;gap:14px;align-items:center;background:#eaf0eb;padding:15px 17px;margin-top:14px;color:#728079;font-size:11px}.aside-note b{font-size:12px;display:block;color:#355448;margin-top:4px;font-weight:700;line-height:1.5}.note-icon{font-size:26px;color:#628470}.stories-section{padding-top:65px}.section-heading-row{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:23px}.section-heading-row h2{font:700 33px/1.2 var(--serif);letter-spacing:-.05em;margin:10px 0 0}.serif-accent{color:var(--orange)}.freshness{font-size:11px;color:#6f7b7d}.filter-toolbar{border-top:1px solid #b5c0bf;border-bottom:1px solid #d2d9d5;padding:13px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}.topic-filters{display:flex;align-items:center;flex-wrap:wrap;gap:6px}.topic-filter{background:transparent;border:1px solid transparent;border-radius:22px;padding:8px 12px;font-size:11px;font-weight:800;color:#637177}.topic-filter.active{background:var(--ink);border-color:var(--ink);color:white}.topic-filter:hover:not(.active){background:#e8eae4}.tool-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.search-input{height:38px;display:flex;align-items:center;gap:6px;border:1px solid #d8dfdb;background:white;padding:0 10px;border-radius:5px}.search-input svg{width:16px;height:16px;color:#738189}.search-input input{border:0;outline:none;width:160px;max-width:100%;font-size:11px;background:transparent}.tool-filters select{height:38px;border:1px solid #d8dfdb;border-radius:5px;font-size:11px;padding:0 10px;color:var(--ink);background:white}.refresh-button{height:38px;width:38px;border-radius:5px}.refresh-button.loading svg{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.news-info{margin-top:16px;border-left:3px solid var(--gold);padding:10px 15px;background:#fff5dc;color:#706440;font-size:12px}.news-info a{font-weight:800;text-decoration:underline}.story-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px;margin-top:25px}.story-card{background:white;min-height:416px;display:flex;flex-direction:column;box-shadow:0 1px 4px #102b4908;overflow:hidden;transition:transform .2s,box-shadow .2s}.story-card:hover{transform:translateY(-3px);box-shadow:0 10px 25px #102b4910}.card-cover{height:185px;position:relative;overflow:hidden;background:#688595}.card-cover img{height:100%;width:100%;object-fit:cover}.card-tag{position:absolute;left:16px;bottom:14px;background:#fffefa;color:var(--ink);font-size:9px;letter-spacing:.1em;padding:6px 9px;font-weight:800}.card-body{padding:17px 18px 15px;flex:1;display:flex;flex-direction:column}.card-body .story-topline{font-size:9px}.card-body h3{font:700 17px/1.5 var(--serif);letter-spacing:-.026em;margin:11px 0 10px;cursor:pointer}.card-body h3:hover{color:var(--green)}.card-body p{font-size:11.5px;line-height:1.75;color:#6b777f;margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.card-body .story-footer{margin-top:auto;padding-top:12px}.card-read{font-size:11px}.card-read svg{height:14px;width:14px}.cover-art{background-color:#536d72;background-image:radial-gradient(circle at 84% 19%,#a1bbb05e 0 12%,transparent 13%),linear-gradient(137deg,#213d55 0%,#557c86 57%,#a9a47b 100%);position:relative}.cover-art:after{content:'';position:absolute;right:14%;top:15%;width:36%;height:125%;border:2px solid #ffffff4a;border-radius:50%;transform:rotate(33deg);box-shadow:0 0 0 29px #ffffff15,0 0 0 56px #ffffff0a;pointer-events:none}.cover-art[data-topic="football"]{background-image:radial-gradient(circle at 78% 28%,#f9e5b1a6 0 11%,transparent 12%),linear-gradient(130deg,#174b43,#4f927e 54%,#b8b774)}.cover-art[data-topic="economy"]{background-image:linear-gradient(145deg,#202d46 0%,#50617e 65%,#d7ae6e 100%)}.cover-art[data-topic="vietnam"]{background-image:radial-gradient(circle at 74% 26%,#efa565a9 0 12%,transparent 13%),linear-gradient(140deg,#785a41,#b97b5c 53%,#e7b86b)}.cover-art[data-topic="culture"]{background-image:linear-gradient(150deg,#665653,#ad9080 51%,#e6c3a9)}.cover-art[data-topic="technology"]{background-image:radial-gradient(circle at 65% 50%,#3cb0c483,transparent 41%),linear-gradient(130deg,#1b3959,#36727e)}.cover-art[data-topic="world"]{background-image:radial-gradient(circle at 65% 17%,#e5bd83ab,transparent 26%),linear-gradient(140deg,#26475f,#52828d)}.loadmore-row{text-align:center;margin:31px 0 10px}.outline-button{display:inline-flex;justify-content:center;align-items:center;gap:9px;border:1px solid #a9b7b1;background:transparent;color:var(--ink);font-size:12px;font-weight:800;padding:12px 17px;min-height:42px}.outline-button:hover{background:#e9edeb}.outline-button svg{width:16px;height:16px}.empty-state{grid-column:1/-1;padding:55px 30px;background:#fff;text-align:center}.empty-state h3{font-family:var(--serif);font-size:21px}.empty-state p{color:var(--muted)}.bottom-banner{background:#e7ede8;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:45px;margin-bottom:65px;padding:29px 37px}.banner-kicker{font-size:10px;color:var(--green);font-weight:800;letter-spacing:.11em}.bottom-banner h2{font:700 26px var(--serif);letter-spacing:-.04em;margin:7px 0}.bottom-banner p{margin:0;color:#5e7470;font-size:12px}.bottom-banner button{border:0;background:var(--ink);color:white;display:flex;gap:15px;padding:14px 16px;font-weight:800;font-size:11px;white-space:nowrap}.bottom-banner button svg{width:15px}.skeleton-hero,.skeleton-card{background:linear-gradient(105deg,#ebf0eb 20%,#fff 40%,#ebf0eb 62%);background-size:220% 100%;animation:shimmer 1.9s infinite}.skeleton-hero{height:485px}.skeleton-card{height:416px}@keyframes shimmer{to{background-position-x:-220%}}
+.workspace{padding-top:62px;min-height:67vh;padding-bottom:90px}.workspace-head{display:flex;align-items:center;justify-content:space-between;gap:25px;border-bottom:1px solid #c3cdc5;padding-bottom:38px;margin-bottom:37px}.workspace-head h1{font:700 clamp(32px,4.5vw,48px)/1.3 var(--serif);letter-spacing:-.055em;margin:15px 0}.workspace-head p{max-width:650px;color:#68777c;font-size:13px;line-height:1.8;margin:0}.workspace-deco{width:114px;height:114px;border:1px solid #a9c0b5;display:grid;place-items:center;border-radius:50%;box-shadow:0 0 0 17px #e7eeea,0 0 0 18px #c9d8d0;flex-shrink:0}.workspace-deco svg{width:48px;height:48px;color:var(--green);stroke-width:1}.studio-columns{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(290px,.85fr);gap:34px}.subhead{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #d4dcd5;padding-bottom:14px}.subhead h2{font:700 22px var(--serif);letter-spacing:-.03em;margin:0}.subhead span{font-size:10px;color:var(--green);font-weight:800;letter-spacing:.09em}.muted-explain{color:#7d8685;font-size:11px;margin:10px 0 22px}.practice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.practice-card{background:#fff;border:1px solid #e5e9e4;padding:20px;display:flex;flex-direction:column;min-height:250px;transition:border-color .2s}.practice-card:hover{border-color:#a1b5a9}.practice-card-top{display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:.1em;color:var(--green)}.practice-card h3{font:700 18px/1.45 var(--serif);letter-spacing:-.025em;margin:20px 0 11px}.practice-card p{font-size:12px;color:#758087;line-height:1.7;margin:0 0 16px}.practice-card button{margin-top:auto;align-self:start;background:transparent;border:0;padding:0;display:flex;align-items:center;gap:6px;color:var(--ink);font-size:11px;font-weight:800}.practice-card button svg{width:14px}.paste-panel{background:#e9ede7;padding:25px;align-self:start;position:sticky;top:87px}.paste-head{display:flex;align-items:center;gap:12px}.paste-head svg{width:23px;height:23px;color:var(--green)}.paste-head h3{font:700 20px var(--serif);margin:0}.paste-panel p{font-size:12px;line-height:1.75;color:#667870;margin:15px 0 20px}.paste-panel label,.dictionary-popover label{display:block;font-size:11px;font-weight:800;margin:14px 0 6px}.paste-panel input,.paste-panel textarea,.dictionary-popover input,.reflection-box textarea{width:100%;border:1px solid #cdd6ce;background:white;border-radius:2px;color:var(--ink);padding:12px;resize:vertical;font-size:12px}.paste-panel textarea{line-height:1.65}.solid-button{border:0;background:var(--ink);color:white;display:inline-flex;justify-content:center;align-items:center;gap:12px;padding:13px 16px;font-size:11px;font-weight:800}.solid-button:hover{background:#305875;color:white}.solid-button svg{width:16px;height:16px}.paste-panel .solid-button{width:100%;margin-top:14px}.paste-status{color:#996b40;font-size:11px;margin-top:10px}.word-head-stat{border-left:1px solid #c4d5cb;padding-left:28px;display:flex;flex-direction:column;align-items:center}.word-head-stat span{font:700 62px var(--serif);color:var(--green);line-height:1}.word-head-stat small{font-size:10px;letter-spacing:.1em;font-weight:800;margin-top:11px}.word-actions{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;gap:15px}.tab-segments{background:#e6ebe6;border:1px solid #d7dfd6;display:flex;padding:4px;gap:3px}.tab-segments button{background:transparent;border:0;color:#63716a;font-size:11px;font-weight:800;padding:10px 13px}.tab-segments button.active{background:white;color:var(--ink);box-shadow:0 1px 3px #00000014}.subtle-button{background:white;border:1px solid #d2dbd2;color:#557165;padding:11px 15px;font-size:11px;font-weight:800}.word-table{display:grid;gap:9px}.word-item{background:white;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid #e5e9e4}.word-item h3{font:700 18px var(--serif);margin:0 0 5px}.word-item p{font-size:12px;color:#667a74;margin:0 0 4px}.word-item small{color:#929e9c;font-size:11px}.word-item input{padding:9px 11px;border:1px solid #d3ddd5;width:min(270px,100%);font-size:12px}.word-item-actions{display:flex;align-items:center;gap:9px}.word-item-actions button{width:32px;height:32px;background:#f5f6f1;border:0;display:grid;place-items:center}.word-item-actions svg{width:16px}.flashcard-wrapper{max-width:680px;margin:32px auto;text-align:center}.flashcard-outer{height:330px;perspective:1000px;cursor:pointer}.flashcard{height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s}.flashcard.flipped{transform:rotateY(180deg)}.flashcard-face{position:absolute;inset:0;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:35px;background:white;border:1px solid #cfdbd2;box-shadow:0 12px 29px #304f3c0d}.flashcard-face.back{transform:rotateY(180deg);background:#e7eee8}.flashcard-face span{color:var(--green);font-size:10px;letter-spacing:.2em;font-weight:800}.flashcard-face h2{font:700 39px/1.35 var(--serif);overflow-wrap:anywhere;letter-spacing:-.035em;margin:20px 0}.flashcard-face p{font-size:14px;color:#4d6d61;max-width:530px}.flashcard-controls{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:20px}.flashcard-controls button{border:1px solid #c7d5ca;background:white;padding:11px 15px;font-weight:800;font-size:12px}.flashcard-controls button:last-child{background:var(--ink);color:white;border-color:var(--ink)}.flashcard-counter{font-size:12px;color:#788980}.empty-vocab{background:white;padding:68px 26px;text-align:center}.empty-vocab h3{font:700 25px var(--serif)}.empty-vocab p{color:#6e7b78;font-size:13px}.empty-vocab button{margin-top:12px}.progress-stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.progress-stat{background:#fff;border-top:3px solid var(--green);padding:26px 23px}.progress-stat:nth-child(2){border-color:var(--gold)}.progress-stat:nth-child(3){border-color:#7f9cae}.progress-stat:nth-child(4){border-color:var(--orange)}.progress-stat small{font-size:10px;letter-spacing:.12em;color:#7c8b89;font-weight:800}.progress-stat strong{display:block;font:700 37px var(--serif);margin:14px 0 3px;letter-spacing:-.06em}.progress-stat span{font-size:11px;color:#85918d}.progress-bottom{display:grid;grid-template-columns:1.25fr 1fr;gap:25px;margin-top:24px}.habit-panel,.recent-panel{padding:28px;background:white}.habit-panel h2,.recent-panel h2{font:700 21px var(--serif);margin:0 0 10px}.habit-panel>p,.recent-panel>p{font-size:12px;color:#7b8881;margin:0 0 24px}.week-bars{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;align-items:end;height:190px;border-bottom:1px solid #d7e0d8;padding-bottom:0}.week-col{display:flex;flex-direction:column;align-items:center;gap:10px;justify-content:end;height:100%}.week-bar{background:#dbe5de;width:42px;max-width:100%;min-height:5px;border-radius:6px 6px 0 0;transition:height .2s}.week-bar.active{background:#428267}.week-col small{font-size:10px;color:#86938d;transform:translateY(26px)}.recent-read{padding:14px 0;border-bottom:1px solid #e8ece7}.recent-read b{display:block;font-size:12px}.recent-read small{color:#7c8a85;font-size:11px}.goal-panel{background:#f4e8ce;padding:25px;margin-top:33px;display:flex;justify-content:space-between;align-items:center;gap:16px}.goal-panel h3{margin:0;font:700 20px var(--serif)}.goal-panel p{font-size:12px;margin:7px 0 0;color:#847457}.goal-panel select{padding:9px;border:1px solid #d5c49e;background:#fff9e9}.site-footer{background:var(--ink);color:#e4e9eb}.footer-inner{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;padding:45px 0}.footer-logo{font:700 28px var(--serif);letter-spacing:-.06em;color:white}.footer-logo small{font:800 9px var(--sans);letter-spacing:.1em;margin-left:5px}.footer-inner p{font-size:11px;line-height:1.8;color:#b4c3c9;max-width:320px}.footer-label{font-size:10px;color:#e1c37f;letter-spacing:.14em;font-weight:800}.footer-links{display:grid;gap:7px;margin-top:11px;font-size:11px}.footer-links a:hover{color:#e9ba58}.footer-bottom{border-top:1px solid #38536b;padding:18px 0;display:flex;justify-content:space-between;gap:12px;font-size:10px;color:#acbcc6}
+.reader-dialog{border:0;position:fixed;inset:0;width:min(1100px,calc(100vw - 55px));height:min(92vh,1050px);max-height:92vh;margin:auto;padding:0;background:var(--paper);color:var(--ink);box-shadow:0 28px 95px #0005;overflow:auto}.reader-dialog::backdrop{background:#0d2434bb;backdrop-filter:blur(4px)}.reader-header{position:sticky;top:0;z-index:4;background:var(--ink);color:white;min-height:63px;display:flex;align-items:center;justify-content:space-between;padding:0 30px}.reader-brand{font:700 23px var(--serif);letter-spacing:-.05em}.reader-brand small{font:800 9px var(--sans);margin-left:12px;letter-spacing:.14em}.close-reader{border:1px solid #ffffff55;width:32px;height:32px;background:transparent;color:white;display:grid;place-items:center}.close-reader svg{width:16px;height:16px}.reader-layout{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:35px;padding:33px 42px 50px}.reader-main{min-width:0}.reader-meta{color:var(--green);font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.reader-main>h1{font:700 clamp(25px,3.2vw,37px)/1.42 var(--serif);letter-spacing:-.04em;margin:14px 0 22px}.reader-toolbar{display:flex;align-items:center;gap:9px;flex-wrap:wrap;border-top:1px solid #e0e4df;border-bottom:1px solid #e0e4df;padding:10px 0}.reader-toolbar button{display:flex;align-items:center;gap:7px;background:#edf2ef;border:0;color:#3b6854;font-size:11px;font-weight:800;padding:9px 12px}.reader-toolbar svg{width:15px;height:15px}.reader-toolbar button.active{background:#f9ebc8;color:#855a21}.reader-help{margin-left:auto;font-size:10px;color:#89948e}.reader-copy{font:400 16px/2 var(--serif);letter-spacing:.005em;padding:29px 0 10px;color:#263747;white-space:pre-wrap}.reader-copy p{margin:0 0 19px}.lookup-word{font:inherit;color:inherit;cursor:pointer;border:0;border-radius:2px;padding:0;background:transparent;text-align:inherit}.lookup-word:hover{background:#f8dda1;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:5px}.reader-copyright{font-size:11px;color:#8b9993;margin:15px 0 22px;border-left:3px solid #d8be85;padding-left:12px}.reader-action-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:27px}.reader-action-row .outline-button{padding:11px}.reflection-box{background:#edf3ef;padding:23px}.reflection-box h3{font:700 20px var(--serif);margin:0 0 8px}.reflection-box p{font-size:12px;color:#668075;margin:0 0 14px}.reflection-box button,.quiz-check{background:var(--ink);border:0;color:white;font-size:11px;font-weight:800;padding:10px 14px;margin-top:12px}.reflection-status{font-size:11px;color:var(--green);margin-top:7px}.reader-side{border-left:1px solid #e1e6df;padding-left:23px;align-self:start;position:sticky;top:95px}.side-kicker{font-size:10px;letter-spacing:.12em;font-weight:800;color:var(--green)}.reader-side h3{font:700 20px/1.4 var(--serif)}.reader-checklist{display:grid;gap:15px;margin:22px 0}.reader-checklist div{font-size:12px;display:flex;align-items:center;gap:9px}.reader-checklist span{border:1px solid #bbcec3;border-radius:50%;color:var(--green);height:28px;width:28px;flex-shrink:0;display:grid;place-items:center;font-size:10px;font-weight:800}.vocab-side-panel{border-top:1px solid #dbe4da;margin-top:28px;padding-top:20px}.vocab-side-panel b{font-size:11px}.vocab-side-panel>div{font-size:12px;color:#7e9187;margin-top:10px}.reader-vocab-chip{display:inline-block;padding:4px 7px;margin:3px 3px 0 0;background:#edf1e9;color:#42624f;border-radius:4px}.quiz-section{margin-top:25px;border:1px solid #dfe6de;padding:22px}.quiz-section h3{font:700 20px var(--serif);margin:0 0 15px}.quiz-question{border-top:1px solid #e3e9e4;padding:17px 0 5px}.quiz-question p{font-size:13px;font-weight:800}.quiz-option{display:flex;align-items:center;gap:8px;font-size:12px;margin:10px 0}.quiz-option input{accent-color:var(--green)}.quiz-result{font-size:12px;padding:10px 13px;background:#e9f3ec;color:#38674f;margin-top:12px}.dictionary-popover{position:fixed;z-index:100;width:340px;max-width:calc(100vw - 25px);background:white;border:1px solid #ccdad0;box-shadow:0 15px 50px #142b3533;padding:21px;color:var(--ink)}.dict-head{display:flex;align-items:start;justify-content:space-between;gap:10px}.dict-kicker{font-size:9px;letter-spacing:.13em;color:var(--green);font-weight:800}.dict-head h3{font:700 26px var(--serif);margin:5px 0 3px}.dict-head button{border:0;background:transparent;padding:4px}.dict-head button svg{width:16px;height:16px}.dict-pronunciation{font-size:12px;color:#82908b}.dict-meaning{font-size:13px;line-height:1.65;color:#354a40;margin:16px 0 7px}.dict-example{font-size:11px;color:#758a7f;font-style:italic;line-height:1.55;margin:8px 0}.dict-actions{display:flex;gap:10px;margin-top:12px}.dict-actions>button:first-child{border:1px solid #cddcd2;background:#f2f6f1;display:grid;place-items:center;width:42px}.dict-actions .solid-button{flex:1}.toast{position:fixed;bottom:30px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.2s;background:var(--ink);color:white;z-index:120;padding:12px 20px;box-shadow:0 8px 25px #0003;font-size:12px;pointer-events:none;max-width:90vw;text-align:center}.toast.show{transform:translate(-50%,0);opacity:1}
+@media (max-width:1150px){.container{width:min(1130px,calc(100% - 40px))}.home-top-grid{grid-template-columns:minmax(0,1.6fr) minmax(275px,.8fr)}.navlinks{gap:19px}.topic-filter{padding:7px 10px}.filter-toolbar{align-items:stretch}.topic-filters{width:100%}.tool-filters{width:100%}.search-input{flex:1}.search-input input{width:100%}}
+@media (max-width:850px){.masthead-grid{grid-template-columns:1fr}.masthead-side{display:none}.masthead-grid{min-height:140px}.brand-title{font-size:62px}.topnav-inner{min-height:60px}.navlinks{gap:13px;overflow-x:auto;height:60px;scrollbar-width:none}.navlinks::-webkit-scrollbar{display:none}.nav-link{font-size:11px}.pill-button{display:none}.home-top-grid{grid-template-columns:1fr}.ritual-aside{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ritual-aside>.section-caption{grid-column:1/-1;margin-bottom:0}.ritual-card{min-height:0}.aside-note{align-self:stretch;margin-top:0}.story-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.studio-columns{grid-template-columns:1fr}.paste-panel{position:static}.reader-layout{grid-template-columns:1fr}.reader-side{position:static;border:0;border-top:1px solid #e1e6df;padding:24px 0 0}.reader-checklist{grid-template-columns:repeat(2,1fr)}.progress-stat-grid{grid-template-columns:repeat(2,1fr)}.footer-inner{grid-template-columns:1.2fr 1fr;gap:30px}.footer-inner>div:last-child{grid-column:1/-1}}
+@media (max-width:600px){.container{width:calc(100% - 30px)}.announcement-inner{justify-content:center}.announcement-right{display:none}.masthead-grid{min-height:113px}.brand-overline{font-size:8px}.brand-title{font-size:50px}.brand-subtitle{font-size:9px}.topnav-inner{width:calc(100% - 20px)}.navlinks{gap:15px}.nav-actions{display:none}.main-intro{padding:34px 0 28px}.intro-flex{display:block}.intro-flex h1{font-size:35px;margin-bottom:19px}.intro-copy{font-size:12px}.hero-cover{height:210px}.hero-text{padding:18px}.hero-text h2{font-size:24px}.ritual-aside{display:block}.ritual-aside>.section-caption{margin-bottom:13px}.ritual-card{padding:23px}.aside-note{margin-top:12px}.stories-section{padding-top:42px}.section-heading-row h2{font-size:27px}.freshness{font-size:10px;max-width:130px;text-align:right}.topic-filters{overflow:auto;flex-wrap:nowrap;padding-bottom:3px}.topic-filter{white-space:nowrap}.tool-filters select{max-width:150px}.story-grid{grid-template-columns:1fr;gap:16px}.story-card{min-height:0}.card-cover{height:210px}.bottom-banner{display:block;padding:23px;margin:33px auto 45px}.bottom-banner h2{font-size:22px}.bottom-banner button{margin-top:20px;width:100%;justify-content:space-between}.workspace{padding-top:35px}.workspace-head{padding-bottom:24px;margin-bottom:26px}.workspace-head h1{font-size:32px}.workspace-deco{display:none}.practice-grid{grid-template-columns:1fr}.practice-card{min-height:200px}.word-head-stat{padding-left:12px}.word-head-stat span{font-size:38px}.word-head-stat small{font-size:8px;text-align:center}.word-actions{flex-direction:column;align-items:stretch}.word-item{align-items:stretch;flex-direction:column}.word-item input{width:100%}.progress-stat-grid{gap:8px}.progress-stat{padding:18px 13px}.progress-stat strong{font-size:30px}.progress-bottom{grid-template-columns:1fr}.week-bar{width:25px}.footer-inner{grid-template-columns:1fr;padding:32px 0;gap:18px}.footer-inner>div:last-child{grid-column:auto}.footer-bottom{flex-direction:column}.reader-dialog{width:100vw;height:100dvh;max-height:100dvh;margin:0}.reader-header{padding:0 20px}.reader-layout{padding:25px 20px 40px}.reader-main>h1{font-size:26px}.reader-help{margin:5px 0 0;flex-basis:100%}.reader-copy{font-size:15px}.reader-checklist{grid-template-columns:1fr}.dictionary-popover{left:12px!important;right:12px!important;bottom:12px!important;top:auto!important;width:auto;max-width:none;max-height:70dvh;overflow:auto}.flashcard-outer{height:290px}.flashcard-face h2{font-size:29px}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+.image-badge{z-index:2}.image-veil{z-index:1}.unstyled{border:0;padding:0;background:transparent}
+.saved-panel{margin-top:22px;background:#fff;padding:26px}.saved-panel h2{font:700 21px var(--serif);margin:0 0 13px}.saved-article-btn{display:flex;align-items:center;justify-content:space-between;gap:13px;border:0;border-bottom:1px solid #e8ece7;width:100%;padding:12px 0;background:transparent;text-align:left;color:var(--ink);font-weight:700;font-size:12px}.saved-article-btn svg{width:15px;height:15px;color:var(--green)}
+
+</style>
+  <script>
+// Original, evergreen English practice passages. Not current news or republished reporting.
+window.PAMVU_PRACTICE = [
+  {
+    id:'practice-vietnam-cafes',topic:'vietnam',level:'B1',source:'PamVu Original · Practice',readMinutes:4,
+    title:'Why Coffee Shops Play a Special Role in Vietnamese Cities',
+    summary:'From early morning conversations to quiet afternoons with a laptop, cafés are part of everyday life in Vietnam.',
+    body:`In many Vietnamese cities, a coffee shop is more than a place to buy a drink. It can be a meeting point for friends, a temporary office for students, or a quiet corner for someone who wants to read. Some cafés are busy from early morning, while others become popular in the evening.\n\nCoffee culture reflects the rhythm of daily life. A customer might order a traditional iced coffee before work, while another chooses tea and spends an hour studying. Many local businesses try to create a comfortable atmosphere with plants, warm lighting and carefully selected music.\n\nHowever, running a café is not always easy. Owners must pay rent, manage employees and respond to changing customer preferences. Competition can be intense, especially in neighborhoods with dozens of similar shops. To stand out, a café may offer a distinctive menu or excellent customer service.\n\nFor English learners, cafés offer an interesting topic for conversation. You can describe your favorite place, compare prices or explain what makes a business successful. The next time you visit a café, pay attention to its customers and atmosphere. You may discover a useful story to tell in English.`,
+    question:'What is the main idea of the passage?',options:['Coffee shops have several social and economic roles.','Coffee is always more expensive than tea.','All cafés in Vietnam close in the afternoon.'],answer:0,explanation:'The passage discusses cafés as social spaces, study places, and businesses.'
+  },
+  {
+    id:'practice-football-youth',topic:'football',level:'B2',source:'PamVu Original · Practice',readMinutes:5,
+    title:'What Makes a Strong Youth Football Development System?',
+    summary:'Talent matters, but long-term planning, coaching and opportunities are just as important to young players.',
+    body:`Every football fan enjoys watching a young player make an impressive debut. Yet the journey from a local training ground to a professional stadium is often long and unpredictable. A talented teenager needs much more than natural ability to build a successful career.\n\nFirst, strong youth development depends on consistent coaching. Players must learn technical skills, tactical awareness and how to communicate with teammates. Good coaches also understand that teenagers develop at different speeds. Selecting only the tallest or fastest players may cause clubs to overlook others with exceptional potential.\n\nSecond, competition should be meaningful. Young footballers improve when they face opponents who challenge them, but excessive pressure can damage their confidence. Clubs should provide opportunities to play without treating every youth match as a final. Education is also important because only a small percentage of academy players eventually become professionals.\n\nFinally, a successful system requires patience. Clubs may need years before their investment produces visible results. Supporters naturally want immediate victories, but long-term progress often comes from building a stable pathway between youth teams and the first team.\n\nFor countries hoping to strengthen their domestic leagues, the central lesson is simple: developing players is not a single project. It is a commitment that must continue across many seasons.`,
+    question:'Why does the passage warn against selecting players only by physical size?',options:['It guarantees more victories.','It may overlook players with other strengths.','All youth players develop at the same speed.'],answer:1,explanation:'Physical development varies, so early selection can miss talented players.'
+  },
+  {
+    id:'practice-economy-inflation',topic:'economy',level:'B2',source:'PamVu Original · Practice',readMinutes:5,
+    title:'Inflation Explained: Why Everyday Prices Matter',
+    summary:'An accessible introduction to inflation, purchasing power and the decisions households make when prices change.',
+    body:`Imagine that you spend the same amount of money on groceries every week. Over time, you notice that your usual budget buys fewer products. This is one way people experience inflation: the general price level in an economy rises, reducing the purchasing power of money.\n\nInflation can have several causes. Businesses may face higher costs for electricity, transport or raw materials, which they then pass on to consumers. Demand can also increase faster than the supply of goods and services. In some situations, both factors occur at the same time.\n\nA moderate and predictable level of inflation is different from rapid, unexpected price increases. If wages do not rise as quickly as living costs, households may have to reduce spending or postpone large purchases. Companies, meanwhile, can find it harder to plan future investments when costs are uncertain.\n\nCentral banks often use interest rates as one tool to manage inflation. Higher interest rates can make borrowing more expensive and encourage saving, which may reduce demand. However, such decisions also affect businesses and employment.\n\nUnderstanding inflation does not require you to be an economist. By comparing prices, income and spending over time, you can begin to understand how national economic trends influence individual choices.`,
+    question:'What does purchasing power describe?',options:['How many goods or services money can buy.','The number of employees at a bank.','The total value of a country’s exports.'],answer:0,explanation:'Purchasing power refers to the amount of goods or services that money can purchase.'
+  },
+  {
+    id:'practice-vietnam-tourism',topic:'culture',level:'B1',source:'PamVu Original · Practice',readMinutes:4,
+    title:'How Responsible Tourism Can Support Local Communities',
+    summary:'Travel brings new opportunities, but it also creates responsibilities for visitors, businesses and communities.',
+    body:`Travel allows people to experience new places and cultures. In Vietnam, a visitor might explore a busy market, take a boat trip or enjoy a meal prepared by a local family. These experiences can create jobs and provide income for small businesses.\n\nTourism, however, also brings challenges. Popular destinations may struggle with traffic, waste and pressure on natural resources. When large numbers of tourists visit a small community, everyday life can change quickly. Local residents may welcome new opportunities while worrying about rising prices or environmental damage.\n\nResponsible tourism means thinking about the effect of our choices. Travelers can support locally owned businesses, respect cultural traditions and reduce unnecessary waste. Businesses can help by paying fair wages and explaining how visitors should behave in sensitive areas.\n\nGovernments and communities also play a role. Clear planning can protect important places while allowing visitors to enjoy them. Tourism works best when its benefits are shared and its long-term costs are considered.\n\nIf you are practicing English, try describing a place you have visited. Explain what makes it attractive, what challenges it faces and what tourists could do to protect it.`,
+    question:'Which choice best represents responsible tourism?',options:['Ignoring local customs.','Supporting local businesses and reducing waste.','Visiting only the most crowded destinations.'],answer:1,explanation:'The text highlights support for local businesses, respect for traditions and reducing waste.'
+  },
+  {
+    id:'practice-technology-ai',topic:'technology',level:'C1',source:'PamVu Original · Practice',readMinutes:6,
+    title:'Artificial Intelligence and the Changing Nature of Work',
+    summary:'AI can automate routine tasks, but its wider effect depends on how people, companies and schools respond.',
+    body:`Artificial intelligence is changing how organizations process information, serve customers and make decisions. Much of the public conversation focuses on whether machines will replace human workers. Yet this question can be misleading because jobs usually consist of many different tasks, not a single activity.\n\nAI systems may perform repetitive administrative work quickly, allowing employees to concentrate on complex decisions or relationships with customers. In other settings, automation may reduce demand for particular roles. The outcome will depend on the technology itself, the decisions of employers and the availability of training.\n\nOne important challenge is the gap between technological change and educational systems. Workers need opportunities to develop skills such as critical thinking, communication and digital literacy. Employers may also need to redesign jobs rather than simply introduce new software into old workflows.\n\nThere are additional concerns about reliability and accountability. An AI-generated answer can sound confident while containing inaccurate information. Organizations therefore need clear procedures for verifying important outputs and protecting sensitive data.\n\nInstead of treating technological progress as automatically beneficial or harmful, it is more useful to ask who gains from it, who faces the risks and what policies could distribute the benefits more fairly.`,
+    question:'Why does the author suggest that the question “Will AI replace jobs?” is incomplete?',options:['Every job consists of multiple tasks.','AI is unable to process information.','Businesses never change their workflows.'],answer:0,explanation:'The passage argues that different tasks within the same job can be affected differently.'
+  },
+  {
+    id:'practice-economy-trade',topic:'economy',level:'C1',source:'PamVu Original · Practice',readMinutes:6,
+    title:'Why Global Supply Chains Matter to Vietnam’s Economy',
+    summary:'Trade connects factories, consumers, suppliers and workers across borders—and makes economies more interdependent.',
+    body:`When someone buys a laptop or a pair of shoes, the final product may contain materials, components and expertise from several countries. This network of suppliers, manufacturers and transport companies is commonly described as a global supply chain. For an export-oriented economy such as Vietnam, understanding these connections is particularly important.\n\nInternational production networks can bring investment, employment and access to advanced manufacturing processes. Local businesses may become suppliers to larger companies, gaining experience with new quality standards and management practices. Consumers also benefit when firms can obtain components from different markets.\n\nHowever, interdependence creates vulnerabilities. A disruption at a major port, a shortage of essential materials or a sudden change in trade policy can affect production far from the original problem. Companies may respond by diversifying suppliers or holding larger inventories, although these decisions can increase costs.\n\nLong-term competitiveness involves more than offering affordable labor. Businesses and policymakers also consider infrastructure, logistics, education, innovation and the ability of domestic firms to move into higher-value activities. Improving these areas takes coordinated investment and time.\n\nThe central trade-off is between efficiency and resilience. A highly optimized supply chain may be inexpensive when everything goes according to plan, but a more flexible network can sometimes respond better to unexpected events.`,
+    question:'What does the passage identify as a key supply-chain trade-off?',options:['Efficiency versus resilience.','Education versus cultural identity.','Tourism versus agriculture.'],answer:0,explanation:'The final paragraph explicitly contrasts an efficient chain with one that can better withstand disruptions.'
+  }
+];
+window.PAMVU_PRACTICE.push({
+  id:'practice-world-urban',topic:'world',level:'B2',source:'PamVu Original · Practice',readMinutes:5,
+  title:'How Cities Around the World Can Become More Liveable',
+  summary:'Public transport, green spaces and affordable housing all shape the experience of urban life.',
+  body:`Across the world, more people are living in cities. Urban areas offer jobs, education and opportunities to meet people from different backgrounds. At the same time, rapid growth can create serious challenges, including traffic congestion, air pollution and expensive housing.\n\nOne way to improve urban life is to invest in public transport. Reliable buses and trains allow people to travel without depending entirely on private cars. This can reduce congestion and help residents reach workplaces, schools and hospitals more easily. However, transport systems must be affordable and accessible to be genuinely useful.\n\nGreen spaces also matter. Parks provide places to exercise, relax and spend time with family. Trees can offer shade and may help reduce heat in densely built neighborhoods. Community groups often play an important role in keeping these spaces welcoming and well maintained.\n\nHousing presents a more complicated challenge. When rents rise faster than wages, workers may need to move farther away from their jobs. This can increase commuting times and make inequalities more visible. Governments, businesses and communities may disagree on the best solutions, but long-term planning is essential.\n\nA liveable city is not simply a place with impressive buildings. It is a place where people can move around safely, access essential services and enjoy a reasonable quality of life.`,
+  question:'According to the passage, what is a key feature of a liveable city?',options:['Only tall buildings and busy roads.','Accessible services, transport and good quality of life.','Transport that depends entirely on private cars.'],answer:1,explanation:'The final paragraph emphasizes access, safety and quality of life rather than impressive buildings alone.'
+});
+
+</script>
+  <script>
+(() => {
+  'use strict';
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
+  const KEY = 'pamvu-english-ledger-v1';
+  const GOAL_DEFAULT = 15;
+  const TOPIC_LABEL = { all:'All stories',vietnam:'Vietnam',football:'Football',economy:'Economy',world:'World',technology:'Technology',culture:'Lifestyle' };
+  const TOPIC_COLOR = { vietnam:'#bf855f',football:'#5e8c76',economy:'#586d8e',world:'#71949c',technology:'#4e8b9c',culture:'#b28d83' };
+  const GLOSSARY = {
+    economy:['nền kinh tế','the system of producing, buying, and selling goods and services'],
+    economic:['thuộc kinh tế','relating to an economy'],inflation:['lạm phát','a general increase in prices'],
+    consumer:['người tiêu dùng','a person who buys goods or services'],consumers:['người tiêu dùng','people who buy goods or services'],
+    investment:['đầu tư','the use of resources in the hope of future benefit'],investor:['nhà đầu tư','someone who puts money into an investment'],
+    export:['xuất khẩu','to sell goods to another country'],exports:['hàng xuất khẩu','goods sold to another country'],
+    import:['nhập khẩu','to bring goods into a country'],market:['thị trường','a place or system for buying and selling'],
+    demand:['nhu cầu','the quantity of something people want to buy'],supply:['nguồn cung','the quantity available for purchase'],
+    revenue:['doanh thu','income a business receives from sales'],budget:['ngân sách','a plan for spending and saving money'],
+    income:['thu nhập','money earned by an individual or organization'],wages:['tiền lương','money paid to workers'],
+    salary:['lương','regular payment for work'],growth:['tăng trưởng','the process of increasing in size or amount'],
+    policy:['chính sách','a set of official plans or decisions'],trade:['thương mại','the buying and selling of goods or services'],
+    tariff:['thuế quan','a tax on imported goods'],interest:['lãi suất hoặc sự quan tâm','the cost of borrowing money, or attention paid to something'],
+    rate:['tỷ lệ, mức','a measure or quantity compared with another'],cost:['chi phí','the amount paid for something'],
+    price:['giá cả','the amount of money something costs'],prices:['giá cả','amounts of money paid for goods or services'],
+    company:['công ty','an organization that sells goods or services'],business:['doanh nghiệp; kinh doanh','commercial activity or an organization engaged in it'],
+    competition:['sự cạnh tranh','the activity of trying to succeed against others'],competitive:['có tính cạnh tranh','having a strong position compared with rivals'],
+    sustainable:['bền vững','able to continue with limited environmental or social harm'],sustainability:['tính bền vững','the capacity to continue without exhausting resources'],
+    environment:['môi trường','the natural world and the conditions around us'],environmental:['thuộc môi trường','related to the natural world'],
+    tourism:['du lịch','the industry of people travelling for pleasure'],tourist:['du khách','a person travelling for leisure'],
+    destination:['điểm đến','a place people travel to'],destinationS:['các điểm đến','places people travel to'],
+    community:['cộng đồng','a group of people living in the same place or sharing interests'],communities:['các cộng đồng','groups of people linked by place or interests'],
+    culture:['văn hóa','the customs and beliefs of a group'],traditional:['truyền thống','following long-established customs'],
+    opportunity:['cơ hội','a favourable chance to do something'],opportunities:['các cơ hội','favourable chances to do something'],
+    challenge:['thử thách','something that requires effort to overcome'],challenges:['thử thách','difficult situations that require action'],
+    improve:['cải thiện','to become or make something better'],development:['sự phát triển','the process of growing or improving'],
+    develop:['phát triển','to grow or make something more advanced'],progress:['tiến bộ','movement towards a goal'],
+    player:['cầu thủ','a person taking part in a sport'],players:['các cầu thủ','people taking part in a sport'],
+    football:['bóng đá','a sport played by two teams with a ball'],coach:['huấn luyện viên','a person who trains players'],
+    coaching:['việc huấn luyện','the process of training and instructing others'],team:['đội bóng, nhóm','people working or playing together'],
+    league:['giải đấu','a competition involving several teams'],match:['trận đấu','a sports competition between sides'],
+    tournament:['giải đấu','a series of sporting competitions'],goal:['bàn thắng; mục tiêu','a score in sport or an aim'],
+    striker:['tiền đạo','a football player whose job is to score'],defender:['hậu vệ','a player who stops the opponent from scoring'],
+    midfielder:['tiền vệ','a player working between defence and attack'],tactical:['chiến thuật','related to a plan of action'],
+    tactics:['chiến thuật','plans used to achieve an advantage'],academy:['học viện','an institution offering special training'],
+    transfer:['chuyển nhượng','moving a player from one club to another'],manager:['người quản lý','a person in charge of a team or organization'],
+    supporters:['người hâm mộ','people who support a team or cause'],fans:['người hâm mộ','people who admire or follow something'],
+    confidence:['sự tự tin','belief in your own abilities'],potential:['tiềm năng','the possibility of future success'],
+    performance:['màn trình diễn; hiệu suất','how well an action or activity is carried out'],victory:['chiến thắng','winning a competition'],
+    defeat:['thất bại','losing a competition'],result:['kết quả','the outcome of an action or event'],
+    international:['quốc tế','involving more than one country'],global:['toàn cầu','relating to the whole world'],
+    domestic:['trong nước','within a particular country'],regional:['thuộc khu vực','relating to a specific geographical area'],
+    government:['chính phủ','the group responsible for governing a country'],authority:['cơ quan có thẩm quyền','an organization with official power'],
+    official:['chính thức','approved by someone in authority'],report:['báo cáo','an account of information or events'],
+    research:['nghiên cứu','a detailed investigation to find information'],study:['nghiên cứu; học tập','a detailed examination or learning activity'],
+    data:['dữ liệu','facts or figures used for analysis'],evidence:['bằng chứng','information showing whether a claim is true'],
+    impact:['tác động','a strong effect on something'],affect:['ảnh hưởng','to make a difference to something'],
+    effect:['ảnh hưởng; hiệu ứng','a change caused by something else'],benefit:['lợi ích','something that improves a situation'],
+    risk:['rủi ro','the possibility that something harmful will happen'],opinion:['quan điểm','a belief or judgement about something'],
+    analysis:['phân tích','a careful examination of information'],strategy:['chiến lược','a plan to achieve a goal'],
+    infrastructure:['cơ sở hạ tầng','basic systems such as roads and electricity'],logistics:['hậu cần; logistics','planning and moving resources efficiently'],
+    supplier:['nhà cung cấp','a business that provides products or materials'],manufacturing:['sản xuất công nghiệp','making products on a large scale'],
+    technology:['công nghệ','practical applications of scientific knowledge'],artificial:['nhân tạo','made by people rather than occurring naturally'],
+    intelligence:['trí tuệ','the ability to learn and understand'],automation:['tự động hóa','using machines to perform tasks'],
+    digital:['kỹ thuật số','using electronic information'],innovation:['đổi mới sáng tạo','the development of useful new ideas or methods'],
+    reliable:['đáng tin cậy','able to be trusted'],accurate:['chính xác','correct and free from errors'],
+    responsibility:['trách nhiệm','the duty to deal with something'],resilience:['khả năng chống chịu','the ability to recover after difficulty'],
+    efficient:['hiệu quả','working well without wasting resources'],efficiency:['hiệu suất; hiệu quả','achieving results with minimal waste'],
+    critical:['mang tính then chốt / phản biện','very important, or involving careful judgement'],
+    priority:['ưu tiên','something regarded as more important than others'],
+    commitment:['sự cam kết','a promise or willingness to continue an activity'],
+    crucial:['rất quan trọng','extremely important'],significant:['đáng kể','important or large enough to matter'],
+    meanwhile:['trong khi đó','at the same time'],however:['tuy nhiên','used to introduce a contrast'],
+    therefore:['vì vậy','for that reason'],although:['mặc dù','despite the fact that'],
+    moreover:['hơn nữa','in addition to what was said'],nevertheless:['tuy nhiên; dẫu vậy','despite what has just been mentioned'],
+    eventually:['cuối cùng','after a long period'],particularly:['đặc biệt','especially or more than usual']
+  };
+
+  const defaultData = { words: [], bookmarks: [], savedArticles: [], sessions: [], reflections: {}, quizScores: {}, goal: GOAL_DEFAULT, customArticles: [] };
+  let data = readStore();
+  let activeView = 'home', activeTopic = 'all', activeLevel = 'all', query = '';
+  let displayed = [], articlesById = new Map(), liveByTopic = new Map();
+  let currentArticle = null, currentDict = null, wordsMode = 'list', flashIndex = 0, flipped = false, itemsShown = 9;
+  let fetchedAt = null, cacheStatus = 'connecting', isLoading = false, requestSeq = 0, toastTimer = null;
+
+  function readStore() { try { return { ...defaultData, ...JSON.parse(localStorage.getItem(KEY) || '{}') }; } catch { return structuredClone(defaultData); } }
+  function store() { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { showToast('Bộ nhớ trình duyệt đã đầy. Hãy export dữ liệu để sao lưu.'); } }
+  const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+  const safeUrl = v => { try { let u = new URL(v); return ['https:', 'http:'].includes(u.protocol) ? u.href : ''; } catch { return ''; } };
+  const todayLocal = () => new Date().toLocaleDateString('sv-SE', { timeZone:'Asia/Ho_Chi_Minh' });
+  const toDate = raw => { let d = new Date(raw); return Number.isFinite(+d) ? d : new Date(); };
+  const dtFmt = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Ho_Chi_Minh'});
+  const updateFmt = new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Ho_Chi_Minh'});
+  function dateStr(d) { return d ? dtFmt.format(toDate(d)) : 'Practice article'; }
+  function relativeDate(d) { if (!d) return 'Practice edition'; const diff = (Date.now() - +new Date(d)) / 3600000; if (diff < 0) return dateStr(d); if(diff < 1) return 'Just published'; if(diff < 24) return `${Math.floor(diff)}h ago`; return dateStr(d); }
+  function showToast(message) { const el = $('#toast'); el.textContent = message; el.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove('show'), 3200); }
+  function icon(name) { return `<svg aria-hidden="true"><use href="#i-${name}"/></svg>`; }
+  function normalizeArticle(item) {
+    return { ...item, source: item.source || 'Source not provided', topic: item.topic || 'world', summary: item.summary || '', readMinutes: Number(item.readMinutes || 3), contentType:item.contentType || 'rss' };
+  }
+  function isPractice(a) { return a.contentType === 'practice' || a.contentType === 'custom' || String(a.id).startsWith('practice-'); }
+  function getArticle(id) { return articlesById.get(id) || window.PAMVU_PRACTICE.find(a=>a.id===id) || data.customArticles.find(a=>a.id===id) || (data.savedArticles||[]).find(a=>a.id===id); }
+  function indexArticles(list) { list.forEach(a => articlesById.set(a.id, normalizeArticle(a))); }
+  function categoryName(topic) { return TOPIC_LABEL[topic] || 'World'; }
+  function readingMinutes(date = todayLocal()) { return data.sessions.filter(s => s.date === date).reduce((sum,s) => sum + Number(s.minutes || 0), 0); }
+  function startedToday(article) { return data.sessions.some(s => s.id === article.id && s.date === todayLocal()); }
+  function totalToday() { return readingMinutes(todayLocal()); }
+  function bookmarked(id) { return data.bookmarks.includes(id); }
+  function setLiveState(mode) {
+    cacheStatus = mode;
+    const el = $('#liveIndicator'); el.className = 'live-indicator ' + (mode === 'live' ? 'connected' : mode === 'practice' ? 'offline' : '');
+    $('#liveText').textContent = mode === 'live' ? 'LIVE PUBLISHER RSS' : mode === 'practice' ? 'PRACTICE EDITION' : 'CONNECTING TO RSS';
+  }
+  function formatDateHeader() {
+    const s = new Intl.DateTimeFormat('en-GB',{weekday:'long',day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Ho_Chi_Minh'}).format(new Date());
+    $('#todayDate').textContent = s.toUpperCase();
+  }
+  function updateStats() {
+    $('#navWordCount').textContent = String(data.words.length);
+    let total = totalToday(), goal = Number(data.goal || GOAL_DEFAULT);
+    $('#dailyMeterText').textContent = `${total} / ${goal} min`;
+    $('#dailyMeterBar').style.width = Math.min(100, Math.round(total / goal * 100)) + '%';
+    $('#ritualBtn').textContent = total >= goal ? 'You reached your daily goal ✓' : 'Build my habit →';
+  }
+  async function fetchNews(topic = activeTopic, force = false) {
+    const ticket = ++requestSeq;
+    if (!force && liveByTopic.has(topic)) { if (topic === activeTopic) applyStories(liveByTopic.get(topic), false); return; }
+    isLoading = true; $('#refreshNews').classList.add('loading');
+    try {
+      const url = '/api/news?topic=' + encodeURIComponent(topic) + (force ? '&fresh=' + Date.now() : '');
+      const controller = new AbortController(); const timer = setTimeout(() => controller.abort(), 22000);
+      let res;
+      try { res = await fetch(url, { signal:controller.signal, cache:force ? 'no-store' : 'default' }); } finally { clearTimeout(timer); }
+      if (!res.ok) throw new Error('RSS unavailable');
+      const payload = await res.json();
+      if (!payload.isLive || !Array.isArray(payload.items) || payload.items.length === 0) throw new Error('No feeds available');
+      const items = payload.items.map(normalizeArticle);
+      liveByTopic.set(topic, { items, fetchedAt:payload.fetchedAt, failedFeeds:payload.failedFeeds, healthyFeeds:payload.healthyFeeds });
+      if (ticket === requestSeq) applyStories(liveByTopic.get(topic), false);
+    } catch (err) {
+      if (ticket === requestSeq) applyStories({ items:getPracticeForTopic(topic), fetchedAt:null, failedFeeds:0, healthyFeeds:0 }, true);
+    } finally { if (ticket === requestSeq) { isLoading = false; $('#refreshNews').classList.remove('loading'); } }
+  }
+  function getPracticeForTopic(topic) { return window.PAMVU_PRACTICE.filter(a => topic === 'all' || a.topic === topic || (topic === 'vietnam' && a.id === 'practice-economy-trade')).map(a => ({ ...a,contentType:'practice' })); }
+  function applyStories(result, practiceMode) {
+    displayed = result.items;
+    fetchedAt = result.fetchedAt;
+    indexArticles(displayed);
+    setLiveState(practiceMode ? 'practice' : 'live');
+    itemsShown = 9;
+    const notice = $('#newsNotice');
+    if (practiceMode) {
+      notice.hidden = false;
+      notice.innerHTML = '<strong>Chế độ luyện tập:</strong> Tin RSS chưa kết nối. Đây là các bài luyện đọc tự biên soạn, không phải tin mới. Để bật tin thời gian thực, hãy chạy website bằng Cloudflare Worker theo file README. Bạn vẫn có thể đọc và học từ vựng bình thường.';
+      $('#lastRefresh').textContent = 'PRACTICE LIBRARY · NOT LIVE NEWS';
+    } else {
+      notice.hidden = !result.failedFeeds;
+      notice.textContent = result.failedFeeds ? `Đã kết nối ${result.healthyFeeds} nguồn RSS. ${result.failedFeeds} nguồn tạm thời không phản hồi; những tin còn lại vẫn là bài thật.` : '';
+      $('#lastRefresh').textContent = `Updated ${fetchedAt ? updateFmt.format(toDate(fetchedAt)) : 'recently'} · Publisher RSS`;
+    }
+    renderHome();
+  }
+  function filteredStories() {
+    let s = displayed;
+    if (activeLevel !== 'all') s = s.filter(a => a.level === activeLevel);
+    if (query.trim()) { const q = query.toLowerCase().trim(); s = s.filter(a => `${a.title} ${a.summary} ${a.source}`.toLowerCase().includes(q)); }
+    return s;
+  }
+  function makeCover(article, hero = false) {
+    const url = safeUrl(article.image);
+    const className = hero ? 'hero-cover' : 'card-cover';
+    const badge = hero ? 'image-badge' : 'card-tag';
+    return `<div class="${className} cover-art" data-topic="${esc(article.topic)}">${url ? `<img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}<span class="${badge}">${esc(categoryName(article.topic).toUpperCase())}${isPractice(article) ? ' · PRACTICE' : ''}</span>${hero ? '<span class="image-veil"></span>' : ''}</div>`;
+  }
+  function metadata(a) {
+    return `<span class="source">${esc(a.source)}</span><span class="dot-separator"></span><span>${esc(relativeDate(a.publishedAt))}</span><span class="dot-separator"></span><span>${a.readMinutes} MIN READ</span>`;
+  }
+  function storyCard(a) {
+    return `<article class="story-card" data-article-id="${esc(a.id)}">${makeCover(a)}<div class="card-body"><div class="story-topline">${metadata(a)}</div><h3 class="article-title" role="button" tabindex="0" data-open="${esc(a.id)}">${esc(a.title)}</h3><p>${esc(a.summary)}</p><div class="story-footer"><button class="card-read unstyled" data-open="${esc(a.id)}">Practice reading ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(a.level)}</span><button class="save-small ${bookmarked(a.id) ? 'saved' : ''}" data-bookmark="${esc(a.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div></article>`;
+  }
+  function renderHome() {
+    const filtered = filteredStories(), featured = filtered[0];
+    if (featured) {
+      $('#heroStory').innerHTML = `${makeCover(featured,true)}<div class="hero-text"><div class="story-topline">${metadata(featured)}</div><h2 role="button" tabindex="0" data-open="${esc(featured.id)}">${esc(featured.title)}</h2><p>${esc(featured.summary)}</p><div class="story-footer"><button class="read-link unstyled" data-open="${esc(featured.id)}">Read & learn ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(featured.level)} READING</span><button class="save-small ${bookmarked(featured.id) ? 'saved' : ''}" data-bookmark="${esc(featured.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div>`;
+    } else {
+      $('#heroStory').innerHTML = '<div class="empty-state"><h3>No matching stories</h3><p>Try a different topic, keyword or level.</p></div>';
+    }
+    const rest = filtered.slice(1,itemsShown);
+    $('#storyGrid').innerHTML = rest.length ? rest.map(storyCard).join('') : (filtered.length ? '<div class="empty-state"><h3>That’s the latest in this section.</h3><p>Explore another topic or try the Reading Studio.</p></div>' : '');
+    $('#loadMoreBtn').hidden = filtered.length <= itemsShown;
+    updateStats();
+  }
+  function setView(name) {
+    if (!['home','practice','words','progress'].includes(name)) return;
+    activeView = name;
+    $$('.view').forEach(x => x.classList.toggle('active', x.id === name + 'View'));
+    $$('.nav-link').forEach(x => x.classList.toggle('active',x.dataset.view === name));
+    if (name === 'practice') renderPractice();
+    if (name === 'words') renderWords();
+    if (name === 'progress') renderProgress();
+    window.scrollTo({ top:0,behavior:'smooth' });
+  }
+  function renderPractice() {
+    indexArticles(window.PAMVU_PRACTICE);
+    indexArticles(data.customArticles);
+    $('#practiceGrid').innerHTML = [...data.customArticles.map(x=>({...x,contentType:'custom'})),...window.PAMVU_PRACTICE].map(a => `<article class="practice-card"><div class="practice-card-top"><span>${esc(categoryName(a.topic).toUpperCase())}</span><span>${esc(a.level)} · ${a.readMinutes} MIN</span></div><h3>${esc(a.title)}</h3><p>${esc(a.summary)}</p><button data-open="${esc(a.id)}">Start this reading ${icon('arrow')}</button></article>`).join('');
+  }
+  function openReader(id) {
+    const article = getArticle(id);
+    if (!article) { showToast('Không tìm thấy bài đọc này. Hãy tải lại nguồn tin.'); return; }
+    currentArticle = normalizeArticle(article);
+    $('#readerMeta').textContent = `${categoryName(article.topic).toUpperCase()}   /   ${article.level}   /   ${article.readMinutes} MIN  /   ${article.source}`;
+    $('#readerTitle').textContent = article.title;
+    $('#readerBookmark').classList.toggle('active',bookmarked(article.id));
+    $('#readerBookmark span').textContent = bookmarked(article.id) ? 'Saved' : 'Bookmark';
+    $('#readerListen span').textContent = 'Listen';
+    const copy = isPractice(article) ? article.body : `${article.summary || 'Publisher did not provide a text summary for this article.'}`;
+    renderClickableText(copy);
+    $('#readerCopyright').textContent = isPractice(article) ? (article.contentType === 'custom' ? 'Your text is stored locally in this browser and is not uploaded.' : 'Original practice text created for PamVu English Ledger. This is not a news report.') : 'Publisher RSS excerpt only. The full article belongs to the original publisher. Use the source link to continue reading.';
+    $('#readOriginal').hidden = !safeUrl(article.url) || isPractice(article);
+    if (!$('#readOriginal').hidden) $('#readOriginal').href = safeUrl(article.url);
+    $('#completeReader').textContent = startedToday(article) ? '✓ Completed today' : '✓ Mark as completed';
+    $('#reflectionPrompt').textContent = isPractice(article) ? 'Write 2–3 English sentences: What was the main idea, and what would you like to discuss?' : 'Summarise the headline and RSS excerpt. After reading the full story at the publisher, note an important insight.';
+    $('#reflectionText').value = data.reflections[article.id]?.text || '';
+    $('#reflectionStatus').textContent = '';
+    renderArticleWords(); renderQuiz(article);
+    $('#readerDialog').showModal(); document.body.classList.add('modal-open');
+    $('#readerDialog').scrollTop = 0;
+  }
+  function renderClickableText(text) {
+    const root = $('#readerBody'); root.replaceChildren();
+    const paragraphs = String(text).slice(0,23000).split(/\n\s*\n/);
+    const tokenRegex = /[A-Za-z]+(?:['’][A-Za-z]+)*(?:-[A-Za-z]+)*/g;
+    for (const paragraph of paragraphs) {
+      const p = document.createElement('p');
+      let last = 0;
+      for (const m of paragraph.matchAll(tokenRegex)) {
+        p.append(document.createTextNode(paragraph.slice(last,m.index)));
+        let b = document.createElement('button'); b.className = 'lookup-word'; b.type = 'button'; b.textContent = m[0]; b.dataset.word = m[0];
+        b.setAttribute('aria-label',`Tra từ ${m[0]}`); p.append(b); last = m.index + m[0].length;
+      }
+      p.append(document.createTextNode(paragraph.slice(last))); root.append(p);
+    }
+  }
+  function closeReader() { $('#readerDialog').close(); document.body.classList.remove('modal-open'); closeDict(); if ('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+  function doBookmark(id) {
+    if (!id) return;
+    if (bookmarked(id)) { data.bookmarks = data.bookmarks.filter(x=>x!==id); data.savedArticles=(data.savedArticles||[]).filter(a=>a.id!==id); showToast('Đã bỏ lưu bài.'); }
+    else { data.bookmarks.unshift(id); const article=getArticle(id); if(article){data.savedArticles=data.savedArticles||[];data.savedArticles.unshift(article);data.savedArticles=data.savedArticles.slice(0,80);}showToast('Đã lưu bài vào danh sách đọc.'); }
+    store();
+    if (currentArticle?.id===id) { $('#readerBookmark').classList.toggle('active',bookmarked(id)); $('#readerBookmark span').textContent=bookmarked(id)?'Saved':'Bookmark'; }
+    renderHome();
+  }
+  function finishArticle() {
+    if (!currentArticle) return;
+    if (startedToday(currentArticle)) { showToast('Bạn đã hoàn tất bài này hôm nay.'); return; }
+    data.sessions.push({ id:currentArticle.id,date:todayLocal(),minutes:Math.max(2,currentArticle.readMinutes),title:currentArticle.title,topic:currentArticle.topic });
+    store(); updateStats();
+    $('#completeReader').textContent = '✓ Completed today';
+    showToast(`Tuyệt! +${currentArticle.readMinutes} phút đọc đã được ghi nhận.`);
+  }
+  function renderArticleWords() {
+    if (!currentArticle) return;
+    const list = data.words.filter(w=>w.sourceId === currentArticle.id);
+    $('#articleWords').innerHTML = list.length ? list.map(w=>`<span class="reader-vocab-chip">${esc(w.word)}</span>`).join('') : 'Tap any word to start learning.';
+  }
+  function saveReflection() {
+    if(!currentArticle) return;
+    const t=$('#reflectionText').value.trim();
+    if(t.length<12){$('#reflectionStatus').textContent='Please write at least one complete English sentence.';return;}
+    data.reflections[currentArticle.id] = { text:t,at:new Date().toISOString() };store();
+    $('#reflectionStatus').textContent = '✓ Reflection saved on this device.';showToast('Đã lưu phần tóm tắt của bạn.');
+  }
+  function renderQuiz(a) {
+    const target=$('#quizSection');
+    if(!a.question || !Array.isArray(a.options)) {target.hidden=true;return;}
+    target.hidden=false;
+    target.innerHTML=`<div class="eyebrow">READING COMPREHENSION</div><h3>Check your understanding</h3><div class="quiz-question"><p>${esc(a.question)}</p>${a.options.map((t,i)=>`<label class="quiz-option"><input type="radio" name="quizAnswer" value="${i}"><span>${esc(t)}</span></label>`).join('')}<button class="quiz-check" id="quizCheckBtn">Check my answer</button><div class="quiz-answer" id="quizAnswer"></div></div>`;
+    $('#quizCheckBtn').addEventListener('click',()=>{
+      const checked=$('input[name="quizAnswer"]:checked',target);
+      if(!checked){showToast('Hãy chọn một đáp án trước.');return;}
+      const correct=Number(checked.value)===a.answer;
+      data.quizScores[a.id]={correct,at:new Date().toISOString()};store();
+      $('#quizAnswer').innerHTML=`<div class="quiz-result">${correct?'✓ Correct!':'Not quite — try reviewing the paragraph.'} ${esc(a.explanation)}</div>`;
+      if(correct) showToast('Great job! You got it right.');
+    });
+  }
+  function speakText(text) {
+    if (!('speechSynthesis' in window)) {showToast('Trình duyệt không hỗ trợ đọc văn bản.');return;}
+    const synth=window.speechSynthesis;
+    synth.cancel();
+    const utter=new SpeechSynthesisUtterance(String(text).slice(0,4200));
+    utter.lang='en-GB';utter.rate=.9;utter.pitch=1;
+    synth.speak(utter);
+  }
+  function clickWord(word, element) {
+    if(!currentArticle || !word) return;
+    const normalized = word.toLowerCase().replace(/^[^a-z]+|[^a-z]+$/g,'');
+    if(!normalized || normalized.length>45) return;
+    currentDict = { word:normalized, sourceId:currentArticle.id,sourceTitle:currentArticle.title,example:(element.closest('p')?.textContent || '').slice(0,300), phonetic:'',english:'', vietnamese:'' };
+    const gloss=GLOSSARY[normalized] || GLOSSARY[normalized.replace(/s$/,'')];
+    if(gloss){currentDict.vietnamese=gloss[0];currentDict.english=gloss[1];}
+    const existing=data.words.find(w=>w.word===normalized);
+    if(existing?.vietnamese) currentDict.vietnamese=existing.vietnamese;
+    $('#dictWord').textContent=normalized;
+    $('#dictPhonetic').textContent='Loading pronunciation…';
+    $('#dictMeaning').textContent=currentDict.english || 'Đang tra định nghĩa tiếng Anh…';
+    $('#dictExample').textContent=currentDict.example.length>100 ? '“'+currentDict.example.slice(0,160)+'…”' : '“'+currentDict.example+'”';
+    $('#dictVietnamese').value=currentDict.vietnamese;
+    $('#dictSave').textContent=existing?'Update flashcard':'+ Save to flashcards';
+    const pop=$('#dictionaryPopover'); pop.hidden=false;
+    let rect=element.getBoundingClientRect();
+    let left=Math.max(12,Math.min(window.innerWidth-355,rect.left));
+    let top=rect.bottom+9;
+    if(top+390>window.innerHeight) top=Math.max(12,rect.top-400);
+    pop.style.left=left+'px';pop.style.top=top+'px';
+    fetchDictionary(normalized, currentDict);
+  }
+  async function fetchDictionary(word, dict) {
+    try {
+      const ctrl = new AbortController(), t=setTimeout(()=>ctrl.abort(),7500);
+      let res;
+      try { res=await fetch('https://api.dictionaryapi.dev/api/v2/entries/en/'+encodeURIComponent(word),{signal:ctrl.signal}); }
+      finally { clearTimeout(t); }
+      if(!res.ok) throw new Error('Unavailable');
+      const json=await res.json();const first=json[0];
+      if(currentDict!==dict) return;
+      const definition=first?.meanings?.flatMap(m=>m.definitions||[])?.find(x=>x.definition)?.definition;
+      const phonetic=first?.phonetic || first?.phonetics?.find(x=>x.text)?.text || '';
+      currentDict.phonetic=phonetic;
+      if(!currentDict.english && definition) currentDict.english=definition;
+      $('#dictMeaning').textContent=currentDict.english || 'No definition available for this word.';
+      $('#dictPhonetic').textContent=phonetic || 'English dictionary';
+    } catch {
+      if(currentDict!==dict) return;
+      $('#dictPhonetic').textContent='Pronunciation unavailable';
+      $('#dictMeaning').textContent=currentDict.english || 'Không lấy được định nghĩa trực tuyến. Bạn vẫn có thể nhập nghĩa tiếng Việt và lưu từ.';
+    }
+  }
+  function closeDict() { $('#dictionaryPopover').hidden=true; currentDict=null; }
+  function saveCurrentWord() {
+    if(!currentDict) return;
+    const v=$('#dictVietnamese').value.trim().slice(0,240);
+    const word=currentDict.word;
+    const existing=data.words.find(w=>w.word===word);
+    const merged={...existing, word,vietnamese:v||currentDict.vietnamese||'',english:currentDict.english || existing?.english || '',phonetic:currentDict.phonetic || existing?.phonetic || '',example:currentDict.example,sourceTitle:currentDict.sourceTitle,sourceId:currentDict.sourceId,updatedAt:new Date().toISOString(),mastered:existing?.mastered||false};
+    if(existing) data.words=data.words.map(w=>w.word===word?merged:w);
+    else data.words.unshift({...merged,addedAt:new Date().toISOString()});
+    store();updateStats();renderArticleWords();showToast(`Đã lưu “${word}” vào flashcards.`);closeDict();
+  }
+  function renderWords() {
+    $('#wordTotal').textContent=data.words.length;
+    $$('[data-words-mode]').forEach(el=>el.classList.toggle('active',el.dataset.wordsMode===wordsMode));
+    if(data.words.length===0){
+      $('#wordsContent').innerHTML='<div class="empty-vocab"><h3>Every vocabulary collection starts with one word.</h3><p>Mở một bài đọc và chạm vào từ bất kỳ để lưu flashcard đầu tiên nhé.</p><button class="solid-button" id="emptyStartReading">Explore articles →</button></div>';
+      $('#emptyStartReading').onclick=()=>setView('home');return;
+    }
+    if(wordsMode==='cards'){renderFlashcards();return;}
+    $('#wordsContent').innerHTML=`<div class="word-table">${data.words.map(w=>`<div class="word-item" data-word-row="${esc(w.word)}"><div><h3>${esc(w.word)} ${w.mastered?'<span class="sublevel">MASTERED</span>':''}</h3><p>${esc(w.english||'Add a definition or translation')}</p><small>From: ${esc(w.sourceTitle||'Your reading')} ${w.phonetic?' · '+esc(w.phonetic):''}</small></div><div class="word-item-actions"><input type="text" data-meaning="${esc(w.word)}" aria-label="Nghĩa tiếng Việt cho ${esc(w.word)}" value="${esc(w.vietnamese||'')}" placeholder="Ghi nghĩa tiếng Việt"><button data-speak="${esc(w.word)}" aria-label="Nghe từ">${icon('volume')}</button><button data-delete="${esc(w.word)}" aria-label="Xóa từ">${icon('trash')}</button></div></div>`).join('')}</div>`;
+  }
+  function renderFlashcards() {
+    flashIndex = Math.max(0, Math.min(data.words.length-1,flashIndex));
+    const word=data.words[flashIndex];
+    $('#wordsContent').innerHTML=`<div class="flashcard-wrapper"><p class="eyebrow" style="justify-content:center">SPACED REPETITION · TAP TO FLIP</p><div class="flashcard-outer" id="flashFlip" role="button" tabindex="0" aria-label="Lật flashcard"><div class="flashcard ${flipped?'flipped':''}" id="flashcard"><div class="flashcard-face"><span>FRONT · THE WORD</span><h2>${esc(word.word)}</h2><p>${esc(word.phonetic||'Tap to reveal meaning')}</p></div><div class="flashcard-face back"><span>BACK · THE MEANING</span><h2>${esc(word.vietnamese||word.english||'Your own meaning')}</h2><p>${esc(word.english||'')}<br>${esc(word.example?.slice(0,180)||'')}</p></div></div></div><div class="flashcard-controls"><button id="flashPrev">← Previous</button><span class="flashcard-counter">${flashIndex+1} / ${data.words.length}</span><button id="flashNext">Next →</button></div><div class="flashcard-controls"><button id="flashShuffle">↝ Shuffle</button><button id="flashMaster">${word.mastered?'✓ Mastered':'Mark as mastered ✓'}</button></div></div>`;
+    $('#flashFlip').addEventListener('click',flipCard);
+    $('#flashFlip').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flipCard();}});
+    $('#flashPrev').onclick=()=>{flashIndex=(flashIndex-1+data.words.length)%data.words.length;flipped=false;renderFlashcards();};
+    $('#flashNext').onclick=()=>{flashIndex=(flashIndex+1)%data.words.length;flipped=false;renderFlashcards();};
+    $('#flashShuffle').onclick=()=>{flashIndex=Math.floor(Math.random()*data.words.length);flipped=false;renderFlashcards();};
+    $('#flashMaster').onclick=()=>{word.mastered=!word.mastered;store();renderFlashcards();};
+  }
+  function flipCard() {flipped=!flipped;$('#flashcard').classList.toggle('flipped',flipped);}
+  function renderProgress() {
+    const sessions=data.sessions, days=[...new Set(sessions.map(s=>s.date))];
+    let streak=0, day=new Date(todayLocal()+'T12:00:00+07:00');
+    if(!days.includes(todayLocal())) day.setDate(day.getDate()-1);
+    for(let n=0;n<500;n++){
+      const date=day.toLocaleDateString('sv-SE',{timeZone:'Asia/Ho_Chi_Minh'});
+      if(!days.includes(date))break;streak++;day.setDate(day.getDate()-1);
+    }
+    const totalMinutes=sessions.reduce((s,x)=>s+Number(x.minutes||0),0);
+    const week=Array.from({length:7},(_,i)=>{ const d=new Date(todayLocal()+'T12:00:00+07:00'); d.setDate(d.getDate()-(6-i)); const key=d.toLocaleDateString('sv-SE',{timeZone:'Asia/Ho_Chi_Minh'});return {date:key,label:d.toLocaleDateString('en-US',{weekday:'short',timeZone:'Asia/Ho_Chi_Minh'}),minutes:readingMinutes(key)}; });
+    $('#progressContent').innerHTML=`<div class="progress-stat-grid"><div class="progress-stat"><small>READING STREAK</small><strong>${streak} days</strong><span>Keep the momentum going</span></div><div class="progress-stat"><small>TOTAL READING TIME</small><strong>${totalMinutes} min</strong><span>Time spent with English</span></div><div class="progress-stat"><small>ARTICLES COMPLETED</small><strong>${sessions.length}</strong><span>Reading sessions logged</span></div><div class="progress-stat"><small>WORDS COLLECTED</small><strong>${data.words.length}</strong><span>${data.words.filter(w=>w.mastered).length} marked as mastered</span></div></div><div class="progress-bottom"><section class="habit-panel"><h2>One week at a glance</h2><p>Your reading minutes per day (Vietnam time).</p><div class="week-bars">${week.map(d=>`<div class="week-col"><div class="week-bar ${d.minutes?'active':''}" title="${d.minutes} min" style="height:${Math.max(5,Math.min(155,d.minutes / Math.max(data.goal,1) * 135))}px"></div><small>${d.label}</small></div>`).join('')}</div><div class="goal-panel"><div><h3>Daily reading goal</h3><p>Choose a sustainable target.</p></div><select id="goalSelect" aria-label="Thời lượng mục tiêu"><option value="10" ${data.goal===10?'selected':''}>10 min / day</option><option value="15" ${data.goal===15?'selected':''}>15 min / day</option><option value="20" ${data.goal===20?'selected':''}>20 min / day</option><option value="30" ${data.goal===30?'selected':''}>30 min / day</option></select></div></section><section class="recent-panel"><h2>Recent reading activity</h2><p>Your latest five completed readings.</p>${sessions.length? [...sessions].reverse().slice(0,5).map(s=>`<div class="recent-read"><b>${esc(s.title)}</b><small>${esc(s.date)} · ${s.minutes} reading min</small></div>`).join(''):'<div class="empty-vocab" style="padding:30px"><p>Your reading history will appear here after you finish an article.</p></div>'}</section></div>`;
+    const saved = (data.savedArticles||[]).filter(a=>data.bookmarks.includes(a.id));
+    $('#progressContent').insertAdjacentHTML('beforeend', `<section class="saved-panel"><h2>Saved for later · ${saved.length}</h2>${saved.length ? saved.slice(0,15).map(a=>`<button class="saved-article-btn" data-saved-open="${esc(a.id)}"><span>${esc(a.title)}</span>${icon('arrow')}</button>`).join('') : '<p style="color:#74847d;font-size:12px">Use the bookmark icon on a story to keep it here.</p>'}</section>`);
+    $$('[data-saved-open]').forEach(button=>button.onclick=()=>openReader(button.dataset.savedOpen));
+    $('#goalSelect').onchange=(e)=>{data.goal=Number(e.target.value);store();updateStats();renderProgress();};
+  }
+  function exportData() {
+    const out=JSON.stringify({app:'PamVu English Ledger',exportedAt:new Date().toISOString(),...data},null,2);
+    const href=URL.createObjectURL(new Blob([out],{type:'application/json'}));
+    const a=document.createElement('a');a.href=href;a.download='pamvu-english-progress-'+todayLocal()+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),3000);
+    showToast('Đã xuất file tiến độ học tiếng Anh của bạn.');
+  }
+  function addCustomArticle() {
+    const title=$('#customTitle').value.trim(), body=$('#customBody').value.trim();
+    if(title.length < 6 || body.length < 60){$('#pasteStatus').textContent='Hãy nhập tiêu đề ít nhất 6 ký tự và đoạn tiếng Anh tối thiểu 60 ký tự.';return;}
+    const a={id:'custom-'+Date.now(),title,body:body.slice(0,23000),summary:body.slice(0,155)+'…',source:'Your personal text',topic:'world',level:'B2',contentType:'custom',readMinutes:Math.max(2,Math.ceil(body.split(/\s+/).length/155))};
+    data.customArticles.unshift(a);data.customArticles=data.customArticles.slice(0,15);store();
+    indexArticles([a]);$('#customTitle').value='';$('#customBody').value='';$('#pasteStatus').textContent='';renderPractice();openReader(a.id);
+  }
+  function handleOpenClicks(event) {
+    const btn=event.target.closest('[data-open]');
+    if(btn){openReader(btn.dataset.open);return;}
+    const bookmark=event.target.closest('[data-bookmark]');
+    if(bookmark){doBookmark(bookmark.dataset.bookmark);return;}
+  }
+  function bind() {
+    $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
+    $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
+      activeTopic=button.dataset.topic; $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
+      $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
+      $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
+      fetchNews(activeTopic);
+    }));
+    $('#articleSearch').addEventListener('input',e=>{query=e.target.value;renderHome();});
+    $('#levelFilter').addEventListener('change',e=>{activeLevel=e.target.value;renderHome();});
+    $('#loadMoreBtn').addEventListener('click',()=>{itemsShown+=9;renderHome();});
+    $('#refreshNews').addEventListener('click',()=>{liveByTopic.delete(activeTopic);fetchNews(activeTopic,true);});
+    $('#storyGrid').addEventListener('click',handleOpenClicks);
+    $('#heroStory').addEventListener('click',handleOpenClicks);
+    for(const id of ['heroStory','storyGrid','practiceGrid']){
+      $('#'+id).addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.dataset.open){e.preventDefault();openReader(e.target.dataset.open);}});
+    }
+    $('#practiceGrid').addEventListener('click',handleOpenClicks);
+    $('#globalSearchBtn').onclick=()=>{setView('home');$('#articleSearch').focus();};
+    $('#dailyStartBtn').onclick=()=>{setView('home');const first=filteredStories()[0];if(first)openReader(first.id);};
+    $('#ritualBtn').onclick=()=>{const first=filteredStories()[0];if(first)openReader(first.id);else setView('practice');};
+    $('#bannerStudioBtn').onclick=()=>setView('practice');
+    $('#closeReader').onclick=closeReader;
+    $('#readerDialog').addEventListener('click',e=>{if(e.target===$('#readerDialog'))closeReader();});
+    $('#readerDialog').addEventListener('close',()=>{document.body.classList.remove('modal-open');closeDict();if('speechSynthesis' in window)window.speechSynthesis.cancel();});
+    $('#readerBody').addEventListener('click',e=>{const word=e.target.closest('[data-word]');if(word)clickWord(word.dataset.word,word);});
+    $('#readerBookmark').onclick=()=>currentArticle&&doBookmark(currentArticle.id);
+    $('#completeReader').onclick=finishArticle;
+    $('#saveReflection').onclick=saveReflection;
+    $('#readerListen').onclick=()=>{if(!currentArticle)return;if('speechSynthesis'in window&&window.speechSynthesis.speaking){window.speechSynthesis.cancel();$('#readerListen span').textContent='Listen';}else{speakText(isPractice(currentArticle)?currentArticle.body:currentArticle.summary);$('#readerListen span').textContent='Stop / Listen';}};
+    $('#dictClose').onclick=closeDict;
+    $('#dictSpeak').onclick=()=>currentDict&&speakText(currentDict.word);
+    $('#dictSave').onclick=saveCurrentWord;
+    $('#addCustomArticle').onclick=addCustomArticle;
+    $$('[data-words-mode]').forEach(el=>el.onclick=()=>{wordsMode=el.dataset.wordsMode;flipped=false;renderWords();});
+    $('#wordsContent').addEventListener('change',e=>{const word=e.target.dataset.meaning;if(!word)return;const w=data.words.find(w=>w.word===word);if(w){w.vietnamese=e.target.value.trim();store();showToast('Đã lưu nghĩa tiếng Việt.');}});
+    $('#wordsContent').addEventListener('click',e=>{
+      const del=e.target.closest('[data-delete]'); if(del){data.words=data.words.filter(w=>w.word!==del.dataset.delete);store();updateStats();renderWords();showToast('Đã xóa từ.');return;}
+      const speak=e.target.closest('[data-speak]');if(speak)speakText(speak.dataset.speak);
+    });
+    $('#exportDataBtn').onclick=exportData;
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDict();});
+    document.addEventListener('click',e=>{if(!$('#dictionaryPopover').hidden&&!e.target.closest('#dictionaryPopover')&&!e.target.closest('.lookup-word'))closeDict();});
+  }
+  function init() {
+    if(!window.PAMVU_PRACTICE) return;
+    formatDateHeader();indexArticles(window.PAMVU_PRACTICE);indexArticles(data.customArticles);
+    updateStats();renderPractice();bind();setLiveState('connecting');
+    const hash=location.hash.replace('#','');if(['home','practice','words','progress'].includes(hash))setView(hash);
+    fetchNews('all');
+    // Refresh the active section every 15 minutes while the page is open.
+    setInterval(() => { if (!document.hidden && activeView === 'home' && !isLoading) { liveByTopic.delete(activeTopic); fetchNews(activeTopic,true); } }, 15*60*1000);
+  }
+  document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
+})();
+
+</script>
+</head>
+<body>
+  <svg class="icons" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C8 4.4 4.5 4.2 2 5v14c3.4-1.2 6.6-.8 10 1.1 3.4-1.9 6.6-2.3 10-1.1V5c-2.5-.8-6-.6-10 1.5Zm0 0v13.6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.9"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4.5 0 7-3.1 7-7.4 0-2.8-1.6-5.2-4.1-7.6.2 3.2-1.7 4.1-2.8 4-2.6-1-2.9-3.7-2.4-8-3.5 3.2-5.5 7.2-5.5 11.6C4.2 18.9 7 22 12 22Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3L12 2Z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12-1c2.2 1.6 2.2 6.4 0 8m2-11c4.4 3 4.4 11 0 14"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5.7 9A7 7 0 0 1 18 7l2 5M4 12l2 5a7 7 0 0 0 12.3-2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 20 5-.9L20 8a2.5 2.5 0 0 0-4-4L5 15l-1 5Z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 6-10 6L2 8l10-6Zm-10 11 10 6 10-6M2 17l10 6 10-6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4m0 16h16M8 16v-5m5 5V6m5 10v-8"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5m4-5v5"/></symbol>
+  </svg>
+
+  <div class="announcement"><div class="container announcement-inner"><span><span class="mini-sun">✦</span> YOUR DAILY ENGLISH EDITION</span><span class="announcement-right">Đọc tin thật · Học trong ngữ cảnh · Tiến bộ mỗi ngày</span></div></div>
+  <header class="masthead">
+    <div class="container masthead-grid">
+      <div class="masthead-side"><div class="date-small" id="todayDate">FRIDAY, 20 NOV 2026</div><div class="edition-small">Vietnamese learners · Global perspective</div></div>
+      <a class="brand" href="#home" aria-label="PamVu English Ledger home"><span class="brand-overline">READ BETTER. THINK BIGGER.</span><span class="brand-title">PamVu<span class="brand-dot">.</span></span><span class="brand-subtitle">THE ENGLISH LEDGER</span></a>
+      <div class="masthead-side masthead-side-right"><div class="live-indicator" id="liveIndicator"><span class="live-dot"></span><span id="liveText">Đang kết nối tin tức</span></div><span class="edition-small">An editorial reading companion</span></div>
+    </div>
+  </header>
+  <nav class="topnav" aria-label="Điều hướng chính">
+    <div class="container topnav-inner">
+      <div class="navlinks">
+        <button class="nav-link active" data-view="home">The Daily</button>
+        <button class="nav-link" data-view="practice">Reading Studio</button>
+        <button class="nav-link" data-view="words">My Vocabulary <span class="nav-count" id="navWordCount">0</span></button>
+        <button class="nav-link" data-view="progress">My Progress</button>
+      </div>
+      <div class="nav-actions"><button class="icon-button" id="globalSearchBtn" aria-label="Tìm tin tức"><svg><use href="#i-search"/></svg></button><button class="pill-button" id="dailyStartBtn"><svg><use href="#i-book"/></svg> Start reading</button></div>
+    </div>
+  </nav>
+
+  <main id="homeView" class="view active" aria-label="Today's news">
+    <section class="container main-intro"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WORLD, IN ENGLISH</div><div class="intro-flex"><h1>Stay curious.<br><em>Read every day.</em></h1><p class="intro-copy">Từ nhịp sống Việt Nam đến bóng đá và kinh tế toàn cầu. Đọc một chút mỗi ngày, học từ vựng theo ngữ cảnh và biến tiếng Anh thành thói quen.</p></div></section>
+    <section class="container home-top-grid">
+      <div class="lead-column"><div class="section-caption"><span>EDITOR'S PICK</span><span>01 / TODAY'S READING</span></div><div class="hero-story" id="heroStory"><div class="skeleton-hero"></div></div></div>
+      <aside class="ritual-aside"><div class="section-caption"><span>THE DAILY RITUAL</span><svg><use href="#i-spark"/></svg></div><div class="ritual-card"><div class="ritual-kicker">YOUR 15-MINUTE JOURNEY</div><h2>Small reads.<br><i>Big progress.</i></h2><p>A little reading every day adds up.</p><div class="meter-head"><span>Today's goal</span><strong id="dailyMeterText">0 / 15 min</strong></div><div class="meter-track"><span id="dailyMeterBar" style="width:0%"></span></div><div class="ritual-steps"><div><span>01</span> Read one story</div><div><span>02</span> Save useful words</div><div><span>03</span> Write a quick reflection</div></div><button class="ritual-cta" id="ritualBtn">Build my habit <svg><use href="#i-arrow"/></svg></button></div><div class="aside-note"><span class="note-icon">✳</span><span>Tip of the day<br><b>Don't translate every word. Read for the main idea first.</b></span></div></aside>
+    </section>
+    <section class="container stories-section"><div class="section-heading-row"><div><div class="eyebrow">THE NEWSROOM</div><h2>Today's stories<span class="serif-accent">.</span></h2></div><div class="freshness" id="lastRefresh">Updated from publisher RSS</div></div>
+      <div class="filter-toolbar"><div class="topic-filters" role="group" aria-label="Chủ đề tin tức"><button class="topic-filter active" data-topic="all">All stories</button><button class="topic-filter" data-topic="vietnam">🇻🇳 Vietnam</button><button class="topic-filter" data-topic="football">⚽ Football</button><button class="topic-filter" data-topic="economy">↗ Economy</button><button class="topic-filter" data-topic="world">◉ World</button><button class="topic-filter" data-topic="technology">⌘ Technology</button><button class="topic-filter" data-topic="culture">✦ Lifestyle</button></div><div class="tool-filters"><label class="search-input"><svg><use href="#i-search"/></svg><input type="search" id="articleSearch" placeholder="Search headlines..." aria-label="Tìm theo tiêu đề" autocomplete="off"></label><select id="levelFilter" aria-label="Lọc theo trình độ"><option value="all">All levels</option><option value="B1">B1 · Intermediate</option><option value="B2">B2 · Upper intermediate</option><option value="C1">C1 · Advanced</option></select><button class="refresh-button" id="refreshNews" title="Làm mới tin tức" aria-label="Làm mới tin tức"><svg><use href="#i-refresh"/></svg></button></div></div>
+      <div class="news-info" id="newsNotice" hidden></div><div class="story-grid" id="storyGrid"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div><div class="loadmore-row"><button id="loadMoreBtn" class="outline-button" hidden>Load more stories <svg><use href="#i-chevron"/></svg></button></div>
+    </section>
+    <section class="container bottom-banner"><div><span class="banner-kicker">AN ENGLISH HABIT THAT STICKS</span><h2>Read beyond the headline.</h2><p>Học cách đọc sâu, nắm ý chính và tích lũy từ vựng ứng dụng.</p></div><button id="bannerStudioBtn">Explore the Reading Studio <svg><use href="#i-arrow"/></svg></button></section>
+  </main>
+
+  <main id="practiceView" class="view container workspace" aria-label="Reading studio">
+    <div class="workspace-head"><div><div class="eyebrow">LEARN WITH INTENTION</div><h1>The Reading <em>Studio.</em></h1><p>Đọc bài tiếng Anh gốc do PamVu biên soạn hoặc dán bài đọc của bạn. Chạm vào từ để tra nghĩa, lưu từ và luyện đọc.</p></div><div class="workspace-deco"><svg><use href="#i-book"/></svg></div></div>
+    <div class="studio-columns"><section class="practice-list"><div class="subhead"><h2>Practice library</h2><span>7 BÀI ĐỌC GỐC · B1–C1</span></div><p class="muted-explain">Các bài dưới đây là nội dung luyện tập tự viết, <strong>không phải tin tức thời sự</strong>.</p><div class="practice-grid" id="practiceGrid"></div></section><aside class="paste-panel"><div class="paste-head"><svg><use href="#i-pencil"/></svg><h3>Bring your own article</h3></div><p>Dán đoạn tiếng Anh từ tài liệu bạn được quyền sử dụng. Nội dung chỉ lưu trên trình duyệt của bạn.</p><label for="customTitle">Article title</label><input id="customTitle" maxlength="180" placeholder="e.g. A story about Vietnam's economy"><label for="customBody">Your English text</label><textarea id="customBody" rows="9" placeholder="Paste your English passage here (at least 60 characters)..."></textarea><button id="addCustomArticle" class="solid-button">Open in Reading Studio <svg><use href="#i-arrow"/></svg></button><div class="paste-status" id="pasteStatus"></div></aside></div>
+  </main>
+
+  <main id="wordsView" class="view container workspace" aria-label="My vocabulary">
+    <div class="workspace-head"><div><div class="eyebrow">YOUR PERSONAL WORD BANK</div><h1>Words worth <em>keeping.</em></h1><p>Lưu từ vựng trong ngữ cảnh, tự sửa nghĩa tiếng Việt, rồi dùng flashcard để ghi nhớ dài hạn.</p></div><div class="word-head-stat"><span id="wordTotal">0</span><small>WORDS COLLECTED</small></div></div>
+    <div class="word-actions"><div class="tab-segments"><button data-words-mode="list" class="active">My word bank</button><button data-words-mode="cards">Flashcards</button></div><button id="exportDataBtn" class="subtle-button">↓ Export my progress</button></div>
+    <div id="wordsContent"></div>
+  </main>
+
+  <main id="progressView" class="view container workspace" aria-label="Learning progress">
+    <div class="workspace-head"><div><div class="eyebrow">EVERY PAGE COUNTS</div><h1>Your reading <em>journey.</em></h1><p>Mỗi lần đọc là một bước tiến. Kết quả được lưu riêng trong trình duyệt của bạn, không cần tạo tài khoản.</p></div><div class="workspace-deco progress-deco"><svg><use href="#i-chart"/></svg></div></div><div id="progressContent"></div>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><div><div class="footer-logo">PamVu<span>.</span> <small>THE ENGLISH LEDGER</small></div><p>Read the world. Grow your English.<br>A personal reading companion, not a news publisher.</p></div><div><span class="footer-label">ORIGINAL SOURCES</span><div class="footer-links"><a href="https://e.vnexpress.net/rss" target="_blank" rel="noopener noreferrer">VnExpress RSS</a><a href="https://www.theguardian.com/help/feeds" target="_blank" rel="noopener noreferrer">The Guardian RSS</a><a href="https://www.channelnewsasia.com/rss" target="_blank" rel="noopener noreferrer">CNA RSS</a><a href="https://www.dw.com/en/more-dw/rss/s-31500" target="_blank" rel="noopener noreferrer">DW RSS</a></div></div><div><span class="footer-label">A NOTE ON CONTENT</span><p>Live headlines &amp; short excerpts belong to their publishers. Read full reporting at the original source.</p></div></div><div class="container footer-bottom"><span>© 2026 PamVu English Ledger · Made for English learners</span><span>Progress saved on this device · No account needed</span></div></footer>
+
+  <dialog class="reader-dialog" id="readerDialog" aria-label="Read article"><div class="reader-header"><span class="reader-brand">PamVu<span>.</span> <small>READING STUDIO</small></span><button class="close-reader" id="closeReader" aria-label="Đóng bài đọc"><svg><use href="#i-x"/></svg></button></div><div class="reader-layout"><article class="reader-main"><div class="reader-meta" id="readerMeta"></div><h1 id="readerTitle"></h1><div class="reader-toolbar"><button id="readerListen"><svg><use href="#i-volume"/></svg><span>Listen</span></button><button id="readerBookmark"><svg><use href="#i-bookmark"/></svg><span>Bookmark</span></button><span class="reader-help">Chạm vào từ bất kỳ để tra nghĩa</span></div><div class="reader-copy" id="readerBody"></div><div class="reader-copyright" id="readerCopyright"></div><div class="reader-action-row"><a id="readOriginal" target="_blank" rel="noopener noreferrer" class="solid-button" hidden>Read full article at publisher <svg><use href="#i-external"/></svg></a><button id="completeReader" class="outline-button"><svg><use href="#i-check"/></svg> Mark as completed</button></div><div class="reflection-box"><h3>✦ Think in English</h3><p id="reflectionPrompt">What is the main idea? What did you learn?</p><textarea id="reflectionText" rows="3" placeholder="Write 2–3 sentences in English..."></textarea><button id="saveReflection">Save my reflection</button><div class="reflection-status" id="reflectionStatus"></div></div><section id="quizSection" class="quiz-section" hidden></section></article><aside class="reader-side"><div class="side-kicker">MAKE IT STICK</div><h3>Your learning checklist</h3><div class="reader-checklist"><div><span>01</span> Read for the main idea</div><div><span>02</span> Look up unfamiliar words</div><div><span>03</span> Save 3 useful expressions</div><div><span>04</span> Reflect in your own words</div></div><div class="vocab-side-panel"><b>Saved from this article</b><div id="articleWords">Tap any word to start learning.</div></div></aside></div></dialog>
+  <div id="dictionaryPopover" class="dictionary-popover" hidden role="dialog" aria-label="Tra từ vựng"><div class="dict-head"><div><span class="dict-kicker">VOCABULARY NOTE</span><h3 id="dictWord">word</h3><div class="dict-pronunciation" id="dictPhonetic"></div></div><button id="dictClose" aria-label="Đóng từ điển"><svg><use href="#i-x"/></svg></button></div><p class="dict-meaning" id="dictMeaning"></p><p class="dict-example" id="dictExample"></p><label for="dictVietnamese">Nghĩa tiếng Việt / ghi chú của bạn</label><input id="dictVietnamese" placeholder="Type a Vietnamese meaning..."><div class="dict-actions"><button id="dictSpeak" title="Nghe phát âm"><svg><use href="#i-volume"/></svg></button><button id="dictSave" class="solid-button">+ Save to flashcards</button></div></div>
+  <div id="toast" class="toast" aria-live="polite" role="status"></div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102b49">
+  <meta name="description" content="PamVu English Ledger — đọc tin tức thật bằng tiếng Anh, học từ vựng qua ngữ cảnh và xây dựng thói quen đọc mỗi ngày.">
+  <title>PamVu English Ledger — Read the world, grow your English</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="/practice.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <svg class="icons" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6.5C8 4.4 4.5 4.2 2 5v14c3.4-1.2 6.6-.8 10 1.1 3.4-1.9 6.6-2.3 10-1.1V5c-2.5-.8-6-.6-10 1.5Zm0 0v13.6"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.9"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-external" viewBox="0 0 24 24"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></symbol>
+    <symbol id="i-bookmark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4V3Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4.5 4.5L19 7"/></symbol>
+    <symbol id="i-fire" viewBox="0 0 24 24"><path d="M12 22c4.5 0 7-3.1 7-7.4 0-2.8-1.6-5.2-4.1-7.6.2 3.2-1.7 4.1-2.8 4-2.6-1-2.9-3.7-2.4-8-3.5 3.2-5.5 7.2-5.5 11.6C4.2 18.9 7 22 12 22Z"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.3 7.7L22 12l-7.7 2.3L12 22l-2.3-7.7L2 12l7.7-2.3L12 2Z"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12-1c2.2 1.6 2.2 6.4 0 8m2-11c4.4 3 4.4 11 0 14"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5M5.7 9A7 7 0 0 1 18 7l2 5M4 12l2 5a7 7 0 0 0 12.3-2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="m5 5 14 14M19 5 5 19"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="m4 20 5-.9L20 8a2.5 2.5 0 0 0-4-4L5 15l-1 5Z"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 6-10 6L2 8l10-6Zm-10 11 10 6 10-6M2 17l10 6 10-6"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4m0 16h16M8 16v-5m5 5V6m5 10v-8"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v5m4-5v5"/></symbol>
+  </svg>
+
+  <div class="announcement"><div class="container announcement-inner"><span><span class="mini-sun">✦</span> YOUR DAILY ENGLISH EDITION</span><span class="announcement-right">Đọc tin thật · Học trong ngữ cảnh · Tiến bộ mỗi ngày</span></div></div>
+  <header class="masthead">
+    <div class="container masthead-grid">
+      <div class="masthead-side"><div class="date-small" id="todayDate">FRIDAY, 20 NOV 2026</div><div class="edition-small">Vietnamese learners · Global perspective</div></div>
+      <a class="brand" href="#home" aria-label="PamVu English Ledger home"><span class="brand-overline">READ BETTER. THINK BIGGER.</span><span class="brand-title">PamVu<span class="brand-dot">.</span></span><span class="brand-subtitle">THE ENGLISH LEDGER</span></a>
+      <div class="masthead-side masthead-side-right"><div class="live-indicator" id="liveIndicator"><span class="live-dot"></span><span id="liveText">Đang kết nối tin tức</span></div><span class="edition-small">An editorial reading companion</span></div>
+    </div>
+  </header>
+  <nav class="topnav" aria-label="Điều hướng chính">
+    <div class="container topnav-inner">
+      <div class="navlinks">
+        <button class="nav-link active" data-view="home">The Daily</button>
+        <button class="nav-link" data-view="practice">Reading Studio</button>
+        <button class="nav-link" data-view="words">My Vocabulary <span class="nav-count" id="navWordCount">0</span></button>
+        <button class="nav-link" data-view="progress">My Progress</button>
+      </div>
+      <div class="nav-actions"><button class="icon-button" id="globalSearchBtn" aria-label="Tìm tin tức"><svg><use href="#i-search"/></svg></button><button class="pill-button" id="dailyStartBtn"><svg><use href="#i-book"/></svg> Start reading</button></div>
+    </div>
+  </nav>
+
+  <main id="homeView" class="view active" aria-label="Today's news">
+    <section class="container main-intro"><div class="eyebrow"><span class="eyebrow-line"></span> YOUR WORLD, IN ENGLISH</div><div class="intro-flex"><h1>Stay curious.<br><em>Read every day.</em></h1><p class="intro-copy">Từ nhịp sống Việt Nam đến bóng đá và kinh tế toàn cầu. Đọc một chút mỗi ngày, học từ vựng theo ngữ cảnh và biến tiếng Anh thành thói quen.</p></div></section>
+    <section class="container home-top-grid">
+      <div class="lead-column"><div class="section-caption"><span>EDITOR'S PICK</span><span>01 / TODAY'S READING</span></div><div class="hero-story" id="heroStory"><div class="skeleton-hero"></div></div></div>
+      <aside class="ritual-aside"><div class="section-caption"><span>THE DAILY RITUAL</span><svg><use href="#i-spark"/></svg></div><div class="ritual-card"><div class="ritual-kicker">YOUR 15-MINUTE JOURNEY</div><h2>Small reads.<br><i>Big progress.</i></h2><p>A little reading every day adds up.</p><div class="meter-head"><span>Today's goal</span><strong id="dailyMeterText">0 / 15 min</strong></div><div class="meter-track"><span id="dailyMeterBar" style="width:0%"></span></div><div class="ritual-steps"><div><span>01</span> Read one story</div><div><span>02</span> Save useful words</div><div><span>03</span> Write a quick reflection</div></div><button class="ritual-cta" id="ritualBtn">Build my habit <svg><use href="#i-arrow"/></svg></button></div><div class="aside-note"><span class="note-icon">✳</span><span>Tip of the day<br><b>Don't translate every word. Read for the main idea first.</b></span></div></aside>
+    </section>
+    <section class="container stories-section"><div class="section-heading-row"><div><div class="eyebrow">THE NEWSROOM</div><h2>Today's stories<span class="serif-accent">.</span></h2></div><div class="freshness" id="lastRefresh">Updated from publisher RSS</div></div>
+      <div class="filter-toolbar"><div class="topic-filters" role="group" aria-label="Chủ đề tin tức"><button class="topic-filter active" data-topic="all">All stories</button><button class="topic-filter" data-topic="vietnam">🇻🇳 Vietnam</button><button class="topic-filter" data-topic="football">⚽ Football</button><button class="topic-filter" data-topic="economy">↗ Economy</button><button class="topic-filter" data-topic="world">◉ World</button><button class="topic-filter" data-topic="technology">⌘ Technology</button><button class="topic-filter" data-topic="culture">✦ Lifestyle</button></div><div class="tool-filters"><label class="search-input"><svg><use href="#i-search"/></svg><input type="search" id="articleSearch" placeholder="Search headlines..." aria-label="Tìm theo tiêu đề" autocomplete="off"></label><select id="levelFilter" aria-label="Lọc theo trình độ"><option value="all">All levels</option><option value="B1">B1 · Intermediate</option><option value="B2">B2 · Upper intermediate</option><option value="C1">C1 · Advanced</option></select><button class="refresh-button" id="refreshNews" title="Làm mới tin tức" aria-label="Làm mới tin tức"><svg><use href="#i-refresh"/></svg></button></div></div>
+      <div class="news-info" id="newsNotice" hidden></div><div class="story-grid" id="storyGrid"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div><div class="loadmore-row"><button id="loadMoreBtn" class="outline-button" hidden>Load more stories <svg><use href="#i-chevron"/></svg></button></div>
+    </section>
+    <section class="container bottom-banner"><div><span class="banner-kicker">AN ENGLISH HABIT THAT STICKS</span><h2>Read beyond the headline.</h2><p>Học cách đọc sâu, nắm ý chính và tích lũy từ vựng ứng dụng.</p></div><button id="bannerStudioBtn">Explore the Reading Studio <svg><use href="#i-arrow"/></svg></button></section>
+  </main>
+
+  <main id="practiceView" class="view container workspace" aria-label="Reading studio">
+    <div class="workspace-head"><div><div class="eyebrow">LEARN WITH INTENTION</div><h1>The Reading <em>Studio.</em></h1><p>Đọc bài tiếng Anh gốc do PamVu biên soạn hoặc dán bài đọc của bạn. Chạm vào từ để tra nghĩa, lưu từ và luyện đọc.</p></div><div class="workspace-deco"><svg><use href="#i-book"/></svg></div></div>
+    <div class="studio-columns"><section class="practice-list"><div class="subhead"><h2>Practice library</h2><span>7 BÀI ĐỌC GỐC · B1–C1</span></div><p class="muted-explain">Các bài dưới đây là nội dung luyện tập tự viết, <strong>không phải tin tức thời sự</strong>.</p><div class="practice-grid" id="practiceGrid"></div></section><aside class="paste-panel"><div class="paste-head"><svg><use href="#i-pencil"/></svg><h3>Bring your own article</h3></div><p>Dán đoạn tiếng Anh từ tài liệu bạn được quyền sử dụng. Nội dung chỉ lưu trên trình duyệt của bạn.</p><label for="customTitle">Article title</label><input id="customTitle" maxlength="180" placeholder="e.g. A story about Vietnam's economy"><label for="customBody">Your English text</label><textarea id="customBody" rows="9" placeholder="Paste your English passage here (at least 60 characters)..."></textarea><button id="addCustomArticle" class="solid-button">Open in Reading Studio <svg><use href="#i-arrow"/></svg></button><div class="paste-status" id="pasteStatus"></div></aside></div>
+  </main>
+
+  <main id="wordsView" class="view container workspace" aria-label="My vocabulary">
+    <div class="workspace-head"><div><div class="eyebrow">YOUR PERSONAL WORD BANK</div><h1>Words worth <em>keeping.</em></h1><p>Lưu từ vựng trong ngữ cảnh, tự sửa nghĩa tiếng Việt, rồi dùng flashcard để ghi nhớ dài hạn.</p></div><div class="word-head-stat"><span id="wordTotal">0</span><small>WORDS COLLECTED</small></div></div>
+    <div class="word-actions"><div class="tab-segments"><button data-words-mode="list" class="active">My word bank</button><button data-words-mode="cards">Flashcards</button></div><button id="exportDataBtn" class="subtle-button">↓ Export my progress</button></div>
+    <div id="wordsContent"></div>
+  </main>
+
+  <main id="progressView" class="view container workspace" aria-label="Learning progress">
+    <div class="workspace-head"><div><div class="eyebrow">EVERY PAGE COUNTS</div><h1>Your reading <em>journey.</em></h1><p>Mỗi lần đọc là một bước tiến. Kết quả được lưu riêng trong trình duyệt của bạn, không cần tạo tài khoản.</p></div><div class="workspace-deco progress-deco"><svg><use href="#i-chart"/></svg></div></div><div id="progressContent"></div>
+  </main>
+
+  <footer class="site-footer"><div class="container footer-inner"><div><div class="footer-logo">PamVu<span>.</span> <small>THE ENGLISH LEDGER</small></div><p>Read the world. Grow your English.<br>A personal reading companion, not a news publisher.</p></div><div><span class="footer-label">ORIGINAL SOURCES</span><div class="footer-links"><a href="https://e.vnexpress.net/rss" target="_blank" rel="noopener noreferrer">VnExpress RSS</a><a href="https://www.theguardian.com/help/feeds" target="_blank" rel="noopener noreferrer">The Guardian RSS</a><a href="https://www.channelnewsasia.com/rss" target="_blank" rel="noopener noreferrer">CNA RSS</a><a href="https://www.dw.com/en/more-dw/rss/s-31500" target="_blank" rel="noopener noreferrer">DW RSS</a></div></div><div><span class="footer-label">A NOTE ON CONTENT</span><p>Live headlines &amp; short excerpts belong to their publishers. Read full reporting at the original source.</p></div></div><div class="container footer-bottom"><span>© 2026 PamVu English Ledger · Made for English learners</span><span>Progress saved on this device · No account needed</span></div></footer>
+
+  <dialog class="reader-dialog" id="readerDialog" aria-label="Read article"><div class="reader-header"><span class="reader-brand">PamVu<span>.</span> <small>READING STUDIO</small></span><button class="close-reader" id="closeReader" aria-label="Đóng bài đọc"><svg><use href="#i-x"/></svg></button></div><div class="reader-layout"><article class="reader-main"><div class="reader-meta" id="readerMeta"></div><h1 id="readerTitle"></h1><div class="reader-toolbar"><button id="readerListen"><svg><use href="#i-volume"/></svg><span>Listen</span></button><button id="readerBookmark"><svg><use href="#i-bookmark"/></svg><span>Bookmark</span></button><span class="reader-help">Chạm vào từ bất kỳ để tra nghĩa</span></div><div class="reader-copy" id="readerBody"></div><div class="reader-copyright" id="readerCopyright"></div><div class="reader-action-row"><a id="readOriginal" target="_blank" rel="noopener noreferrer" class="solid-button" hidden>Read full article at publisher <svg><use href="#i-external"/></svg></a><button id="completeReader" class="outline-button"><svg><use href="#i-check"/></svg> Mark as completed</button></div><div class="reflection-box"><h3>✦ Think in English</h3><p id="reflectionPrompt">What is the main idea? What did you learn?</p><textarea id="reflectionText" rows="3" placeholder="Write 2–3 sentences in English..."></textarea><button id="saveReflection">Save my reflection</button><div class="reflection-status" id="reflectionStatus"></div></div><section id="quizSection" class="quiz-section" hidden></section></article><aside class="reader-side"><div class="side-kicker">MAKE IT STICK</div><h3>Your learning checklist</h3><div class="reader-checklist"><div><span>01</span> Read for the main idea</div><div><span>02</span> Look up unfamiliar words</div><div><span>03</span> Save 3 useful expressions</div><div><span>04</span> Reflect in your own words</div></div><div class="vocab-side-panel"><b>Saved from this article</b><div id="articleWords">Tap any word to start learning.</div></div></aside></div></dialog>
+  <div id="dictionaryPopover" class="dictionary-popover" hidden role="dialog" aria-label="Tra từ vựng"><div class="dict-head"><div><span class="dict-kicker">VOCABULARY NOTE</span><h3 id="dictWord">word</h3><div class="dict-pronunciation" id="dictPhonetic"></div></div><button id="dictClose" aria-label="Đóng từ điển"><svg><use href="#i-x"/></svg></button></div><p class="dict-meaning" id="dictMeaning"></p><p class="dict-example" id="dictExample"></p><label for="dictVietnamese">Nghĩa tiếng Việt / ghi chú của bạn</label><input id="dictVietnamese" placeholder="Type a Vietnamese meaning..."><div class="dict-actions"><button id="dictSpeak" title="Nghe phát âm"><svg><use href="#i-volume"/></svg></button><button id="dictSave" class="solid-button">+ Save to flashcards</button></div></div>
+  <div id="toast" class="toast" aria-live="polite" role="status"></div>
+</body>
+</html>

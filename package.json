@@ -1,0 +1,14 @@
+{
+  "name": "pamvu-english-ledger",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Editorial English learning news reader powered by publisher RSS",
+  "scripts": {
+    "build": "node --check public/app.js && node --check src/worker.js && node --check netlify/functions/news.js",
+    "check": "npm run build"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^4.5.3"
+  }
+}
