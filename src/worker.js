@@ -22,6 +22,7 @@ const BY_TOPIC = {
   all: ['vn-home', 'vn-business', 'vn-sports', 'guardian-football', 'guardian-business', 'guardian-world', 'vn-tech', 'vn-travel'],
   vietnam: ['vn-home', 'vn-business', 'vn-travel'],
   football: ['vn-sports', 'guardian-football', 'cna-sport'],
+  // Vietnam business + UK/global markets + Southeast Asian economy in one dedicated desk.
   economy: ['vn-business', 'guardian-business', 'cna-business'],
   world: ['guardian-world', 'cna-world', 'dw-world'],
   technology: ['vn-tech', 'guardian-tech'],
@@ -119,7 +120,7 @@ async function loadFeed(id) {
     const parsed = parser.parse(xml);
     const root = parsed.rss?.channel ?? parsed['rdf:RDF'] ?? parsed.feed ?? {};
     const entries = asArray(root.item ?? root.entry);
-    return entries.slice(0, 13).map((entry) => {
+    return entries.slice(0, 30).map((entry) => {
       const title = strip(entry.title).slice(0, 280);
       const description = excerptFrom(entry, title);
       const url = cleanLink(entry.link ?? entry.guid);
@@ -162,7 +163,7 @@ async function handleNews(req) {
   const items = succeeded.flatMap(x => x.value).filter(x => {
     if (seen.has(x.url)) return false;
     seen.add(x.url); return true;
-  }).sort((a, b) => Date.parse(b.publishedAt ?? 0) - Date.parse(a.publishedAt ?? 0)).slice(0, 60);
+  }).sort((a, b) => Date.parse(b.publishedAt ?? 0) - Date.parse(a.publishedAt ?? 0)).slice(0, 100);
   return json({ items, topic, fetchedAt: new Date().toISOString(), healthyFeeds: succeeded.length, failedFeeds: failures, totalFeeds: ids.length, isLive: items.length > 0 }, items.length ? 200 : 503, bypassCache);
 }
 export default {
