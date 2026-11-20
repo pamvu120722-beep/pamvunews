@@ -47,3 +47,6 @@
 .loadmore-row .outline-button:not([hidden]){min-width:230px;transition:background .2s,border-color .2s}
 .loadmore-row .outline-button:hover{background:#e7efea;border-color:#739d8c}
 @media(max-width:600px){.economy-desk{padding:18px;margin-top:17px}.economy-desk-heading{display:block}.economy-desk-heading h3{font-size:21px}.economy-source-label{display:block;text-align:left;margin-top:9px}.economy-pill{padding:9px 11px}}
+
+/* Respect native hidden states even when buttons and notices have display styles. */
+#loadMoreBtn[hidden],#newsNotice[hidden],#economyDesk[hidden]{display:none!important}
