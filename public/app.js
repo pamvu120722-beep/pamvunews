@@ -4,8 +4,8 @@
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
   const KEY = 'pamvu-english-ledger-v1';
   const GOAL_DEFAULT = 15;
-  const TOPIC_LABEL = { all:'All stories',vietnam:'Vietnam',football:'Football',economy:'Economy',world:'World',technology:'Technology',culture:'Lifestyle' };
-  const TOPIC_COLOR = { vietnam:'#bf855f',football:'#5e8c76',economy:'#586d8e',world:'#71949c',technology:'#4e8b9c',culture:'#b28d83' };
+  const TOPIC_LABEL = { all:'All stories',vietnam:'Vietnam',football:'Football',economy:'Economy',esports:'Esports',world:'World',technology:'Technology',culture:'Lifestyle' };
+  const TOPIC_COLOR = { vietnam:'#bf855f',football:'#5e8c76',economy:'#586d8e',esports:'#626ca5',world:'#71949c',technology:'#4e8b9c',culture:'#b28d83' };
   const GLOSSARY = {
     economy:['nền kinh tế','the system of producing, buying, and selling goods and services'],
     economic:['thuộc kinh tế','relating to an economy'],inflation:['lạm phát','a general increase in prices'],
@@ -78,7 +78,7 @@
   let data = readStore();
   let activeView = 'home', activeTopic = 'all', activeLevel = 'all', query = '';
   let displayed = [], articlesById = new Map(), liveByTopic = new Map();
-  let economyFocus = 'all';
+  let economyFocus = 'all', leagueFocus = 'all';
   let currentArticle = null, currentDict = null, wordsMode = 'list', flashIndex = 0, flipped = false, itemsShown = 9;
   let fetchedAt = null, cacheStatus = 'connecting', isLoading = false, requestSeq = 0, toastTimer = null;
 
@@ -174,6 +174,7 @@
   function filteredStories() {
     let s = displayed;
     if (activeTopic === 'economy') s = s.filter(matchesEconomyFocus);
+    if (activeTopic === 'esports' && leagueFocus !== 'all') s = s.filter(a => a.league === leagueFocus);
     if (activeLevel !== 'all') s = s.filter(a => a.level === activeLevel);
     if (query.trim()) { const q = query.toLowerCase().trim(); s = s.filter(a => `${a.title} ${a.summary} ${a.source}`.toLowerCase().includes(q)); }
     return s;
@@ -185,7 +186,7 @@
     const url = safeUrl(article.image);
     const className = hero ? 'hero-cover' : 'card-cover';
     const badge = hero ? 'image-badge' : 'card-tag';
-    return `<div class="${className} cover-art" data-topic="${esc(article.topic)}">${url ? `<img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}<span class="${badge}">${esc(categoryName(article.topic).toUpperCase())}${isPractice(article) ? ' · PRACTICE' : ''}</span>${hero ? '<span class="image-veil"></span>' : ''}</div>`;
+    return `<div class="${className} cover-art" data-topic="${esc(article.topic)}">${url ? `<img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'">` : ''}<span class="${badge}">${esc(article.topic === 'esports' && article.league ? 'LOL · '+article.league.toUpperCase() : categoryName(article.topic).toUpperCase())}${isPractice(article) ? ' · PRACTICE' : ''}</span>${hero ? '<span class="image-veil"></span>' : ''}</div>`;
   }
   function metadata(a) {
     return `<span class="source">${esc(a.source)}</span><span class="dot-separator"></span><span>${esc(relativeDate(a.publishedAt))}</span><span class="dot-separator"></span><span>${a.readMinutes} MIN READ</span>`;
@@ -211,6 +212,7 @@
     $('#storyCount').textContent = filtered.length ? `Showing ${shown} of ${filtered.length} stories · ${categoryName(activeTopic)}` : 'No matching stories · try another filter';
     $('#loadMoreStatus').textContent = more ? `${more} stories remaining` : (filtered.length ? `You're all caught up · ${filtered.length} stories shown` : '');
     $('#economyDesk').hidden = activeTopic !== 'economy';
+    $('#esportsDesk').hidden = activeTopic !== 'esports';
     updateStats();
   }
   function setView(name) {
@@ -492,8 +494,9 @@
   function bind() {
     $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
     $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
-      activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all';
-      $$('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all'; leagueFocus='all';
+      $('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $('[data-league]').forEach(el=>{const selected=el.dataset.league==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
       $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
       $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
       $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
@@ -505,6 +508,12 @@
       const pill=e.target.closest('[data-economy-focus]'); if(!pill)return;
       economyFocus=pill.dataset.economyFocus;itemsShown=9;
       $$('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
+      renderHome();
+    });
+    $('#esportsDesk').addEventListener('click',e=>{
+      const pill=e.target.closest('[data-league]'); if(!pill) return;
+      leagueFocus=pill.dataset.league; itemsShown=9;
+      $('[data-league]').forEach(el=>{const chosen=el===pill;el.classList.toggle('active',chosen);el.setAttribute('aria-pressed',String(chosen));});
       renderHome();
     });
     $('#loadMoreBtn').addEventListener('click',()=>{
