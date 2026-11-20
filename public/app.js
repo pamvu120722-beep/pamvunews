@@ -493,8 +493,8 @@
     $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
     $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
       activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all';
-      $('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
-      $('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
+      $$('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
       $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
       $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
       fetchNews(activeTopic);
@@ -504,13 +504,13 @@
     $('#economyDesk').addEventListener('click',e=>{
       const pill=e.target.closest('[data-economy-focus]'); if(!pill)return;
       economyFocus=pill.dataset.economyFocus;itemsShown=9;
-      $('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
+      $$('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
       renderHome();
     });
     $('#loadMoreBtn').addEventListener('click',()=>{
       const list=filteredStories();if(itemsShown>=list.length){renderHome();return;}
       const old=itemsShown;itemsShown=Math.min(itemsShown+9,list.length);renderHome();
-      const cards=$('.story-card', $('#storyGrid'));
+      const cards=$$('.story-card', $('#storyGrid'));
       const firstNew=cards[Math.max(0,old-1)];
       if(firstNew){firstNew.setAttribute('tabindex','-1');firstNew.scrollIntoView({behavior:'smooth',block:'nearest'});}
     });
