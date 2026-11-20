@@ -62,7 +62,18 @@
     </section>
     <section class="container stories-section"><div class="section-heading-row"><div><div class="eyebrow">THE NEWSROOM</div><h2>Today's stories<span class="serif-accent">.</span></h2></div><div class="freshness" id="lastRefresh">Updated from publisher RSS</div></div>
       <div class="filter-toolbar"><div class="topic-filters" role="group" aria-label="Chủ đề tin tức"><button class="topic-filter active" data-topic="all">All stories</button><button class="topic-filter" data-topic="vietnam">🇻🇳 Vietnam</button><button class="topic-filter" data-topic="football">⚽ Football</button><button class="topic-filter" data-topic="economy">↗ Economy</button><button class="topic-filter" data-topic="world">◉ World</button><button class="topic-filter" data-topic="technology">⌘ Technology</button><button class="topic-filter" data-topic="culture">✦ Lifestyle</button></div><div class="tool-filters"><label class="search-input"><svg><use href="#i-search"/></svg><input type="search" id="articleSearch" placeholder="Search headlines..." aria-label="Tìm theo tiêu đề" autocomplete="off"></label><select id="levelFilter" aria-label="Lọc theo trình độ"><option value="all">All levels</option><option value="B1">B1 · Intermediate</option><option value="B2">B2 · Upper intermediate</option><option value="C1">C1 · Advanced</option></select><button class="refresh-button" id="refreshNews" title="Làm mới tin tức" aria-label="Làm mới tin tức"><svg><use href="#i-refresh"/></svg></button></div></div>
-      <div class="news-info" id="newsNotice" hidden></div><div class="story-grid" id="storyGrid"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div><div class="loadmore-row"><button id="loadMoreBtn" class="outline-button" hidden>Load more stories <svg><use href="#i-chevron"/></svg></button></div>
+      <div id="economyDesk" class="economy-desk" hidden aria-label="Economy news topics">
+        <div class="economy-desk-heading"><div><span class="economy-kicker">THE ECONOMY DESK</span><h3>Money, markets &amp; business.</h3><p>Vietnamese business and the global economy, reported by trusted publishers.</p></div><span class="economy-source-label">VNEXPRESS · THE GUARDIAN · CNA</span></div>
+        <div class="economy-pills" role="group" aria-label="Lọc tin kinh tế">
+          <button type="button" class="economy-pill active" data-economy-focus="all" aria-pressed="true">All economy</button>
+          <button type="button" class="economy-pill" data-economy-focus="vietnam" aria-pressed="false">🇻🇳 Vietnam business</button>
+          <button type="button" class="economy-pill" data-economy-focus="markets" aria-pressed="false">Markets &amp; investing</button>
+          <button type="button" class="economy-pill" data-economy-focus="companies" aria-pressed="false">Companies</button>
+          <button type="button" class="economy-pill" data-economy-focus="global" aria-pressed="false">Global economy</button>
+        </div>
+      </div>
+      <div class="news-info" id="newsNotice" hidden></div>
+      <div class="story-count" id="storyCount" aria-live="polite"></div><div class="story-grid" id="storyGrid"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div><div class="loadmore-row"><button id="loadMoreBtn" class="outline-button" type="button" hidden>Load more stories <svg><use href="#i-chevron"/></svg></button><div class="loadmore-status" id="loadMoreStatus" role="status" aria-live="polite"></div></div>
     </section>
     <section class="container bottom-banner"><div><span class="banner-kicker">AN ENGLISH HABIT THAT STICKS</span><h2>Read beyond the headline.</h2><p>Học cách đọc sâu, nắm ý chính và tích lũy từ vựng ứng dụng.</p></div><button id="bannerStudioBtn">Explore the Reading Studio <svg><use href="#i-arrow"/></svg></button></section>
   </main>
