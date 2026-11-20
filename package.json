@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Editorial English learning news reader powered by publisher RSS",
   "scripts": {
-    "build": "node --check public/app.js && node --check src/worker.js && node --check netlify/functions/news.js",
+    "build": "node --check public/app.js && node --check src/worker.js && node --check netlify/functions/news.js && node --test tests/ui-contract.test.mjs",
     "check": "npm run build"
   },
   "dependencies": {
