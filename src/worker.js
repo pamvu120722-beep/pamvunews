@@ -16,12 +16,16 @@ const FEEDS = {
   'cna-business': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6936', source: 'CNA', topic: 'economy' },
   'cna-sport': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=10296', source: 'CNA', topic: 'football', mixedSports: true },
   'cna-world': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6311', source: 'CNA', topic: 'world' },
-  'dw-world': { url: 'https://rss.dw.com/rdf/rss-en-all', source: 'DW', topic: 'world' }
+  'dw-world': { url: 'https://rss.dw.com/rdf/rss-en-all', source: 'DW', topic: 'world' },
+  // Google News SEARCH RSS; links lead to indexed publishers, not first-party league RSS.
+  'lol-lck': { url: 'https://news.google.com/rss/search?q=(%22LCK%22%20OR%20%22T1%22%20OR%20%22Gen.G%22%20OR%20%22Hanwha%20Life%20Esports%22%20OR%20%22Dplus%20KIA%22)%20%22League%20of%20Legends%22%20when%3A30d&hl=en-US&gl=US&ceid=US:en', source: 'Google News', topic: 'esports', league: 'lck', searchAggregator: true },
+  'lol-lpl': { url: 'https://news.google.com/rss/search?q=(%22LPL%22%20OR%20%22Bilibili%20Gaming%22%20OR%20%22Top%20Esports%22%20OR%20%22JD%20Gaming%22%20OR%20%22Weibo%20Gaming%22)%20%22League%20of%20Legends%22%20when%3A30d&hl=en-US&gl=US&ceid=US:en', source: 'Google News', topic: 'esports', league: 'lpl', searchAggregator: true }
 };
 const BY_TOPIC = {
-  all: ['vn-home', 'vn-business', 'vn-sports', 'guardian-football', 'guardian-business', 'guardian-world', 'vn-tech', 'vn-travel'],
+  all: ['vn-home', 'vn-business', 'vn-sports', 'guardian-football', 'guardian-business', 'guardian-world', 'vn-tech', 'vn-travel', 'lol-lck', 'lol-lpl'],
   vietnam: ['vn-home', 'vn-business', 'vn-travel'],
   football: ['vn-sports', 'guardian-football', 'cna-sport'],
+  esports: ['lol-lck', 'lol-lpl'],
   // Vietnam business + UK/global markets + Southeast Asian economy in one dedicated desk.
   economy: ['vn-business', 'guardian-business', 'cna-business'],
   world: ['guardian-world', 'cna-world', 'dw-world'],
@@ -93,6 +97,19 @@ export function isFootballStory(title, description = '', mixedSports = false) {
   // The Guardian's football-specific RSS is already categorized by the publisher.
   return !mixedSports || SOCCER_TERMS.test(text);
 }
+// Esports here means ONLY League of Legends coverage related to LCK or LPL.
+const NOT_LOL = /\b(?:valorant|counter[- ]?strike|cs2|dota\s?2|pubg|overwatch|mobile legends|wild rift|arena of valor|tft|teamfight tactics|fortnite|call of duty)\b/i;
+const LCK_TERMS = /\b(?:lck|league of legends champions korea|t1|gen\.?g|hanwha life(?: esports)?|hle|dplus(?: kia)?|dk|kt rolster|nongshim redforce|b[nk]? fearx|brion|dn soopers|faker|chovy|showmaker|peanut|gumayusi|keria|zeus|canyon|ruler)\b/i;
+const LPL_TERMS = /\b(?:lpl|league of legends pro league|bilibili gaming|blg|top esports|tes|jd gaming|jdg|weibo gaming|wbg|invictus gaming|ig|edward gaming|edg|funplus phoenix|fpx|lng esports|anyone'?s legend|al|royal never give up|rng|xiaohu|knight|bin|elk|jackeylove|theshy|meiko)\b/i;
+export function lolLeagueOf(title, excerpt = '', requested = '') {
+  const t = String(title || '') + ' ' + String(excerpt || '');
+  if (NOT_LOL.test(t)) return '';
+  // Search-specific RSS is already restricted by "League of Legends"; require a named league/team.
+  const ck=LCK_TERMS.test(t), pl=LPL_TERMS.test(t);
+  if (requested === 'lck') return ck ? 'lck' : '';
+  if (requested === 'lpl') return pl ? 'lpl' : '';
+  return ck && !pl ? 'lck' : pl && !ck ? 'lpl' : '';
+}
 const calcLevel = (s) => {
   const w = s.toLowerCase().match(/[a-z]+(?:'[a-z]+)?/g) ?? [];
   if (w.length < 13) return 'B1';
@@ -126,11 +143,13 @@ async function loadFeed(id) {
       const url = cleanLink(entry.link ?? entry.guid);
       if (!url || !title) return null;
       if (feed.topic === 'football' && !isFootballStory(title, description, Boolean(feed.mixedSports))) return null;
+      if (feed.topic === 'esports' && !lolLeagueOf(title, description, feed.league)) return null;
       const pub = plain(entry.pubDate ?? entry.published ?? entry.updated ?? entry['dc:date']);
       const t = Date.parse(pub);
       return {
         id: digest(url), title, summary: description, url,
-        image: imageFrom(entry), source: feed.source, topic: feed.topic,
+        image: imageFrom(entry), source: feed.searchAggregator ? (strip(entry.source) || feed.source) : feed.source, topic: feed.topic,
+        league: feed.league || null,
         hasExcerpt: Boolean(description),
         publishedAt: Number.isFinite(t) ? new Date(t).toISOString() : null,
         level: calcLevel(`${title} ${description}`), contentType: 'rss',
