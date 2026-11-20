@@ -495,8 +495,8 @@
     $$('.nav-link').forEach(button=>button.addEventListener('click',()=>setView(button.dataset.view)));
     $$('.topic-filter').forEach(button=>button.addEventListener('click',()=>{
       activeTopic=button.dataset.topic; itemsShown=9; economyFocus='all'; leagueFocus='all';
-      $('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
-      $('[data-league]').forEach(el=>{const selected=el.dataset.league==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $$('[data-economy-focus]').forEach(el=>{const selected=el.dataset.economyFocus==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
+      $$('[data-league]').forEach(el=>{const selected=el.dataset.league==='all';el.classList.toggle('active',selected);el.setAttribute('aria-pressed',String(selected));});
       $$('.topic-filter').forEach(el=>el.classList.toggle('active',el===button));
       $('#heroStory').innerHTML='<div class="skeleton-hero"></div>';
       $('#storyGrid').innerHTML='<div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>';
@@ -507,13 +507,13 @@
     $('#economyDesk').addEventListener('click',e=>{
       const pill=e.target.closest('[data-economy-focus]'); if(!pill)return;
       economyFocus=pill.dataset.economyFocus;itemsShown=9;
-      $$('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
+      $$$('[data-economy-focus]').forEach(el=>{const active=el===pill;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
       renderHome();
     });
     $('#esportsDesk').addEventListener('click',e=>{
       const pill=e.target.closest('[data-league]'); if(!pill) return;
       leagueFocus=pill.dataset.league; itemsShown=9;
-      $('[data-league]').forEach(el=>{const chosen=el===pill;el.classList.toggle('active',chosen);el.setAttribute('aria-pressed',String(chosen));});
+      $$('[data-league]').forEach(el=>{const chosen=el===pill;el.classList.toggle('active',chosen);el.setAttribute('aria-pressed',String(chosen));});
       renderHome();
     });
     $('#loadMoreBtn').addEventListener('click',()=>{
