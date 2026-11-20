@@ -81,6 +81,20 @@
         </div><p class="esports-note">Headlines are sourced from Google News RSS search results. Read the original publisher for the full report.</p>
       </div>
       <div class="news-info" id="newsNotice" hidden></div>
+      <details class="feed-monitor" id="feedMonitor" hidden>
+        <summary><span class="feed-monitor-dot" aria-hidden="true"></span>
+          <span id="feedSummary">Checking live news sources…</span>
+          <span class="feed-monitor-more">Source details</span>
+        </summary>
+        <div class="feed-monitor-body">
+          <div class="feed-monitor-info">
+            <div id="feedFreshness">Publisher timestamps will appear here.</div>
+            <button id="feedCheckNow" type="button" class="feed-check-now">Check sources now ↻</button>
+          </div>
+          <div id="feedHealthList" class="feed-monitor-list" aria-live="polite"></div>
+          <p class="feed-monitor-footnote">RSS checks run around every 5 minutes while this tab is open. A new check does not mean a new article was published. Publisher RSS may lag behind a live event.</p>
+        </div>
+      </details>
       <div class="story-count" id="storyCount" aria-live="polite"></div><div class="story-grid" id="storyGrid"><div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div></div><div class="loadmore-row"><button id="loadMoreBtn" class="outline-button" type="button" hidden>Load more stories <svg><use href="#i-chevron"/></svg></button><div class="loadmore-status" id="loadMoreStatus" role="status" aria-live="polite"></div></div>
     </section>
     <section class="container bottom-banner"><div><span class="banner-kicker">AN ENGLISH HABIT THAT STICKS</span><h2>Read beyond the headline.</h2><p>Học cách đọc sâu, nắm ý chính và tích lũy từ vựng ứng dụng.</p></div><button id="bannerStudioBtn">Explore the Reading Studio <svg><use href="#i-arrow"/></svg></button></section>

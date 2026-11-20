@@ -135,18 +135,48 @@
       const payload = await res.json();
       if (!payload.isLive || !Array.isArray(payload.items) || payload.items.length === 0) throw new Error('No feeds available');
       const items = payload.items.map(normalizeArticle);
-      liveByTopic.set(topic, { items, fetchedAt:payload.fetchedAt, failedFeeds:payload.failedFeeds, healthyFeeds:payload.healthyFeeds });
+      const oldIds = cached ? new Set(cached.items.map(a=>a.id)) : null;
+      const newItems = oldIds ? items.filter(a=>!oldIds.has(a.id)).length : 0;
+      liveByTopic.set(topic, {
+        items, fetchedAt: payload.fetchedAt, failedFeeds: payload.failedFeeds,
+        healthyFeeds: payload.healthyFeeds, totalFeeds: payload.totalFeeds,
+        latestPublishedAt: payload.latestPublishedAt,
+        publisherCount: payload.publisherCount,
+        sourceHealth: Array.isArray(payload.sourceHealth) ? payload.sourceHealth : [],
+        newItems
+      });
       if (ticket === requestSeq) applyStories(liveByTopic.get(topic), false);
     } catch (err) {
       if (ticket === requestSeq) applyStories({ items:getPracticeForTopic(topic), fetchedAt:null, failedFeeds:0, healthyFeeds:0 }, true);
     } finally { if (ticket === requestSeq) { isLoading = false; $('#refreshNews').classList.remove('loading'); } }
   }
   function getPracticeForTopic(topic) { return window.PAMVU_PRACTICE.filter(a => topic === 'all' || a.topic === topic || (topic === 'vietnam' && a.id === 'practice-economy-trade')).map(a => ({ ...a,contentType:'practice' })); }
+  function renderFeedMonitor(result, practiceMode) {
+    const monitor = $('#feedMonitor');
+    monitor.hidden = practiceMode || !Array.isArray(result.sourceHealth);
+    if (monitor.hidden) return;
+    const feeds = result.sourceHealth;
+    const connected = feeds.filter(f=>f.status !== 'failed').length;
+    const changed = Number(result.newItems || 0);
+    $('#feedSummary').textContent = `${connected}/${feeds.length} RSS feeds checked · ${result.publisherCount || 0} publishers${changed ? ' · '+changed+' new headlines' : ''}`;
+    const checkedAt = result.fetchedAt && Number.isFinite(Date.parse(result.fetchedAt))
+      ? updateFmt.format(new Date(result.fetchedAt)) : 'time unavailable';
+    const newestAt = result.latestPublishedAt && Number.isFinite(Date.parse(result.latestPublishedAt))
+      ? updateFmt.format(new Date(result.latestPublishedAt)) : 'not supplied by publishers';
+    $('#feedFreshness').textContent = `Checked: ${checkedAt} (Vietnam time) · Newest article published: ${newestAt}`;
+    $('#feedHealthList').innerHTML = feeds.map(f => {
+      const checked = f.status === 'ok' ? 'Connected' : f.status === 'empty' ? 'No matching articles' : 'Unavailable';
+      const date = f.latestPublishedAt && Number.isFinite(Date.parse(f.latestPublishedAt))
+        ? updateFmt.format(new Date(f.latestPublishedAt)) : 'date unavailable';
+      return `<div class="feed-monitor-item"><span class="feed-monitor-source">${esc(f.source)} <small>${esc(f.id)}</small></span><span class="feed-monitor-health ${esc(f.status)}">${esc(checked)}</span><span>${Number(f.articleCount||0)} articles · latest ${esc(date)}</span></div>`;
+    }).join('');
+  }
   function applyStories(result, practiceMode) {
     displayed = result.items;
     fetchedAt = result.fetchedAt;
     indexArticles(displayed);
     setLiveState(practiceMode ? 'practice' : 'live');
+    renderFeedMonitor(result, practiceMode);
     // Keep the expanded list when RSS automatically refreshes.
     const notice = $('#newsNotice');
     if (practiceMode) {
@@ -156,7 +186,7 @@
     } else {
       notice.hidden = !result.failedFeeds;
       notice.textContent = result.failedFeeds ? `Đã kết nối ${result.healthyFeeds} nguồn RSS. ${result.failedFeeds} nguồn tạm thời không phản hồi; những tin còn lại vẫn là bài thật.` : '';
-      $('#lastRefresh').textContent = `Updated ${fetchedAt ? updateFmt.format(toDate(fetchedAt)) : 'recently'} · Publisher RSS`;
+      $('#lastRefresh').textContent = `RSS checked ${fetchedAt ? updateFmt.format(toDate(fetchedAt)) : 'recently'} · Publisher RSS`;
     }
     renderHome();
   }
@@ -523,7 +553,11 @@
       const firstNew=cards[Math.max(0,old-1)];
       if(firstNew){firstNew.setAttribute('tabindex','-1');firstNew.scrollIntoView({behavior:'smooth',block:'nearest'});}
     });
-    $('#refreshNews').addEventListener('click',()=>{liveByTopic.delete(activeTopic);fetchNews(activeTopic,true);});
+    $('#refreshNews').addEventListener('click',()=>fetchNews(activeTopic,true));
+    $('#feedCheckNow').addEventListener('click',()=>{
+      showToast('Đang kiểm tra các nguồn RSS mới nhất…');
+      fetchNews(activeTopic,true);
+    });
     $('#storyGrid').addEventListener('click',handleOpenClicks);
     $('#heroStory').addEventListener('click',handleOpenClicks);
     for(const id of ['heroStory','storyGrid','practiceGrid']){

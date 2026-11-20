@@ -66,3 +66,28 @@
 .esports-note{font-size:10px;color:#64728a;margin:14px 0 0;line-height:1.6}
 .cover-art[data-topic=esports]{background-image:radial-gradient(circle at 78% 21%,#c0baf2aa 0 13%,transparent 14%),linear-gradient(135deg,#152d52,#535c9b 62%,#9289bd)}
 @media(max-width:600px){.esports-desk{padding:18px}.esports-title-row{display:block}.esports-title-row h3{font-size:21px}.esports-source{display:block;text-align:left;margin-top:10px}.esports-pill{padding:9px 13px}}
+
+/* Publisher RSS health: lightweight and optional so stories remain central */
+.feed-monitor{background:#f0f5f1;border:1px solid #dae6dc;border-radius:5px;margin:17px 0 3px;color:#2b5444}
+.feed-monitor[hidden]{display:none!important}
+.feed-monitor>summary{display:flex;gap:9px;align-items:center;cursor:pointer;padding:11px 15px;font-size:11px;font-weight:800;list-style:none;line-height:1.5}
+.feed-monitor>summary::-webkit-details-marker{display:none}
+.feed-monitor>summary:focus-visible,.feed-check-now:focus-visible{outline:2px solid #1a7354;outline-offset:3px}
+.feed-monitor-dot{width:8px;height:8px;border-radius:50%;background:#2f9368;flex:0 0 auto}
+.feed-monitor-more{margin-left:auto;font-weight:700;color:#647a70;white-space:nowrap}
+.feed-monitor[open] .feed-monitor-more:after{content:' ▲'}
+.feed-monitor:not([open]) .feed-monitor-more:after{content:' ▼'}
+.feed-monitor-body{border-top:1px solid #dbe5df;padding:13px 15px 14px}
+.feed-monitor-info{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;font-size:11px;color:#4a6759}
+.feed-check-now{background:#fff;color:#164932;padding:7px 11px;border:1px solid #bfcfc3;font-weight:800;font-size:11px;border-radius:4px;cursor:pointer}
+.feed-check-now:hover{background:#e6f1e8}
+.feed-monitor-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 18px;margin-top:13px}
+.feed-monitor-item{display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;border-bottom:1px solid #e1e9e3;padding:7px 0;font-size:10px;line-height:1.5;color:#6a7870}
+.feed-monitor-source{font-weight:800;color:#163a2f}
+.feed-monitor-source small{font-weight:600;color:#85958b;margin-left:4px}
+.feed-monitor-health{border-radius:3px;padding:1px 5px;font-weight:700}
+.feed-monitor-health.ok{color:#1b7351;background:#d9eadf}
+.feed-monitor-health.empty{color:#8a6a34;background:#f8eed5}
+.feed-monitor-health.failed{color:#95473d;background:#fae5e1}
+.feed-monitor-footnote{font-size:10px;color:#6c7c72;line-height:1.6;margin:12px 0 0}
+@media(max-width:680px){.feed-monitor-list{grid-template-columns:1fr}.feed-monitor>summary{padding:10px 12px}.feed-monitor-body{padding:12px}.feed-monitor-more{font-size:10px}}

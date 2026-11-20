@@ -17,20 +17,29 @@ const FEEDS = {
   'cna-sport': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=10296', source: 'CNA', topic: 'football', mixedSports: true },
   'cna-world': { url: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6311', source: 'CNA', topic: 'world' },
   'dw-world': { url: 'https://rss.dw.com/rdf/rss-en-all', source: 'DW', topic: 'world' },
+  // New English-language publisher feeds. Their availability is monitored independently.
+  'npr-top': { url: 'https://feeds.npr.org/1001/rss.xml', source: 'NPR', topic: 'world' },
+  'npr-business': { url: 'https://feeds.npr.org/1006/rss.xml', source: 'NPR', topic: 'economy' },
+  'aljazeera-world': { url: 'https://www.aljazeera.com/xml/rss/all.xml', source: 'Al Jazeera English', topic: 'world' },
+  'euronews-world': { url: 'https://www.euronews.com/rss?format=mrss&level=theme&name=news', source: 'Euronews', topic: 'world' },
+  'euronews-business': { url: 'https://www.euronews.com/rss?format=mrss&level=theme&name=business', source: 'Euronews', topic: 'economy' },
+  'euronews-culture': { url: 'https://www.euronews.com/rss?format=mrss&level=vertical&name=culture', source: 'Euronews', topic: 'culture' },
+  'un-world': { url: 'https://news.un.org/feed/subscribe/en/news/all/rss.xml', source: 'UN News', topic: 'world' },
   // Google News SEARCH RSS; links lead to indexed publishers, not first-party league RSS.
   'lol-lck': { url: 'https://news.google.com/rss/search?q=(%22LCK%22%20OR%20%22T1%22%20OR%20%22Gen.G%22%20OR%20%22Hanwha%20Life%20Esports%22%20OR%20%22Dplus%20KIA%22)%20%22League%20of%20Legends%22%20when%3A30d&hl=en-US&gl=US&ceid=US:en', source: 'Google News', topic: 'esports', league: 'lck', searchAggregator: true },
   'lol-lpl': { url: 'https://news.google.com/rss/search?q=(%22LPL%22%20OR%20%22Bilibili%20Gaming%22%20OR%20%22Top%20Esports%22%20OR%20%22JD%20Gaming%22%20OR%20%22Weibo%20Gaming%22)%20%22League%20of%20Legends%22%20when%3A30d&hl=en-US&gl=US&ceid=US:en', source: 'Google News', topic: 'esports', league: 'lpl', searchAggregator: true }
 };
 const BY_TOPIC = {
-  all: ['vn-home', 'vn-business', 'vn-sports', 'guardian-football', 'guardian-business', 'guardian-world', 'vn-tech', 'vn-travel', 'lol-lck', 'lol-lpl'],
+  all: ['vn-home', 'vn-business', 'vn-sports', 'guardian-football', 'guardian-business',
+    'guardian-world', 'vn-tech', 'vn-travel', 'lol-lck', 'lol-lpl', 'npr-top',
+    'npr-business', 'aljazeera-world', 'euronews-world', 'euronews-business', 'un-world', 'euronews-culture'],
   vietnam: ['vn-home', 'vn-business', 'vn-travel'],
   football: ['vn-sports', 'guardian-football', 'cna-sport'],
   esports: ['lol-lck', 'lol-lpl'],
-  // Vietnam business + UK/global markets + Southeast Asian economy in one dedicated desk.
-  economy: ['vn-business', 'guardian-business', 'cna-business'],
-  world: ['guardian-world', 'cna-world', 'dw-world'],
+  economy: ['vn-business', 'guardian-business', 'cna-business', 'npr-business', 'euronews-business'],
+  world: ['guardian-world', 'cna-world', 'dw-world', 'npr-top', 'aljazeera-world', 'euronews-world', 'un-world'],
   technology: ['vn-tech', 'guardian-tech'],
-  culture: ['vn-travel', 'cna-asia']
+  culture: ['vn-travel', 'cna-asia', 'euronews-culture']
 };
 const parser = new XMLParser({
   ignoreAttributes: false,
@@ -176,14 +185,38 @@ async function handleNews(req) {
   const topic = BY_TOPIC[u.searchParams.get('topic')] ? u.searchParams.get('topic') : 'all';
   const ids = BY_TOPIC[topic];
   const settled = await Promise.allSettled(ids.map(loadFeed));
+  const now = new Date().toISOString();
+  // Report what was actually retrieved from each RSS feed; a healthy response
+  // does not guarantee that its publisher has just published a fresh story.
+  const sourceHealth = settled.map((result, i) => {
+    const feed = FEEDS[ids[i]];
+    const articles = result.status === 'fulfilled' ? result.value : [];
+    const latest = articles.map(a => a.publishedAt).filter(Boolean)
+      .sort((a,b) => Date.parse(b) - Date.parse(a))[0] || null;
+    return {
+      id: ids[i], source: feed.source, topic: feed.topic,
+      status: result.status === 'rejected' ? 'failed' : articles.length ? 'ok' : 'empty',
+      articleCount: articles.length, latestPublishedAt: latest
+    };
+  });
   const succeeded = settled.filter(x => x.status === 'fulfilled');
   const failures = settled.filter(x => x.status === 'rejected').length;
   const seen = new Set();
-  const items = succeeded.flatMap(x => x.value).filter(x => {
+  // Cap each feed before sorting so a high-volume source cannot completely
+  // crowd out other publishers in the All stories mix.
+  const combined = succeeded.flatMap(x => x.value.slice(0, 20));
+  const items = combined.filter(x => {
     if (seen.has(x.url)) return false;
     seen.add(x.url); return true;
   }).sort((a, b) => Date.parse(b.publishedAt ?? 0) - Date.parse(a.publishedAt ?? 0)).slice(0, 100);
-  return json({ items, topic, fetchedAt: new Date().toISOString(), healthyFeeds: succeeded.length, failedFeeds: failures, totalFeeds: ids.length, isLive: items.length > 0 }, items.length ? 200 : 503, bypassCache);
+  const latestPublishedAt = items.find(a => a.publishedAt)?.publishedAt ?? null;
+  const publishers = [...new Set(items.map(a=>a.source))];
+  return json({
+    items, topic, fetchedAt: now, latestPublishedAt, sourceHealth,
+    publishers, publisherCount: publishers.length,
+    healthyFeeds: succeeded.length, failedFeeds: failures, totalFeeds: ids.length,
+    isLive: items.length > 0
+  }, items.length ? 200 : 503, bypassCache);
 }
 export default {
   async fetch(request, env) {
