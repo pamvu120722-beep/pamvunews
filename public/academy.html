@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102b49"><meta name="description" content="PamVu Read & Practise: đọc những câu chuyện thú vị và ôn tiếng Anh theo cách nhẹ nhàng."><title>Read & Practise | PamVu</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet"><style>
+:root{--navy:#102b49;--green:#27745e;--gold:#e8ae46;--paper:#fffefb;--bg:#f7f7f2;--line:#d9ddd9;--muted:#5e6b75}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--navy);font:15px/1.7 "DM Sans",sans-serif}button,select{font:inherit}button{cursor:pointer}a{color:inherit}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.wrap{width:min(1180px,calc(100% - 36px));margin:auto}.mast{background:var(--navy);color:white;padding:20px 0}.mast .wrap{display:flex;justify-content:space-between;align-items:center;gap:15px}.logo{font:700 30px "Libre Baskerville",serif;text-decoration:none}.logo span{color:var(--gold)}.back{font-size:13px;text-decoration:none;font-weight:700;border:1px solid #ffffff55;border-radius:25px;padding:8px 14px}.intro{padding:40px 0 25px}.eyebrow{font-size:11px;text-transform:uppercase;font-weight:800;letter-spacing:.16em;color:var(--green)}h1,h2,h3{font-family:"Libre Baskerville",serif;line-height:1.35}h1{font-size:clamp(28px,4vw,44px);margin:8px 0}h1 em{color:var(--green)}.intro p{max-width:750px;color:var(--muted);margin:0}.strip{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.chip{background:white;border:1px solid var(--line);padding:7px 12px;border-radius:30px;font-size:12px;font-weight:700}.layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(305px,.95fr);gap:24px;padding-bottom:70px}.panel{background:white;border:1px solid var(--line);padding:25px;border-radius:4px}.controls{display:flex;align-items:end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:20px}.controls label{font-size:12px;font-weight:800;display:block}.controls select{padding:11px;width:min(100%,340px);border:1px solid var(--line);background:white;color:var(--navy);margin-top:6px}.muted{font-size:12px;color:var(--muted)}.passage-title{font-size:25px;margin:6px 0 9px}.reading-text{font:16px/1.95 Georgia,serif;color:#1e2e38}.reading-text p{margin:0 0 20px}.para-number{font:800 11px "DM Sans",sans-serif;color:var(--green);margin-right:10px;letter-spacing:.08em}.vocab{border-top:1px solid var(--line);padding-top:17px;margin-top:18px}.vocab-list{display:flex;gap:9px;flex-wrap:wrap}.word{border:1px solid #bdd0c3;background:#f0f7f1;border-radius:20px;padding:6px 12px;color:#1f6049;font-weight:800;font-size:12px}.word:hover{background:#dcece0}.word-note{margin-top:13px;padding:14px;background:#f5f7f1;font-size:13px;min-height:75px}.word-note strong{font-size:15px}.question{padding:18px 0;border-bottom:1px solid var(--line)}.question h3{font:800 13px "DM Sans",sans-serif;margin:0 0 8px}.type{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}.choices{display:grid;gap:8px;margin-top:12px}.choice{display:flex;align-items:center;gap:9px;font-size:13px;padding:9px;border:1px solid var(--line);border-radius:3px;cursor:pointer}.choice:has(input:checked){border-color:var(--green);background:#f0f8f2}.choice input{accent-color:var(--green)}.answer{background:#f7f8f4;padding:13px 15px;font-size:12px;margin-top:10px;border-left:3px solid var(--gold)}.answer.correct{border-left-color:var(--green)}.answer.wrong{border-left-color:#bd634f}.answer p{margin:5px 0}.answer blockquote{margin:7px 0;font-style:italic}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 0}.primary,.secondary{padding:11px 17px;font-weight:800;font-size:13px;border:1px solid var(--navy)}.primary{background:var(--navy);color:white}.secondary{background:white;color:var(--navy)}.primary:hover{background:#244b69}.score{padding:18px;background:#eaf0eb;margin-top:16px;font-weight:700}.sidebar .panel{margin-bottom:16px}.sidebar h2{font-size:20px;margin:8px 0}.tip{font-size:13px;color:#475c54}.tip strong{color:var(--navy)}.meter{height:7px;background:#dce6dd;border-radius:10px;overflow:hidden;margin:9px 0}.meter span{display:block;height:100%;background:var(--green)}.small-note{font-size:12px;color:var(--muted)}.error{color:#a54437}.footer{padding:25px 0;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}@media(max-width:810px){.layout{grid-template-columns:1fr}.panel{padding:18px}.mast .wrap{align-items:center}.back{font-size:11px}.intro{padding:27px 0 10px}}
+
+/* V3 editorial redesign — quieter typographic hierarchy and usable reading workspace */
+:root{--navy:#142d45;--green:#216f59;--gold:#e8ae46;--bg:#f4f5f1;--line:#e0e5e3;--muted:#61717a}
+body{font-size:14px;line-height:1.65;background:var(--bg)}
+.wrap{width:min(1320px,calc(100% - 64px))}
+.mast{background:#112c45;border-bottom:3px solid var(--gold);padding:15px 0}
+.mast .wrap{min-height:36px}
+.logo{font-size:25px;letter-spacing:-.055em}.back{border-color:#567083;color:#f1f6f4;padding:7px 15px}
+.intro{padding:30px 0 20px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px 28px}
+.intro .eyebrow,.intro h1,.intro p{grid-column:1}
+.intro h1{font-size:clamp(27px,3vw,38px);letter-spacing:-.045em;margin:0}
+.intro p{font-size:13px;line-height:1.65;max-width:820px}
+.intro .strip{grid-column:2;grid-row:1/4;margin:0;align-self:center;max-width:320px;justify-content:flex-end}
+.chip{padding:5px 11px;border-color:#d5ddda;background:#fff;font-size:10px}
+.layout{grid-template-columns:minmax(0,1.42fr) minmax(365px,1fr);gap:18px;align-items:start;padding-bottom:70px}
+.panel{border:1px solid #dee4e1;background:#fff;border-radius:8px;padding:28px 30px;box-shadow:0 7px 24px rgba(16,43,73,.035)}
+.controls{display:block;margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.controls label{display:grid;grid-template-columns:175px minmax(0,1fr);align-items:center;gap:12px;font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.controls select{margin:0;width:100%;max-width:none;min-width:0;padding:10px 36px 10px 12px;border-radius:6px;font-size:12px;text-transform:none;letter-spacing:normal;overflow:hidden;text-overflow:ellipsis}
+.controls .muted{display:block;margin:10px 0 0 187px}
+.eyebrow{font-size:10px;letter-spacing:.14em}
+.passage-title{font-size:clamp(22px,2.2vw,29px);letter-spacing:-.04em;margin:8px 0 20px}
+.reading-text{font-size:16px;line-height:1.88;max-width:74ch}
+.reading-text p{margin:0 0 18px}
+.para-number{display:inline-flex;align-items:center;justify-content:center;margin-right:12px;width:23px;height:23px;border-radius:4px;background:#e9f2ed;vertical-align:2px}
+.sidebar>.panel:first-child{padding:24px}
+.sidebar h2{font-size:21px;letter-spacing:-.025em}
+.sidebar .small-note{margin-bottom:7px}
+.question{padding:16px 0;border-bottom:1px solid #e6eae7}
+.question h3{font-size:13px;line-height:1.55;margin:4px 0 11px;color:#20354b}
+.type{font-size:9px;letter-spacing:.13em}
+.choices{gap:6px;margin-top:8px}
+.choice{padding:9px 11px;border-radius:6px;line-height:1.4;min-height:38px;background:#fff;transition:background .15s,border-color .15s}
+.choice:hover{background:#f3f7f4;border-color:#b2cbbb}
+.choice input{flex:0 0 auto}
+.vocab{margin-top:30px}
+.vocab h3{font-size:18px;letter-spacing:-.02em}
+.word-note{border-radius:5px}
+.actions{position:sticky;bottom:0;padding:14px 0 3px;background:linear-gradient(to top,#fff 82%,rgba(255,255,255,0));margin-top:12px;z-index:1}
+.primary,.secondary{border-radius:5px;padding:10px 15px}
+.answer{border-radius:4px;line-height:1.6}
+.sidebar>.panel:not(:first-child){padding:21px 24px}
+.sidebar>.panel:not(:first-child) h2{font-size:17px}
+.tip p{margin:9px 0}
+.footer{background:#fff}
+@media(max-width:1100px){
+ .intro{display:block}.intro .strip{max-width:none;justify-content:flex-start;margin:18px 0 0}
+ .layout{grid-template-columns:minmax(0,1.15fr) minmax(320px,1fr)}
+ .wrap{width:min(100% - 40px,1180px)}
+ .panel{padding:22px}
+ .controls label{display:block}.controls select{margin-top:8px}.controls .muted{margin:8px 0 0}
+}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ .sidebar{display:contents}
+ .sidebar>.panel:first-child{order:2}
+ .layout>section.panel{order:1}
+ .sidebar>.panel:nth-child(2){order:3}
+ .sidebar>.panel:nth-child(3){order:4}
+ .reading-text{max-width:none}
+}
+@media(max-width:520px){
+ .wrap{width:calc(100% - 26px)}
+ .mast{padding:12px 0}.logo{font-size:23px}
+ .intro{padding:23px 0 16px}.intro h1{font-size:29px}
+ .intro p{font-size:12px}
+ .intro .strip{gap:6px}.chip{font-size:9px;padding:4px 9px}
+ .layout{gap:12px}
+ .panel,.sidebar>.panel:first-child{padding:19px 16px}
+ .reading-text{font-size:15px;line-height:1.85}
+ .passage-title{font-size:23px}
+ .question h3{font-size:13px}
+ .back{font-size:11px;padding:6px 10px}
+}
+</style></head><body>
+<header class="mast"><div class="wrap"><a class="logo" href="/">PamVu<span>.</span></a><a class="back" href="/">← Back to The Daily</a></div></header>
+<main class="wrap"><section class="intro"><div class="eyebrow">READ THE WORLD / PRACTISE AT YOUR PACE</div><h1>Read &amp; <em>Practise.</em></h1><p>Chọn một câu chuyện bạn thích, đọc theo nhịp riêng và thử vài câu hỏi khi có hứng. Tin tức mới nhất vẫn nằm ở The Daily; đây là góc luyện đọc tùy chọn, với nội dung luyện tập tự biên soạn.</p><div class="strip"><span class="chip">3 chủ đề dễ khám phá · 21 câu hỏi</span><span class="chip">B1+ đến C1</span><span class="chip">True / False / Not Given</span><span class="chip">Multiple Choice</span><span class="chip">Matching · Gap Fill</span></div></section>
+<div class="layout"><section class="panel"><div class="controls"><label for="lesson">Choose a reading passage<select id="lesson"></select></label><span id="wordCount" class="muted"></span></div><div class="eyebrow" id="subject"></div><h2 class="passage-title" id="passageTitle"></h2><div class="reading-text" id="readingText"></div><section class="vocab" aria-label="Vocabulary in context"><h3>Vocabulary in context</h3><p class="muted">Chạm một cụm từ để xem nghĩa, ví dụ và lưu vào My Vocabulary của trang chủ.</p><div id="vocabList" class="vocab-list"></div><div id="wordNote" class="word-note" aria-live="polite">Chọn một cụm từ để bắt đầu.</div></section></section><aside class="sidebar"><section class="panel"><div class="eyebrow">COMPREHENSION CHECK</div><h2>Reading questions</h2><p class="small-note">Không bắt buộc làm hết. Đọc trước, thử vài câu hỏi rồi xem gợi ý khi bạn muốn.</p><div id="questions"></div><div class="actions"><button id="grade" class="primary">Check answers</button><button id="reset" class="secondary">Try again</button></div><div id="score" aria-live="polite"></div></section><section class="panel"><div class="eyebrow">YOUR READING HABIT</div><h2>Your little wins</h2><div id="history" class="tip"></div><p class="small-note">Lưu tại trình duyệt này. Đổi máy hoặc xóa dữ liệu trình duyệt sẽ mất lịch sử nếu chưa sao lưu.</p></section><section class="panel"><div class="eyebrow">QUICK READING TIPS</div><h2>Read with curiosity</h2><div class="tip"><p><strong>False ≠ Not Given:</strong> False là thông tin đối lập với bài; Not Given là bài không đủ dữ kiện.</p><p><strong>Paraphrase:</strong> Đáp án thường dùng từ đồng nghĩa, không lặp nguyên văn.</p><p><strong>Scope words:</strong> Cẩn thận với all, only, always, never và số liệu.</p><p><strong>Gap fill:</strong> Chỉ dùng từ có trong bài, đúng số từ cho phép.</p></div></section></aside></div></main><footer class="footer"><div class="wrap">PamVu English Ledger · Practice content is original and educational. Live news continues on The Daily.</div></footer>
+<script>
+(()=>{
+"use strict";
+const STORE="pamvu-ielts-academy-v3", MAIN="pamvu-english-ledger-v1";
+const lessons=[
+{id:"vietnam",topic:"VIETNAM · ECONOMY & CULTURE",level:"B2",title:"How Vietnamese Cities Are Rethinking Urban Tourism", paragraphs:[
+"Across Vietnam, local authorities are experimenting with ways to spread visitor spending beyond famous landmarks. In several cities, walking routes now connect traditional markets, small museums and family-run workshops. Rather than replacing major attractions, these routes encourage visitors to spend an extra afternoon in neighbourhoods they might otherwise overlook.",
+"The approach brings opportunities and challenges. Small businesses can benefit when travellers purchase meals or locally made products. However, researchers warn that a rapid rise in visitors may increase rents, make daily travel less convenient for residents and gradually change the character of a neighbourhood. Successful plans therefore need consultation with local communities, not simply attractive advertising.",
+"Digital maps make the routes easier to discover, but they are not equally useful to everyone. Older visitors and people without reliable mobile internet may still prefer printed information. Some tourism offices are testing both formats. They also train guides to explain cultural traditions accurately, rather than presenting every workshop as an entertainment performance.",
+"Supporters say that measuring success solely through tourist arrivals is misleading. They suggest examining how much spending remains in the community, whether residents support the changes and how effectively historical sites are protected. Although these measures take longer to collect, they may offer a clearer picture of sustainable tourism."
+],vocab:[
+["landmarks","địa danh nổi tiếng","well-known places that visitors recognize","Famous landmarks often attract the largest crowds."],
+["overlook","bỏ qua, không chú ý","fail to notice or consider something","Visitors might overlook smaller neighbourhoods."],
+["consultation","sự tham vấn","discussion to gather people's views before making decisions","Consultation helps residents influence tourism plans."],
+["misleading","gây hiểu nhầm","giving an impression that is not accurate","Visitor numbers alone may be misleading."],
+["sustainable","bền vững","able to continue without causing unacceptable damage","The city is developing sustainable tourism routes."]
+],questions:[
+{type:"tfng",q:"The new walking routes are designed to replace Vietnam's major tourist attractions.",answer:"FALSE",e:"Đoạn A nói 'Rather than replacing major attractions' — đối lập trực tiếp.",proof:"Rather than replacing major attractions, these routes encourage visitors ...",trap:"Bẫy phủ định: nhầm 'rather than' với 'instead of completely replacing'."},
+{type:"tfng",q:"Every Vietnamese city has introduced these walking routes.",answer:"NOT GIVEN",e:"Bài nói 'several cities', không cho biết tất cả các thành phố đã làm.",proof:"In several cities, walking routes now connect ...",trap:"Bẫy all/every: 'several' không chứng minh 'every' là đúng, cũng không khẳng định các thành phố còn lại không làm."},
+{type:"mcq",q:"Which potential problem is specifically mentioned?",options:["An increase in residential rents","A decrease in local food quality","A ban on digital maps"],answer:0,e:"Đoạn B nói lượng du khách tăng nhanh có thể làm tăng giá thuê.",proof:"a rapid rise in visitors may increase rents",trap:"Đáp án sai nghe hợp lý nhưng không có trong bài."},
+{type:"heading",q:"Which heading best matches paragraph C?",options:["The complete disappearance of printed guides","Using different formats to help visitors","The financial cost of historical preservation"],answer:1,e:"Đoạn C so sánh bản đồ số và thông tin in, vì nhu cầu du khách khác nhau.",proof:"Some tourism offices are testing both formats.",trap:"Bẫy heading: không chọn một chi tiết cực đoan thay cho ý chính."},
+{type:"gap",q:"Complete with ONE WORD from paragraph D: Researchers suggest checking how much spending stays in the ______.",answer:"community",e:"Đoạn D đề cập how much spending remains in the community.",proof:"how much spending remains in the community",trap:"Không thêm mạo từ hay thay bằng từ đồng nghĩa ngoài bài."},
+{type:"mcq",q:"What is the author's main position?",options:["Tourism numbers alone measure long-term success","Only online tools can improve tourism","Community benefits and conservation should be measured"],answer:2,e:"Đoạn cuối đánh giá cao lợi ích địa phương, sự đồng thuận và bảo tồn.",proof:"examining how much spending remains ... whether residents support ... how effectively historical sites are protected",trap:"Bẫy main idea: chọn thông điệp bao quát cả bài."},
+{type:"tfng",q:"Researchers have already published a national comparison of the printed and digital map trials.",answer:"NOT GIVEN",e:"Bài chỉ nói một số văn phòng đang thử cả hai định dạng, không nói có nghiên cứu so sánh toàn quốc.",proof:"Some tourism offices are testing both formats.",trap:"Không suy diễn 'testing' thành 'published national study'."}
+]},
+{id:"football",topic:"FOOTBALL · SPORT SCIENCE",level:"B2–C1",title:"Why Youth Football Academies Measure More Than Goals",paragraphs:[
+"At many youth football academies, a player's development is no longer judged only by goals, assists or match victories. Coaches also examine decisions made under pressure, movement without the ball and the ability to adapt to unfamiliar playing positions. These indicators are difficult to summarise in a single number, so observations from several matches are usually more valuable than one outstanding performance.",
+"Physical measurements remain useful, but their interpretation requires care. Two players of the same age may be at different stages of physical maturity. An early-developing athlete might appear faster and stronger, yet this advantage does not necessarily predict who will perform best as an adult. For this reason, some academies combine fitness results with technical assessments and interviews.",
+"Video analysis allows coaches to revisit moments they might miss during a match. Nevertheless, footage rarely reveals everything. A player may deliberately remain in a defensive position because of a tactical instruction that is not obvious to the viewer. Coaches therefore discuss clips with players before drawing conclusions. In some programmes, athletes are also invited to explain what options they considered.",
+"Experts argue that a productive academy should balance competition with learning. When young players fear every mistake, they may avoid creative passes or unfamiliar roles. By contrast, constructive feedback can help them experiment responsibly. No assessment system can guarantee a future professional career, but a transparent process may give every player a fairer opportunity to improve."
+],vocab:[
+["maturity","sự trưởng thành","the stage of physical or mental development","Physical maturity varies among young athletes."],
+["assessments","các bài đánh giá","methods used to judge ability or progress","Technical assessments complement fitness tests."],
+["tactical","thuộc chiến thuật","relating to the planning of actions to achieve a goal","A tactical instruction can explain a player's position."],
+["constructive","mang tính xây dựng","useful and intended to help improvement","Constructive feedback supports learning."],
+["transparent","minh bạch","clear and open about how decisions are made","A transparent process can feel fairer to players."]
+],questions:[
+{type:"tfng",q:"Academies now ignore goals and match results entirely.",answer:"FALSE",e:"Bài nói 'no longer judged only by', tức vẫn có xét nhưng không chỉ xét.",proof:"no longer judged only by goals, assists or match victories",trap:"Bẫy only: 'not only' không đồng nghĩa 'never'."},
+{type:"mcq",q:"Why can physical test results be difficult to interpret?",options:["Players have different maturity rates","Video analysis is always inaccurate","Coaches do not measure speed"],answer:0,e:"Đoạn B nêu hai cầu thủ cùng tuổi có thể trưởng thành sinh học khác nhau.",proof:"Two players of the same age may be at different stages of physical maturity.",trap:"Không nhầm khó khăn về maturity với lỗi kỹ thuật video."},
+{type:"heading",q:"Best heading for paragraph C?",options:["Why interviews should replace football matches","The importance of discussing video evidence","The end of tactical football"],answer:1,e:"Video hữu ích nhưng phải hỏi cầu thủ về tình huống trước khi kết luận.",proof:"Coaches therefore discuss clips with players before drawing conclusions.",trap:"Bẫy tuyệt đối hóa: 'replace' và 'end' không được hỗ trợ."},
+{type:"gap",q:"Complete with ONE WORD from paragraph D: Fear of making errors may discourage ______ passes.",answer:"creative",e:"Đoạn D nói sợ mắc lỗi sẽ khiến cầu thủ né đường chuyền sáng tạo.",proof:"they may avoid creative passes or unfamiliar roles",trap:"Dùng chính từ trong bài, không dùng 'risky'."},
+{type:"tfng",q:"One remarkable match is generally more informative than observations across several matches.",answer:"FALSE",e:"Đoạn A nói ngược lại.",proof:"observations from several matches are usually more valuable than one outstanding performance.",trap:"Đảo chiều phép so sánh more valuable."},
+{type:"mcq",q:"What does the passage say about the future of young players?",options:["Good test scores guarantee a professional contract","Assessment cannot guarantee a professional career","Early-maturing players always become professionals"],answer:1,e:"Câu cuối nói không hệ thống đánh giá nào bảo đảm sự nghiệp chuyên nghiệp.",proof:"No assessment system can guarantee a future professional career",trap:"Bẫy guarantee/always."},
+{type:"tfng",q:"All academies already allow players to explain their choices after games.",answer:"NOT GIVEN",e:"Bài chỉ nói 'In some programmes', không có thông tin về mọi học viện.",proof:"In some programmes, athletes are also invited to explain what options they considered.",trap:"Phân biệt some với all; không tự kết luận phần còn lại."}
+]},
+{id:"economy",topic:"ECONOMY · TRADE & TECHNOLOGY",level:"C1",title:"How Small Exporters Respond to Supply Chain Uncertainty",paragraphs:[
+"For a small exporter, delivering a product overseas involves far more than arranging a shipment. Firms must coordinate materials, labour, packaging and transport while anticipating changes in customer demand. A delay at one stage can affect several others. This explains why managers increasingly focus on resilience: the ability to recover from disruptions without abandoning essential business activities.",
+"One response is to work with more than one supplier. Diversification may reduce dependence on a single factory, but it introduces costs. Purchasing smaller quantities from several partners can weaken a company's bargaining power, and checking the quality of additional suppliers takes time. As a result, diversification is not automatically the cheapest strategy, even when it reduces risk.",
+"Technology offers another set of tools. Inventory software can flag unusually low stock levels, while shipment tracking helps teams identify delays earlier. Yet digital dashboards are only as reliable as the information entered into them. If records are incomplete, even a sophisticated system may provide false confidence. Staff training and consistent data entry remain important.",
+"Finally, companies face a trade-off between efficiency and flexibility. Holding little spare inventory lowers storage costs in normal conditions, but it leaves fewer materials available during a transport interruption. Maintaining a modest buffer can improve continuity at an additional expense. Rather than recommending one universal solution, analysts advise firms to weigh these choices against their products, customers and financial resources."
+],vocab:[
+["resilience","khả năng phục hồi","ability to recover after difficulty","Resilience helps exporters continue despite delays."],
+["diversification","đa dạng hóa","spreading activity or risk across different options","Supplier diversification can reduce dependence."],
+["bargaining power","sức mạnh đàm phán","ability to negotiate favourable conditions","Small orders may weaken bargaining power."],
+["inventory","hàng tồn kho","materials or products that a business keeps","Inventory can protect production during delays."],
+["trade-off","sự đánh đổi","a situation where gaining one benefit means losing another","There is a trade-off between cost and flexibility."]
+],questions:[
+{type:"mcq",q:"What is the passage's definition of resilience?",options:["Avoiding all operating costs","Recovering from disruptions while maintaining key activities","Using only local transport"],answer:1,e:"Resilience được định nghĩa trực tiếp trong đoạn A.",proof:"the ability to recover from disruptions without abandoning essential business activities",trap:"Nhận diện paraphrase: maintaining = without abandoning."},
+{type:"tfng",q:"Supplier diversification always results in lower purchasing costs.",answer:"FALSE",e:"Đoạn B nêu mua số lượng nhỏ có thể làm giảm lợi thế đàm phán và tăng chi phí.",proof:"diversification is not automatically the cheapest strategy",trap:"Bẫy always đối lập với not automatically."},
+{type:"gap",q:"Complete with ONE WORD from paragraph C: Digital dashboards depend on accurate ______.",answer:"information",e:"Đoạn C nói độ tin cậy phụ thuộc thông tin nhập vào.",proof:"only as reliable as the information entered into them",trap:"Không tự thay bằng 'data' dù cùng nghĩa."},
+{type:"heading",q:"Best heading for paragraph D?",options:["Why flexibility and efficiency require a balance","Why storage costs should always be maximised","The disappearance of overseas demand"],answer:0,e:"Cả đoạn D giải thích đánh đổi giữa tồn kho ít và khả năng ứng phó.",proof:"companies face a trade-off between efficiency and flexibility",trap:"Heading phải tóm lược ý cả đoạn."},
+{type:"tfng",q:"Inventory software guarantees that stock records are correct.",answer:"FALSE",e:"Đoạn C nói dữ liệu thiếu khiến hệ thống tinh vi cũng cho cảm giác an toàn sai.",proof:"If records are incomplete, even a sophisticated system may provide false confidence.",trap:"Bẫy guarantees, phân biệt công cụ với độ chính xác đầu vào."},
+{type:"tfng",q:"The companies in the passage primarily export electronics.",answer:"NOT GIVEN",e:"Không có thông tin về ngành hàng cụ thể.",proof:"For a small exporter, delivering a product overseas ...",trap:"Không suy đoán ngành từ từ technology."},
+{type:"mcq",q:"Why do analysts avoid recommending a universal strategy?",options:["All firms operate with the same constraints","Trade-offs vary with products, customers and finances","Exporters cannot use inventory tools"],answer:1,e:"Câu cuối nói quyết định phụ thuộc sản phẩm, khách hàng, nguồn lực tài chính.",proof:"weigh these choices against their products, customers and financial resources",trap:"Bẫy one-size-fits-all."}
+]}
+];
+const $=s=>document.querySelector(s),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let current=lessons[0], showing=false;
+function read(){try{return JSON.parse(localStorage.getItem(STORE)||"{}")}catch{return {}}}
+function write(d){try{localStorage.setItem(STORE,JSON.stringify(d));return true}catch{return false}}
+function pick(id){current=lessons.find(x=>x.id===id)||lessons[0];showing=false;render()}
+function render(){const l=current;$("#lesson").value=l.id;$("#subject").textContent=l.topic+" · "+l.level;$("#passageTitle").textContent=l.title;$("#wordCount").textContent=l.paragraphs.join(" ").split(/\s+/).length+" words · original reading";$("#readingText").innerHTML=l.paragraphs.map((p,i)=>'<p><span class="para-number">'+String.fromCharCode(65+i)+'</span>'+esc(p)+'</p>').join("");$("#vocabList").innerHTML=l.vocab.map((v,i)=>'<button class="word" data-word="'+i+'">'+esc(v[0])+'</button>').join("");$("#wordNote").textContent="Chọn một cụm từ để xem nghĩa, ví dụ và lưu vào My Vocabulary.";$("#questions").innerHTML=l.questions.map((q,i)=>'<div class="question"><span class="type">'+(q.type==="tfng"?"TRUE / FALSE / NOT GIVEN":q.type==="mcq"?"MULTIPLE CHOICE":q.type==="heading"?"MATCHING HEADING":"ONE WORD ONLY")+'</span><h3>'+(i+1)+". "+esc(q.q)+'</h3>'+(q.type==="gap"?'<input aria-label="Answer question '+(i+1)+'" data-ans="'+i+'" type="text" maxlength="50" style="width:100%;padding:9px;border:1px solid #d9ddd9" placeholder="One word from the passage">':'<div class="choices">'+(q.type==="tfng"?["TRUE","FALSE","NOT GIVEN"]:q.options).map((o,j)=>'<label class="choice"><input type="radio" name="q'+i+'" value="'+(q.type==="tfng"?esc(o):j)+'"><span>'+esc(o)+'</span></label>').join("")+'</div>')+'<div class="answer-slot" id="explain'+i+'"></div></div>').join("");$("#score").innerHTML="";showing=false;updateHistory()}
+function getAnswer(q,i){if(q.type==="gap")return ($('[data-ans="'+i+'"]')?.value||"").trim().toLowerCase().replace(/[.!?]+$/,"");return $('input[name="q'+i+'"]:checked')?.value??null}
+function grade(){let n=0,answered=0;current.questions.forEach((q,i)=>{let a=getAnswer(q,i),ok=a!==null&&a!==""&&String(a).toLowerCase()===String(q.answer).toLowerCase();if(a!==null&&a!=="")answered++;if(ok)n++;const e=$("#explain"+i);e.innerHTML='<div class="answer '+(ok?"correct":"wrong")+'"><strong>'+(ok?"✓ Correct":a===null||a===""?"Not answered":"Review this answer")+' · '+esc(q.type==="tfng"?q.answer:q.type==="gap"?q.answer:q.options[q.answer])+'</strong><p>'+esc(q.e)+'</p><blockquote>Evidence: “'+esc(q.proof)+'”</blockquote><p><strong>Common trap:</strong> '+esc(q.trap)+'</p></div>'});$("#score").innerHTML='<div class="score">You got '+n+' / '+current.questions.length+' · '+answered+' answered.<br><span class="small-note">Evidence and explanations are displayed below each question. Đây là điểm luyện tập, không quy đổi thành IELTS band.</span></div>';const state=read();const prev=state[current.id]||{best:0,attempts:0};state[current.id]={best:Math.max(prev.best||0,n),attempts:(prev.attempts||0)+1,last:n,total:current.questions.length,at:new Date().toISOString()};if(!write(state))$("#score").innerHTML+='<p class="error">Không thể lưu tiến độ: trình duyệt đã giới hạn bộ nhớ.</p>';updateHistory();showing=true}
+function updateHistory(){let data=read(),done=lessons.filter(x=>data[x.id]?.attempts).length,stats=lessons.map(l=>{let d=data[l.id];return '<p><strong>'+esc(l.title)+'</strong><br>'+(d?'Best: '+d.best+'/'+d.total+' · '+d.attempts+' attempts':'Not started')+'</p>'}).join("");$("#history").innerHTML='<strong>'+done+' / '+lessons.length+' passages practised</strong><div class="meter"><span style="width:'+(done/lessons.length*100)+'%"></span></div>'+stats}
+function saveWord(i){const v=current.vocab[i];if(!v)return;try{let d=JSON.parse(localStorage.getItem(MAIN)||"{}");d.words=Array.isArray(d.words)?d.words:[];let existing=d.words.find(w=>w.word===v[0]);let item={...existing,word:v[0],vietnamese:v[1],english:v[2],example:v[3],sourceTitle:current.title,sourceId:"academy-"+current.id,updatedAt:new Date().toISOString(),mastered:existing?.mastered||false,addedAt:existing?.addedAt||new Date().toISOString()};if(existing)d.words=d.words.map(w=>w.word===v[0]?item:w);else d.words.unshift(item);localStorage.setItem(MAIN,JSON.stringify(d));$("#wordNote").innerHTML='<strong>'+esc(v[0])+'</strong> · Đã lưu vào My Vocabulary ✓ <a href="/">Về trang chủ</a>'}catch{$("#wordNote").textContent="Không thể lưu từ trên trình duyệt này. Hãy kiểm tra chế độ riêng tư hoặc dung lượng bộ nhớ."}}
+$("#lesson").innerHTML=lessons.map(l=>'<option value="'+l.id+'">'+esc(l.title)+' ('+l.level+')</option>').join("");
+$("#lesson").addEventListener("change",e=>pick(e.target.value));
+$("#grade").addEventListener("click",grade);
+$("#reset").addEventListener("click",()=>render());
+$("#vocabList").addEventListener("click",e=>{let b=e.target.closest("[data-word]");if(!b)return;let i=Number(b.dataset.word),v=current.vocab[i];$("#wordNote").innerHTML='<strong>'+esc(v[0])+'</strong> · '+esc(v[1])+'<br>'+esc(v[2])+'<br><em>'+esc(v[3])+'</em><br><button class="primary" id="saveWordBtn" style="margin-top:8px">+ Save to My Vocabulary</button>';$("#saveWordBtn").onclick=()=>saveWord(i)});
+render();
+})();
+</script></body></html>

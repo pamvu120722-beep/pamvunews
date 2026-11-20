@@ -166,7 +166,7 @@
     return s;
   }
   // Publisher feeds can contain headlines without excerpts: label them clearly.
-  const previewText = a => isPractice(a) ? (a.summary || '') : (a.summary || 'Headline only in RSS. Open the publisher for the full story, then practise your English here.');
+  const previewText = a => isPractice(a) ? (a.summary || '') : (a.summary || 'Explore this story at the original publisher. Save interesting expressions as you read.');
   const isHeadlineOnly = a => !isPractice(a) && !String(a.summary || '').trim();
   function makeCover(article, hero = false) {
     const url = safeUrl(article.image);
@@ -178,7 +178,7 @@
     return `<span class="source">${esc(a.source)}</span><span class="dot-separator"></span><span>${esc(relativeDate(a.publishedAt))}</span><span class="dot-separator"></span><span>${a.readMinutes} MIN READ</span>`;
   }
   function storyCard(a) {
-    return `<article class="story-card" data-article-id="${esc(a.id)}">${makeCover(a)}<div class="card-body"><div class="story-topline">${metadata(a)}</div><h3 class="article-title" role="button" tabindex="0" data-open="${esc(a.id)}">${esc(a.title)}</h3><p class="${isHeadlineOnly(a) ? 'excerpt-missing' : ''}">${esc(previewText(a))}</p><div class="story-footer"><button class="card-read unstyled" data-open="${esc(a.id)}">Practice reading ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(a.level)}</span><button class="save-small ${bookmarked(a.id) ? 'saved' : ''}" data-bookmark="${esc(a.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div></article>`;
+    return `<article class="story-card" data-article-id="${esc(a.id)}">${makeCover(a)}<div class="card-body"><div class="story-topline">${metadata(a)}</div><h3 class="article-title" role="button" tabindex="0" data-open="${esc(a.id)}">${esc(a.title)}</h3><p class="${isHeadlineOnly(a) ? 'excerpt-missing' : ''}">${esc(previewText(a))}</p><div class="story-footer"><button class="card-read unstyled" data-open="${esc(a.id)}">Read & learn ${icon('arrow')}</button><div class="story-footer-right"><span class="sublevel">${esc(a.level)}</span><button class="save-small ${bookmarked(a.id) ? 'saved' : ''}" data-bookmark="${esc(a.id)}" aria-label="Lưu bài" title="Lưu bài">${icon('bookmark')}</button></div></div></div></article>`;
   }
   function renderHome() {
     const filtered = filteredStories(), featured = filtered[0];
@@ -225,7 +225,7 @@
     $('#readOriginal').hidden = !safeUrl(article.url) || isPractice(article);
     if (!$('#readOriginal').hidden) $('#readOriginal').href = safeUrl(article.url);
     $('#completeReader').textContent = startedToday(article) ? '✓ Completed today' : '✓ Mark as completed';
-    $('#reflectionPrompt').textContent = isPractice(article) ? 'Write 2–3 English sentences: What was the main idea, and what would you like to discuss?' : (headlineOnly ? 'After opening the original report, write 2–3 English sentences describing confirmed facts. Avoid guessing from the headline.' : 'Summarise the RSS excerpt. After reading the original report, note one verified fact and one new expression.');
+    $('#reflectionPrompt').textContent = isPractice(article) ? 'What stood out to you? Write one or two English sentences.' : 'Optional: after reading the full article, write one or two sentences about something you learned.';
     $('#reflectionText').value = data.reflections[article.id]?.text || '';
     $('#reflectionStatus').textContent = '';
     renderArticleWords(); renderQuiz(article);
@@ -241,15 +241,18 @@
     }
     if (isPractice(article)) { section.hidden = true; return; }
     section.hidden = false;
-    section.innerHTML = `<div class="reading-guide-label">${headlineOnly ? 'HEADLINE LAB · NO RSS EXCERPT' : 'NEWS READING LAB · VERIFIED SOURCE'}</div>
-      <h3>${headlineOnly ? 'Start with the headline. Then verify the story.' : 'Make this news story part of your English practice.'}</h3>
-      <p>${headlineOnly ? 'This publisher provides a headline but no text preview in RSS. The text above is the actual headline, not the full article.' : 'The paragraph above is a short publisher-provided excerpt, not the whole report.'}</p>
-      <ol>
-        <li>Before opening the link, predict the subject in one English sentence.</li>
-        <li>Read the full story on the publisher's website. Identify <b>one confirmed fact</b>.</li>
-        <li>Return here: save three expressions and write a 2–3 sentence reflection.</li>
-      </ol>
-      <div class="reading-guide-note">No invented articles or auto-generated facts · Original journalism stays with its publisher</div>`;
+    // RSS is often headline-only. Encourage original reporting, do not invent facts.
+    section.innerHTML = `<div class="reading-guide-label">FROM THE NEWSROOM · OPTIONAL PRACTICE</div>
+      <h3>${headlineOnly ? 'Interested in this headline?' : 'Keep reading the full story.'}</h3>
+      <p>${headlineOnly ? 'The publisher shared a headline but no excerpt in RSS.' : 'This is a short excerpt from the publisher, not the complete article.'} Open the original to enjoy the full report.</p>
+      <details class="news-learning-details">
+        <summary>✦ Want to practise your English? <span>2-minute challenge</span></summary>
+        <ol>
+          <li>Read the story at its original source and note one fact you can verify.</li>
+          <li>Come back, save a useful word and write one or two English sentences below.</li>
+        </ol>
+      </details>
+      <div class="reading-guide-note">Original reporting remains with its publisher. No article text is invented.</div>`;
   }
   function renderClickableText(text) {
     const root = $('#readerBody'); root.replaceChildren();
@@ -291,7 +294,7 @@
   function saveReflection() {
     if(!currentArticle) return;
     const t=$('#reflectionText').value.trim();
-    if(t.length<12){$('#reflectionStatus').textContent='Please write at least one complete English sentence.';return;}
+    if(t.length<6){$('#reflectionStatus').textContent='Write a short English thought first.';return;}
     data.reflections[currentArticle.id] = { text:t,at:new Date().toISOString() };store();
     $('#reflectionStatus').textContent = '✓ Reflection saved on this device.';showToast('Đã lưu phần tóm tắt của bạn.');
   }

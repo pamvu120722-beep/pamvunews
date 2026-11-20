@@ -28,3 +28,16 @@
 .review-buttons button:hover{filter:brightness(.94)}
 .review-hint{text-align:center;font-size:11px;line-height:1.5;color:#78887e;max-width:420px;margin:10px auto 16px}
 @media(max-width:600px){.reading-guide{padding:17px}.review-buttons{grid-template-columns:1fr 1fr;gap:8px}.review-buttons button{padding:11px 6px;font-size:11px}}
+
+/* V3: subtle optional coaching; the journalism stays visually dominant */
+.news-learning-details{margin-top:14px;border-top:1px solid #dce6dd;padding-top:11px}
+.news-learning-details summary{cursor:pointer;color:#1c5542;font-weight:800;font-size:12px;list-style-position:outside}
+.news-learning-details summary span{color:#738b7b;font-weight:600;font-size:11px;margin-left:6px}
+.news-learning-details[open] summary{margin-bottom:10px}
+.news-learning-details ol{margin:8px 0 10px;padding-left:22px}
+.news-learning-details li{line-height:1.7;margin-bottom:7px}
+.reading-guide{background:#f5f8f4;border-color:#e0e9e1;padding:18px 22px}
+.reading-guide h3{font-size:18px;margin:7px 0}
+.reading-guide>p{margin:8px 0 0;font-size:12px}
+.reading-guide-note{font-size:10px}
+@media(max-width:600px){.reading-guide{padding:15px}.news-learning-details summary span{display:inline-block}}
